@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { MessageSquareText, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { schoolData } from "@/data/school-data";
 
@@ -11,62 +11,47 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative bg-white overflow-hidden min-h-[620px] lg:min-h-[720px] flex items-stretch"
+      className="relative bg-white overflow-hidden min-h-[580px] sm:min-h-[620px] lg:min-h-[680px] flex items-stretch"
       aria-label="Hero section"
     >
-      {/* ─── Background Layer: Real School Aerial Photograph on Right ─── */}
+      {/* ─── Background Layer: Real School Campus Photo (Clean & Unobstructed) ─── */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 lg:left-[38%]">
+        <div className="absolute inset-0 lg:left-[35%] w-full h-full">
           <Image
             src={schoolData.hero_image}
-            alt="Dularhat Secondary School Campus & Grounds"
+            alt="Dularhat Secondary School Campus, Academic Building & Playground"
             fill
             className="object-cover object-center"
             priority
             sizes="100vw"
           />
-          {/* Subtle natural lighting overlay on image */}
-          <div className="absolute inset-0 bg-black/15 lg:bg-transparent" />
+          {/* Subtle natural lighting overlay for mobile readability */}
+          <div className="absolute inset-0 bg-black/10 lg:bg-transparent" />
         </div>
       </div>
 
-      {/* ─── Organic Green Fluid Wave & Diagonal Gold Slash (SVG Vector) ─── */}
+      {/* ─── Smooth Organic Green Fluid Wave (NO Yellow Diagonal Stripe) ─── */}
       <div className="relative z-10 w-full max-w-7xl mx-auto flex items-center">
         
-        {/* Desktop Dynamic Vector Shapes */}
+        {/* Desktop Organic Wave Mask — Clean green curve without any diagonal line */}
         <div className="absolute inset-0 pointer-events-none hidden lg:block overflow-hidden">
-          {/* Multi-shade Vibrant Green Fluid Shape */}
           <svg
-            className="absolute top-0 bottom-0 left-0 h-full w-[68%] drop-shadow-2xl"
-            viewBox="0 0 850 720"
+            className="absolute top-0 bottom-0 left-0 h-full w-[64%] drop-shadow-xl"
+            viewBox="0 0 800 680"
             fill="none"
             preserveAspectRatio="none"
           >
             <defs>
-              <linearGradient id="heroGreenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="heroCleanGreenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#76C043" />
-                <stop offset="35%" stopColor="#3EA635" />
+                <stop offset="40%" stopColor="#3EA635" />
                 <stop offset="100%" stopColor="#016B00" />
               </linearGradient>
             </defs>
-            {/* Smooth organic wave matching Assumption design */}
+            {/* Smooth fluid curve separating left green from right photo */}
             <path
-              d="M0,0 L750,0 C640,160 500,220 520,360 C540,500 740,580 670,720 L0,720 Z"
-              fill="url(#heroGreenGradient)"
-            />
-          </svg>
-
-          {/* Diagonal Gold/Yellow Accent Slash Band */}
-          <svg
-            className="absolute top-0 bottom-0 left-[38%] h-full w-[38%] pointer-events-none"
-            viewBox="0 0 450 720"
-            fill="none"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M210,0 L275,0 L135,720 L70,720 Z"
-              fill="#F9B828"
-              opacity="0.95"
+              d="M0,0 L720,0 C620,150 480,210 500,340 C520,480 710,560 640,680 L0,680 Z"
+              fill="url(#heroCleanGreenGradient)"
             />
           </svg>
         </div>
@@ -74,11 +59,11 @@ export function HeroSection() {
         {/* Mobile / Tablet Gradient Backdrop */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#016B00]/95 via-[#016B00]/90 to-[#014D00]/95 lg:hidden" />
 
-        {/* ─── Hero Content Area (All Previous Verified Info) ─── */}
-        <div className="relative z-20 w-full lg:max-w-2xl px-6 sm:px-10 lg:px-12 py-14 sm:py-18 lg:py-20 text-white">
+        {/* ─── Hero Content Area ─── */}
+        <div className="relative z-20 w-full lg:max-w-2xl px-6 sm:px-10 lg:px-12 py-14 sm:py-18 lg:py-22 text-white">
           
-          {/* Eyebrow: Welcome + Establishment + EIIN */}
-          <div className="flex flex-wrap items-center gap-2 mb-3">
+          {/* Top Eyebrow Badge */}
+          <div className="flex flex-wrap items-center gap-2 mb-4">
             <div className="inline-flex items-center gap-2 bg-black/20 backdrop-blur-md border border-white/20 rounded-full px-3.5 py-1 text-xs text-white">
               <span className="w-2 h-2 bg-[#F9B828] rounded-full animate-pulse" />
               <span className="font-bold">
@@ -90,14 +75,24 @@ export function HeroSection() {
               <span className="font-mono text-emerald-100">EIIN: {schoolData.eiin}</span>
             </div>
             
-            <div className="text-xs font-bold uppercase tracking-wider text-yellow-200 hidden sm:inline-block">
+            <span className="text-xs font-semibold text-emerald-100/90 hidden sm:inline-block">
               {language === "bn" ? "• বরিশাল শিক্ষা বোর্ড" : "• Barisal Board"}
-            </div>
+            </span>
           </div>
 
           {/* School Name Headline */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight leading-[1.12] mb-2 text-white font-sans drop-shadow-md">
-            {t(schoolData.name)}
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[1.1] mb-2 text-white font-sans drop-shadow-md">
+            {language === "bn" ? (
+              <>
+                <span className="block text-2xl sm:text-4xl lg:text-5xl">দুলারহাট</span>
+                <span className="block text-3xl sm:text-5xl lg:text-6xl">মাধ্যমিক বিদ্যালয়</span>
+              </>
+            ) : (
+              <>
+                <span className="block">DULARHAT</span>
+                <span className="block text-2xl sm:text-4xl lg:text-5xl">SECONDARY SCHOOL</span>
+              </>
+            )}
           </h1>
 
           {/* Location */}
@@ -107,15 +102,15 @@ export function HeroSection() {
               : "Charfashion, Bhola, Bangladesh"}
           </p>
 
-          {/* Tagline */}
+          {/* Tagline Box */}
           <blockquote className="border-l-4 border-[#F9B828] pl-3.5 py-1 mb-5 bg-black/10 backdrop-blur-xs rounded-r-lg">
-            <p className="text-base sm:text-lg lg:text-xl text-yellow-100 italic font-medium leading-relaxed font-serif">
+            <p className="text-base sm:text-lg lg:text-xl text-yellow-100 italic font-medium leading-snug font-serif">
               &ldquo;{t(schoolData.tagline)}&rdquo;
             </p>
           </blockquote>
 
-          {/* Full Description */}
-          <p className="text-white/90 text-xs sm:text-sm leading-relaxed mb-7 max-w-xl font-light">
+          {/* Concise Description */}
+          <p className="text-white/90 text-xs sm:text-sm leading-relaxed mb-8 max-w-xl font-light">
             {t(schoolData.description)}
           </p>
 
@@ -123,7 +118,7 @@ export function HeroSection() {
           <div className="flex flex-wrap items-center gap-3.5 mb-8">
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 bg-[#014D00] hover:bg-[#023800] text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all border border-white/25 group"
+              className="inline-flex items-center gap-2 bg-[#014D00] hover:bg-[#023800] text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-7 py-3.5 rounded-full shadow-xl hover:shadow-2xl transition-all border border-white/20 group"
             >
               <span>{language === "bn" ? "বিদ্যালয় সম্পর্কে" : "ABOUT SCHOOL"}</span>
               <span className="text-[#F9B828] text-xs transition-transform group-hover:translate-x-1">▶</span>
@@ -131,15 +126,15 @@ export function HeroSection() {
 
             <Link
               href="/notices"
-              className="inline-flex items-center gap-2 bg-[#76C043]/30 hover:bg-[#76C043]/50 text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-6 py-3 rounded-full border border-white/40 backdrop-blur-sm shadow-md transition-all group"
+              className="inline-flex items-center gap-2 bg-[#76C043]/30 hover:bg-[#76C043]/50 text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-7 py-3.5 rounded-full border border-white/40 backdrop-blur-sm shadow-md transition-all group"
             >
               <span>{language === "bn" ? "সর্বশেষ নোটিশ" : "LATEST NOTICES"}</span>
               <span className="text-[#F9B828] text-xs transition-transform group-hover:translate-x-1">▶</span>
             </Link>
           </div>
 
-          {/* Quick Stats Ribbon (All Previous Stats) */}
-          <div className="pt-5 border-t border-white/20 flex flex-wrap items-center gap-6 sm:gap-8">
+          {/* Quick Stats Ribbon */}
+          <div className="pt-4 border-t border-white/20 flex flex-wrap items-center gap-6 sm:gap-8">
             <div>
               <div className="text-xl sm:text-2xl font-black text-[#F9B828] leading-tight font-serif">
                 ১৯৬৩
@@ -149,7 +144,7 @@ export function HeroSection() {
               </div>
             </div>
 
-            <div className="w-px h-8 bg-white/20 hidden sm:block" />
+            <div className="w-px h-7 bg-white/20 hidden sm:block" />
 
             <div>
               <div className="text-xl sm:text-2xl font-black text-[#F9B828] leading-tight font-serif">
@@ -160,7 +155,7 @@ export function HeroSection() {
               </div>
             </div>
 
-            <div className="w-px h-8 bg-white/20 hidden sm:block" />
+            <div className="w-px h-7 bg-white/20 hidden sm:block" />
 
             <div>
               <div className="text-xl sm:text-2xl font-black text-[#F9B828] leading-tight font-serif">
@@ -171,7 +166,7 @@ export function HeroSection() {
               </div>
             </div>
 
-            <div className="w-px h-8 bg-white/20 hidden sm:block" />
+            <div className="w-px h-7 bg-white/20 hidden sm:block" />
 
             <div>
               <div className="text-base sm:text-lg font-black text-[#F9B828] leading-tight">

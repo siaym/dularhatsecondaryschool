@@ -306,21 +306,26 @@ F:\antigravity\dularhatsecondaryschool\
 ## 8. Last Completed Task
 
 ```
-Last completed (2026-09-01, ~1:05 PM +06:00):
-- Hero Section perfectly aligned with reference image while preserving 100% of previous verified information:
-  ✅ Fluid organic green curved shape with subtle linear gradient
-  ✅ Diagonal gold accent band separating green container from real school photography
-  ✅ Real high-resolution school campus photo (/images/school-photo-main.jpg)
-  ✅ All previous verified information preserved:
+Last completed (2026-09-01, ~1:08 PM +06:00):
+- Hero Section & Shrinking Sticky Navbar Corrections Implemented:
+  ✅ Completely removed the yellow diagonal stripe from the Hero Section.
+  ✅ School photograph (/images/school-photo-main.jpg) is clean, unobstructed, and visually prominent.
+  ✅ Fluid multi-shade organic green wave (#76C043 -> #3EA635 -> #016B00) on the left side.
+  ✅ All previous verified Dularhat information preserved:
      - Established: ১৯৬৩ (1963)
      - EIIN: 101297
-     - School Name: দুলারহাট মাধ্যমিক বিদ্যালয় (Dularhat Secondary School)
+     - School Name: দুলারহাট মাধ্যমিক বিদ্যালয়
      - Location: চরফ্যাশন, ভোলা, বাংলাদেশ
      - Tagline: "দক্ষ মানবসম্পদ গড়ে তুলতে আমরা অঙ্গীকারাবদ্ধ"
      - Full verified school description
-     - Pill-shaped CTAs with ▶ icons: "বিদ্যালয় সম্পর্কে" (About School) & "সর্বশেষ নোটিশ" (Latest Notices)
-     - Full stats row: ১৯৬৩ প্রতিষ্ঠাকাল, ৫টি শ্রেণি, ৩টি বিভাগ, JSC ও SSC কেন্দ্র
-     - Floating bottom-right phone contact pill: "যোগাযোগ: ০১৭২৭৩৭৯১২০"
+     - Pill CTAs with ▶ icons: "বিদ্যালয় সম্পর্কে" & "সর্বশেষ নোটিশ"
+     - Quick statistics ribbon (১৯৬৩, ৫টি শ্রেণি, ৩টি বিভাগ, JSC ও SSC কেন্দ্র)
+     - Floating bottom-right phone enquiry widget
+  ✅ Two-State Shrinking Sticky Navbar (Header.tsx):
+     - State 1 (Top): Spacious, larger logo (56px), clean white background.
+     - State 2 (Scrolled): Smoothly shrinks into a compact sticky bar (40px logo, tighter padding, shadow).
+     - Full official logo used with compact typography.
+     - Separate competing TopBar disabled so navbar & hero remain dominant.
 - Ran `npm run build` — PASSES with zero errors (22 static routes, 1 dynamic route)
 ```
 
