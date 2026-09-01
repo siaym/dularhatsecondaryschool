@@ -8,28 +8,29 @@ export function TopBar() {
   const { language, setLanguage } = useLanguage();
 
   return (
-    <div className="bg-[#016B00] text-white text-sm py-2 hidden md:block">
+    <div className="bg-[#012600] text-emerald-100 text-xs py-1.5 border-b border-emerald-900/60 hidden md:block">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Contact Info */}
-        <div className="flex items-center gap-5 text-green-100">
+        
+        {/* Contact Links */}
+        <div className="flex items-center gap-6 font-medium">
           <a
             href={`tel:${schoolData.contact.mobile_1}`}
-            className="flex items-center gap-1.5 hover:text-yellow-300 transition-colors"
+            className="flex items-center gap-1.5 hover:text-[#F5B738] transition-colors"
             aria-label="Call school"
           >
-            <Phone size={13} aria-hidden="true" />
-            <span>{schoolData.contact.mobile_1}</span>
+            <Phone size={12} className="text-[#F5B738]" aria-hidden="true" />
+            <span className="font-mono">{schoolData.contact.mobile_1}</span>
           </a>
           <a
             href={`mailto:${schoolData.contact.email}`}
-            className="flex items-center gap-1.5 hover:text-yellow-300 transition-colors"
+            className="flex items-center gap-1.5 hover:text-[#F5B738] transition-colors"
             aria-label="Email school"
           >
-            <Mail size={13} aria-hidden="true" />
+            <Mail size={12} className="text-[#F5B738]" aria-hidden="true" />
             <span>{schoolData.contact.email}</span>
           </a>
-          <span className="flex items-center gap-1.5 text-green-200">
-            <MapPin size={13} aria-hidden="true" />
+          <span className="flex items-center gap-1.5 text-emerald-300/80">
+            <MapPin size={12} className="text-[#F5B738]" aria-hidden="true" />
             <span>
               {language === "bn"
                 ? "দুলারহাট, চরফ্যাশন, ভোলা"
@@ -38,23 +39,25 @@ export function TopBar() {
           </span>
         </div>
 
-        {/* Right: EIIN + Language Switch */}
+        {/* EIIN Badge & Language Switcher */}
         <div className="flex items-center gap-4">
-          <span className="text-green-300 text-xs hidden lg:block">
-            EIIN: {schoolData.eiin}
-          </span>
+          <div className="flex items-center gap-1.5 text-emerald-300 font-mono text-[11px] bg-white/5 px-2 py-0.5 rounded border border-white/10">
+            <span>EIIN:</span>
+            <span className="text-white font-bold">{schoolData.eiin}</span>
+          </div>
+
           <div
-            className="flex items-center border border-green-500 rounded overflow-hidden text-xs"
+            className="flex items-center bg-black/40 border border-white/15 rounded-md overflow-hidden text-[11px]"
             role="group"
             aria-label="Language switcher"
           >
             <button
               onClick={() => setLanguage("bn")}
               aria-pressed={language === "bn"}
-              className={`px-3 py-1 transition-colors ${
+              className={`px-2.5 py-0.5 transition-colors font-medium ${
                 language === "bn"
-                  ? "bg-white text-[#016B00] font-bold"
-                  : "text-white hover:bg-green-700"
+                  ? "bg-[#F5B738] text-gray-950 font-bold"
+                  : "text-emerald-100 hover:bg-white/10"
               }`}
             >
               বাংলা
@@ -62,16 +65,17 @@ export function TopBar() {
             <button
               onClick={() => setLanguage("en")}
               aria-pressed={language === "en"}
-              className={`px-3 py-1 transition-colors ${
+              className={`px-2.5 py-0.5 transition-colors font-medium ${
                 language === "en"
-                  ? "bg-white text-[#016B00] font-bold"
-                  : "text-white hover:bg-green-700"
+                  ? "bg-[#F5B738] text-gray-950 font-bold"
+                  : "text-emerald-100 hover:bg-white/10"
               }`}
             >
               English
             </button>
           </div>
         </div>
+
       </div>
     </div>
   );

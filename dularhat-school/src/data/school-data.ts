@@ -90,8 +90,9 @@ export const schoolData = {
       icon: "📝",
     },
   ],
-  logo_url:
-    "https://dularhatsecondaryschool.edu.bd/storage/uploads/company_assets/org-3/others/1698053681-favicon-32x32.png",
+  logo_url: "/images/logo.jpg",
+  hero_image: "/images/school-photo-main.jpg",
+  building_image: "/images/school-photo-main2.jpg",
   founder: "Mr. Mahabubur Rahaman",
   first_headmaster: "Mr. Arab Ali Mia (M.A)",
 } as const;

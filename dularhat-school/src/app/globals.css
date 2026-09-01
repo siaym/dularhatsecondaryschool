@@ -2,11 +2,31 @@
 
 @layer base {
   :root {
-    --color-primary: #016B00;
-    --color-primary-dark: #024D00;
-    --color-primary-light: #02A200;
-    --color-secondary: #D97706;
-    --color-accent: #f85a40;
+    /* Brand colours */
+    --color-primary:       #015A00;
+    --color-primary-dark:  #013D00;
+    --color-primary-deep:  #012800;
+    --color-primary-light: #028A00;
+    --color-primary-pale:  #EBF7EB;
+
+    /* Gold accent */
+    --color-gold:          #C2902D;
+    --color-gold-light:    #F5B738;
+    --color-gold-pale:     #FCF6E8;
+
+    /* Warm background neutrals */
+    --color-warm-white:    #FAFAF7;
+    --color-warm-off:      #F5F3ED;
+    --color-warm-cream:    #EEEBE2;
+
+    /* Dark section tones */
+    --color-dark:          #111611;
+    --color-dark-green:    #012000;
+
+    /* Text colors */
+    --color-text-primary:  #141914;
+    --color-text-secondary:#4A554A;
+    --color-text-muted:    #718071;
   }
 
   html {
@@ -14,27 +34,55 @@
   }
 
   body {
-    font-family: var(--font-noto-bengali), 'Noto Sans Bengali', sans-serif;
+    font-family: var(--font-noto-bengali), 'Noto Sans Bengali', system-ui, sans-serif;
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #FFFFFF;
+  }
+
+  p, li, blockquote {
+    line-height: 1.85;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-light);
+    outline-offset: 2px;
   }
 }
 
 @layer utilities {
-  .text-primary {
-    color: var(--color-primary);
+  .text-primary   { color: var(--color-primary); }
+  .bg-primary     { background-color: var(--color-primary); }
+  .bg-primary-dark { background-color: var(--color-primary-dark); }
+  .bg-primary-deep { background-color: var(--color-primary-deep); }
+  .border-primary { border-color: var(--color-primary); }
+
+  .text-gold      { color: var(--color-gold-light); }
+  .bg-gold        { background-color: var(--color-gold-light); }
+  .border-gold    { border-color: var(--color-gold-light); }
+
+  .bg-warm-white  { background-color: var(--color-warm-white); }
+  .bg-warm-off    { background-color: var(--color-warm-off); }
+  .bg-warm-cream  { background-color: var(--color-warm-cream); }
+
+  .font-serif-bengali {
+    font-family: var(--font-noto-bengali), Georgia, serif;
   }
-  .bg-primary {
-    background-color: var(--color-primary);
+}
+
+/* ─── Scroll-reveal keyframe animation ───────────────────── */
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  .bg-primary-dark {
-    background-color: var(--color-primary-dark);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .border-primary {
-    border-color: var(--color-primary);
-  }
-  .text-secondary {
-    color: var(--color-secondary);
-  }
-  .bg-secondary {
-    background-color: var(--color-secondary);
-  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
