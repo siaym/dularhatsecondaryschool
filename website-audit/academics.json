@@ -1,0 +1,56 @@
+{
+  "classes": ["Class 6", "Class 7", "Class 8", "Class 9", "Class 10"],
+  "classes_bengali": ["ষষ্ঠ শ্রেণি", "সপ্তম শ্রেণি", "অষ্টম শ্রেণি", "নবম শ্রেণি", "দশম শ্রেণি"],
+  "education_level": "Secondary (JSC and SSC)",
+  "disciplines": [
+    {
+      "name_bengali": "বিজ্ঞান",
+      "name_english": "Science",
+      "available_from": "Class 9"
+    },
+    {
+      "name_bengali": "ব্যবসায় শিক্ষা",
+      "name_english": "Business Studies",
+      "available_from": "Class 9"
+    },
+    {
+      "name_bengali": "মানবিক",
+      "name_english": "Humanities",
+      "available_from": "Class 9"
+    }
+  ],
+  "exam_center": {
+    "jsc": true,
+    "ssc": true,
+    "upazila": "Charfashion",
+    "board": "Barisal"
+  },
+  "class_routine": {
+    "notes": "Class routine not publicly available. No downloadable routine found on site. To be uploaded by admin.",
+    "routine_url": "Not found"
+  },
+  "examination": {
+    "notes": "Examination schedule not publicly available via site. Barisal Board publishes SSC/JSC schedules separately.",
+    "board": "Barisal Education Board",
+    "exams": ["JSC", "SSC"]
+  },
+  "multimedia_classroom": {
+    "notes": "Footer nav includes 'মাল্টিমিডিয়া ক্লাসরুম' (Multimedia Classroom) — link exists but content unknown"
+  },
+  "academic_calendar": "Not found",
+  "rules_regulations": "Not found",
+  "footer_links_academic": [
+    "এনটিআরসিএ (NTRCA)",
+    "মাধ্যমিক ও উচ্চশিক্ষা অধিদপ্তর",
+    "শিক্ষা মন্ত্রণালয়",
+    "শিক্ষক বাতায়ন",
+    "ই এম এই এস (EMIS)"
+  ],
+  "_verification_notes": [
+    "Disciplines confirmed: Science, Business Studies, Humanities — available from Class 9",
+    "Multimedia Classroom link exists in footer/sidebar but content not crawled",
+    "No downloadable routines or PDFs found on site",
+    "Academic calendar not published online",
+    "Footer quick links include NTRCA, DSHE, Ministry of Education, Shikkhok Batayon, EMIS"
+  ]
+}

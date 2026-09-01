@@ -1,0 +1,60 @@
+{
+  "source_page": "https://dularhatsecondaryschool.edu.bd/page/employ-staff",
+  "page_title_bengali": "কর্মকর্তা ও কর্মচারী",
+  "crawl_status": "Successfully loaded — staff cards visible",
+  "total_staff_visible": 5,
+  "staff": [
+    {
+      "id": 1,
+      "name_bengali": "মোঃ হান্নান",
+      "name_english": "Md. Hannan",
+      "position_bengali": "অফিস সহায়ক কর্মচারী",
+      "position_english": "Office Supporting Staff",
+      "photo_url": "Not captured",
+      "qualification": "Not found"
+    },
+    {
+      "id": 2,
+      "name_bengali": "মোঃ কামাল উদ্দিন",
+      "name_english": "Md. Kamal Uddin",
+      "position_bengali": "নিরাপত্তা রক্ষী",
+      "position_english": "Security Guard",
+      "photo_url": "Not captured",
+      "qualification": "Not found"
+    },
+    {
+      "id": 3,
+      "name_bengali": "মোঃ আবদুল আলী",
+      "name_english": "Md. Abdul Ali",
+      "position_bengali": "নিরাপত্তা রক্ষী",
+      "position_english": "Security Guard",
+      "photo_url": "Not captured",
+      "qualification": "Not found"
+    },
+    {
+      "id": 4,
+      "name_bengali": "মোঃ সুমন",
+      "name_english": "Md. Sumon",
+      "position_bengali": "পরিচ্ছন্নতাকর্মী",
+      "position_english": "Cleaner",
+      "photo_url": "Not captured",
+      "qualification": "Not found"
+    },
+    {
+      "id": 5,
+      "name_bengali": "শারমিনা",
+      "name_english": "Sharmina",
+      "position_bengali": "পরিচ্ছন্নতাকর্মী",
+      "position_english": "Cleaner",
+      "photo_url": "Not captured",
+      "qualification": "Not found"
+    }
+  ],
+  "_verification_notes": [
+    "5 staff records extracted from live page /page/employ-staff",
+    "Previous audit had empty staff array — now populated",
+    "Staff categories: Office Supporting Staff (1), Security Guard (2), Cleaner (2)",
+    "Photo URLs not captured — images load from CMS storage",
+    "Qualifications not shown in card UI"
+  ]
+}

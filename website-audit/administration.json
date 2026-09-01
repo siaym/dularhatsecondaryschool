@@ -1,0 +1,44 @@
+{
+  "headmaster": {
+    "name_bengali": "মোহাম্মদ হোসেন",
+    "name_english": "Mohammad Hosen",
+    "designation_bengali": "প্রধান শিক্ষক",
+    "designation_english": "Head Master",
+    "subject": "English",
+    "qualification": "Not found",
+    "message_bengali": "প্রতিষ্ঠা লগ্ন থেকে দুলারহাট মাধ্যমিক বিদ্যালয় চরফ্যাশন উপজেলার পশ্চিমাঞ্চলে শিক্ষার আলো বিস্তারে আলোকবর্তিকা হিসেবে কাজ করে যাছে। বিদ্যালয়ের শিক্ষকমণ্ডলী, কার্যনির্বাহী কমিটি, অভিভাবক ও সমাজহিতৈষী ব্যাক্তিবর্গের প্রত্যক্ষ ও পরোক্ষ সহযোগিতায় বিদ্যালয়টি সামনের দিকে এগিয়ে যাছে দুর্বার গতিতে।\n\n\"উন্নত শিক্ষা একটি উন্নত জাতির সমান\"\n\nশিক্ষা বিষয়কে একটি সুন্দর জায়গা করে তোলে।\n\nদক্ষ ও দেশপ্রেমিক মানব সম্পদ গড়ে তুলতে আমরা দৃঢ় প্রতিজ্ঞ।\n\nস্মার্ট বাংলাদেশ বিনির্মাণে আমরা আছি জাতির কারিগর হিসাবে।\n\nআগামী বিষয়কে একটি সুন্দর, ক্ষুধা ও দারিদ্রামুক্ত বাংলাদেশ বিনির্মাণে এই প্রতিষ্ঠান গুরুত্বপূর্ণ ভূমিকা রাখবে।\n\nইনশাআল্লাহ।",
+    "photo_url": "Not extracted (visible on page but URL not captured in crawl)",
+    "photo_notes": "Photo is visible on /page/head-master-message. Shows a man in formal attire (dark suit). URL pattern likely: https://dularhatsecondaryschool.edu.bd/storage/uploads/... (CMS-generated, exact URL not available)",
+    "joining_date": "Not found",
+    "source_page": "https://dularhatsecondaryschool.edu.bd/page/head-master-message"
+  },
+  "assistant_headmaster": {
+    "name_bengali": "মোহাম্মদ ইউসুফ আলী",
+    "name_english": "Mohammad Yusuf Ali",
+    "designation_bengali": "সহকারী প্রধান শিক্ষক",
+    "designation_english": "Assistant Head Master",
+    "subject": "Bangla",
+    "source_page": "https://dularhatsecondaryschool.edu.bd/page/teacher"
+  },
+  "first_headmaster": {
+    "name": "Mr. Arab Ali Mia",
+    "qualification": "M.A",
+    "notes": "First headmaster of the school, historical record"
+  },
+  "founder": {
+    "name": "Mr. Mahabubur Rahaman",
+    "designation": "Chairman of Nilkomol Union Council (at time of founding)",
+    "notes": "Founder of the school in 1963"
+  },
+  "managing_committee": {
+    "notes": "The school is managed by a Managing Committee. Specific member details not found on public pages."
+  },
+  "_verification_notes": [
+    "Headmaster name FOUND: Mohammad Hosen / মোহাম্মদ হোসেন — previous audit had 'Not found'",
+    "Headmaster subject: English (visible in teacher card on /page/teacher)",
+    "Headmaster message text extracted from /page/head-master-message",
+    "Motto found from message: উন্নত শিক্ষা একটি উন্নত জাতির সমান",
+    "Assistant headmaster identified: Mohammad Yusuf Ali — teaches Bangla",
+    "Photo is visible on site but URL not captured"
+  ]
+}

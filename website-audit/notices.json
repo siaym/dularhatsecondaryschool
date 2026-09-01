@@ -1,0 +1,19 @@
+{
+  "notes": "Notice data is dynamically loaded from the school CMS. Static crawl was not able to extract individual notices. The source website homepage has a notice ticker/scroll section. Notices are accessible via 'নোটিশ বোর্ড' (Notice Board) link in sidebar/footer navigation.",
+  "source_page": "https://dularhatsecondaryschool.edu.bd/",
+  "notice_board_link": "Listed in footer under 'অন্যান্য লিঙ্ক' (Other Links) as 'নোটিশ বোর্ড'",
+  "categories": ["General", "Academic", "Examination", "Admission", "Result", "Holiday", "Event"],
+  "notices": [],
+  "sidebar_links_visible": [
+    "নোটিশ বোর্ড (Notice Board)",
+    "শিক্ষক ও শিক্ষিকা (Teachers)",
+    "মাল্টিমিডিয়া ক্লাসরুম (Multimedia Classroom)",
+    "দৈনিক শিক্ষা (Daily Education)"
+  ],
+  "_verification_notes": [
+    "Notice content not rendered in static crawl — JS-rendered CMS",
+    "Footer confirms 'নোটিশ বোর্ড' navigation link exists",
+    "No individual notice data was extractable",
+    "Notices should be managed via the new admin panel"
+  ]
+}

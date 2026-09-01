@@ -1,0 +1,173 @@
+{
+  "source_page": "https://dularhatsecondaryschool.edu.bd/page/teacher",
+  "page_title_bengali": "শিক্ষক ও শিক্ষিকা",
+  "crawl_status": "Successfully loaded — teacher cards visible",
+  "total_teachers_visible": 14,
+  "total_teachers_exact": "Not confirmed — page may have more beyond visible area",
+  "teachers": [
+    {
+      "id": 1,
+      "name_bengali": "মোহাম্মদ হোসেন",
+      "name_english": "Mohammad Hosen",
+      "designation_bengali": "প্রধান শিক্ষক",
+      "designation_english": "Head Master",
+      "subject": "English",
+      "photo_url": "Not captured",
+      "qualification": "Not found",
+      "registration_number": "Not found",
+      "notes": "Also listed in administration as current headmaster"
+    },
+    {
+      "id": 2,
+      "name_bengali": "মোহাম্মদ ইউসুফ আলী",
+      "name_english": "Mohammad Yusuf Ali",
+      "designation_bengali": "সহকারী প্রধান শিক্ষক",
+      "designation_english": "Assistant Head Master",
+      "subject": "Bangla",
+      "photo_url": "Not captured",
+      "qualification": "Not found",
+      "registration_number": "Not found"
+    },
+    {
+      "id": 3,
+      "name_bengali": "মুহাঃ সফিজুল ইসলাম",
+      "name_english": "Md. Safizul Islam",
+      "designation_bengali": "সহকারী শিক্ষক",
+      "designation_english": "Assistant Teacher",
+      "subject": "Bangla",
+      "photo_url": "Not captured",
+      "qualification": "Not found",
+      "registration_number": "Not found"
+    },
+    {
+      "id": 4,
+      "name_bengali": "বিবি খাদিজা",
+      "name_english": "Bibi Khadija",
+      "designation_bengali": "সহকারী শিক্ষক",
+      "designation_english": "Assistant Teacher",
+      "subject": "Bangla",
+      "photo_url": "Not captured",
+      "qualification": "Not found",
+      "registration_number": "Not found"
+    },
+    {
+      "id": 5,
+      "name_bengali": "মোঃ ইকবাল হোসেন",
+      "name_english": "Md. Ikbal Hosen",
+      "designation_bengali": "সহকারী শিক্ষক",
+      "designation_english": "Assistant Teacher",
+      "subject": "Bangla",
+      "photo_url": "Not captured",
+      "qualification": "Not found",
+      "registration_number": "Not found"
+    },
+    {
+      "id": 6,
+      "name_bengali": "মোঃ আবু বকর ছিদ্দিক",
+      "name_english": "Md. Abu Bakar Siddik",
+      "designation_bengali": "সহকারী শিক্ষক",
+      "designation_english": "Assistant Teacher",
+      "subject": "Bangla",
+      "photo_url": "Not captured",
+      "qualification": "Not found",
+      "registration_number": "Not found"
+    },
+    {
+      "id": 7,
+      "name_bengali": "বিবি ফাতেমা",
+      "name_english": "Bibi Fatema",
+      "designation_bengali": "সহকারী শিক্ষক",
+      "designation_english": "Assistant Teacher",
+      "subject": "Bangla",
+      "photo_url": "Not captured",
+      "qualification": "Not found",
+      "registration_number": "Not found"
+    },
+    {
+      "id": 8,
+      "name_bengali": "মোঃ মোস্তফা কামাল",
+      "name_english": "Md. Mostofa Kamal",
+      "designation_bengali": "সহকারী শিক্ষক",
+      "designation_english": "Assistant Teacher",
+      "subject": "Bangla",
+      "photo_url": "Not captured",
+      "qualification": "Not found",
+      "registration_number": "Not found"
+    },
+    {
+      "id": 9,
+      "name_bengali": "দিলীপ কুমার ঘোষার",
+      "name_english": "Dilip Kumar Ghosar",
+      "designation_bengali": "সহকারী শিক্ষক",
+      "designation_english": "Assistant Teacher",
+      "subject": "Bangla",
+      "photo_url": "Not captured",
+      "qualification": "Not found",
+      "registration_number": "Not found"
+    },
+    {
+      "id": 10,
+      "name_bengali": "শ্যামলী বালা সরকার",
+      "name_english": "Shyamali Bala Sarkar",
+      "designation_bengali": "সহকারী শিক্ষক",
+      "designation_english": "Assistant Teacher",
+      "subject": "Bangla",
+      "photo_url": "Not captured",
+      "qualification": "Not found",
+      "registration_number": "Not found"
+    },
+    {
+      "id": 11,
+      "name_bengali": "মোঃ ফারুক",
+      "name_english": "Md. Faruk",
+      "designation_bengali": "সিনিয়র শিক্ষক",
+      "designation_english": "Senior Teacher",
+      "subject": "Bangla",
+      "photo_url": "Not captured",
+      "qualification": "Not found",
+      "registration_number": "Not found"
+    },
+    {
+      "id": 12,
+      "name_bengali": "মোঃ জাকির হোসাইন",
+      "name_english": "Md. Zakir Hossain",
+      "designation_bengali": "সিনিয়র শিক্ষক",
+      "designation_english": "Senior Teacher",
+      "subject": "Bangla",
+      "photo_url": "Not captured",
+      "qualification": "Not found",
+      "registration_number": "Not found"
+    },
+    {
+      "id": 13,
+      "name_bengali": "মোঃ মাহাবুব আলম",
+      "name_english": "Md. Mahabub Alam",
+      "designation_bengali": "সিনিয়র শিক্ষক",
+      "designation_english": "Senior Teacher",
+      "subject": "Bangla",
+      "photo_url": "Not captured",
+      "qualification": "Not found",
+      "registration_number": "Not found"
+    },
+    {
+      "id": 14,
+      "name_bengali": "নাছিমা বেগম",
+      "name_english": "Nasima Begum",
+      "designation_bengali": "সহকারী শিক্ষক",
+      "designation_english": "Assistant Teacher",
+      "subject": "Bangla",
+      "photo_url": "Not captured",
+      "qualification": "Not found",
+      "registration_number": "Not found"
+    }
+  ],
+  "_verification_notes": [
+    "14 teacher records extracted from live page /page/teacher",
+    "Previous audit had empty teachers array — now populated",
+    "Subject for most teachers shows 'Bangla' — this may be the UI label for the medium of instruction, not the subject taught",
+    "Actual subjects taught are not individually labeled in card UI beyond the medium",
+    "Photo URLs not captured — images load dynamically from CMS storage",
+    "Headmaster Mohammad Hosen also appears as first card (teacher page includes headmaster)",
+    "Registration numbers not visible in card UI"
+  ]
+}

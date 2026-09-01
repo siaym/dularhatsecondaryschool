@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-primary: #016B00;
+    --color-primary-dark: #024D00;
+    --color-primary-light: #02A200;
+    --color-secondary: #D97706;
+    --color-accent: #f85a40;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-noto-bengali), 'Noto Sans Bengali', sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-primary {
+    color: var(--color-primary);
+  }
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  .bg-primary-dark {
+    background-color: var(--color-primary-dark);
+  }
+  .border-primary {
+    border-color: var(--color-primary);
+  }
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+  .bg-secondary {
+    background-color: var(--color-secondary);
+  }
+}

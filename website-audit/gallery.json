@@ -1,0 +1,25 @@
+{
+  "source_page": "https://dularhatsecondaryschool.edu.bd/page/gallery",
+  "page_title_bengali": "গ্যালারি",
+  "crawl_status": "Page loaded but gallery content area is blank — images failed to render",
+  "known_assets": [
+    {
+      "url": "https://dularhatsecondaryschool.edu.bd/storage/uploads/company_assets/org-3/others/1698053681-favicon-32x32.png",
+      "source_page": "https://dularhatsecondaryschool.edu.bd/",
+      "filename": "favicon-32x32.png",
+      "category": "logo",
+      "caption": "School Logo/Favicon (32×32)",
+      "description": "32×32 favicon — cropped version of full circular crest logo",
+      "status": "ACCESSIBLE"
+    }
+  ],
+  "albums": [],
+  "_verification_notes": [
+    "Gallery page /page/gallery loaded but content area was completely blank (white space)",
+    "Images appear to be dynamically loaded via JavaScript/AJAX and failed to load in crawl",
+    "The school header shows a full circular crest logo (red/green/white with book and rising sun imagery)",
+    "Logo URL pattern suggests images are in /storage/uploads/company_assets/org-3/ path",
+    "No gallery image URLs were extractable — to be populated by school admin",
+    "Gallery section on homepage was also not rendered (blank area visible)"
+  ]
+}
