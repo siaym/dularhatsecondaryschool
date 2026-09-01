@@ -123,27 +123,10 @@ export const navLinks = [
   {
     label: { bengali: "প্রশাসন", english: "Administration" },
     href: "/administration",
-    children: [
-      {
-        label: {
-          bengali: "প্রধান শিক্ষকের বাণী",
-          english: "Headmaster's Message",
-        },
-        href: "/administration/headmaster",
-      },
-      {
-        label: { bengali: "ম্যানেজিং কমিটি", english: "Managing Committee" },
-        href: "/administration/committee",
-      },
-    ],
   },
   {
-    label: { bengali: "শিক্ষকবৃন্দ", english: "Teachers" },
+    label: { bengali: "শিক্ষকমণ্ডলী", english: "Teachers" },
     href: "/teachers",
-  },
-  {
-    label: { bengali: "কর্মচারীবৃন্দ", english: "Staff" },
-    href: "/staff",
   },
   {
     label: { bengali: "একাডেমিক", english: "Academics" },

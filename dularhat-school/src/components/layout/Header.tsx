@@ -3,277 +3,302 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown, Phone } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { schoolData, navLinks } from "@/data/school-data";
-import { usePathname } from "next/navigation";
+import { navLinks } from "@/data/school-data";
+import { schoolData } from "@/data/school-data";
 
 export function Header() {
-  const { t, language, setLanguage } = useLanguage();
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const pathname = usePathname();
+  const { language, setLanguage } = useLanguage();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 25);
+      setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // initialize on mount
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    setMobileOpen(false);
-    setOpenDropdown(null);
-  }, [pathname]);
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [mobileMenuOpen]);
+
+  const toggleAccordion = (href: string) => {
+    setMobileAccordion(mobileAccordion === href ? null : href);
+  };
 
   return (
-    <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ease-in-out ${
-        scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-md py-2 border-b border-gray-100"
-          : "bg-white py-3.5 sm:py-4.5 border-b border-gray-100"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          
-          {/* Logo & Compact Title (Shrinks smoothly on scroll) */}
-          <Link
-            href="/"
-            className="flex items-center gap-2.5 sm:gap-3 group flex-shrink-0"
-            aria-label="Dularhat Secondary School Homepage"
+    <>
+      <header
+        className={`fixed w-full top-0 z-50 transition-all duration-300 ease-in-out ${
+          isScrolled ? "pt-2 pb-2" : "pt-[10px] lg:pt-4 pb-0"
+        } pointer-events-none`}
+      >
+        <div className="w-full max-w-[1536px] mx-auto px-[14px] lg:px-10 pointer-events-auto">
+          <div
+            className={`relative flex items-center justify-between bg-white transition-all duration-300 ease-in-out mx-auto h-[60px] lg:h-auto ${
+              isScrolled
+                ? "rounded-[20px] lg:rounded-[16px] shadow-md px-4 sm:px-6 py-2 lg:py-1.5"
+                : "rounded-[20px] shadow-lg px-4 sm:px-6 lg:px-8 py-2.5 lg:py-2.5"
+            }`}
           >
-            <div
-              className={`relative flex items-center justify-center flex-shrink-0 transition-all duration-300 ease-in-out ${
-                scrolled ? "w-9 h-9 sm:w-10 sm:h-10" : "w-12 h-12 sm:w-14 sm:h-14"
-              }`}
-            >
-              <Image
-                src={schoolData.logo_url}
-                alt="Dularhat Secondary School Emblem"
-                width={56}
-                height={56}
-                className="w-full h-full object-contain transition-transform group-hover:scale-105"
-                priority
-              />
-            </div>
-            
-            <div className="flex flex-col justify-center">
-              <span
-                className={`font-extrabold text-[#016B00] leading-tight font-serif tracking-tight group-hover:text-[#024D00] transition-all duration-300 ${
-                  scrolled ? "text-sm sm:text-base" : "text-base sm:text-lg"
-                }`}
-              >
-                {t(schoolData.name)}
-              </span>
-              <span
-                className={`font-medium text-gray-500 uppercase tracking-wider transition-all duration-300 ${
-                  scrolled ? "text-[9px] sm:text-[10px]" : "text-[10px] sm:text-[11px]"
-                }`}
-              >
-                {language === "bn" ? "স্থাপিত ১৯৬৩ • চরফ্যাশন" : "Est. 1963 • Charfashion"}
-              </span>
-            </div>
-          </Link>
-
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2.5" aria-label="Main navigation">
-            {navLinks.map((link) => {
-              const isActive =
-                pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
-
-              return link.children ? (
-                <div
-                  key={link.href}
-                  className="relative"
-                  onMouseEnter={() => setOpenDropdown(link.href)}
-                  onMouseLeave={() => setOpenDropdown(null)}
+            {/* ─── Logo and Identity (Left) ─── */}
+            <Link href="/" className="flex items-center gap-2 lg:gap-3 shrink-0 group z-10 w-fit max-w-[80%] h-full">
+              <div className={`relative flex items-center transition-all duration-300 ease-in-out shrink-0 ${isScrolled ? "w-9 h-9 lg:w-10 lg:h-10" : "w-[38px] h-[38px] lg:w-[48px] lg:h-[48px]"}`}>
+                <Image
+                  src={schoolData.logo_url}
+                  alt="School Logo"
+                  fill
+                  className="object-contain drop-shadow-sm group-hover:scale-105 transition-transform"
+                  priority
+                />
+              </div>
+              <div className="flex flex-col justify-center min-w-0">
+                <h1
+                  className={`font-bold text-[#063F20] transition-all duration-300 ${
+                    isScrolled ? "text-[14px] lg:text-[17px]" : "text-[15px] sm:text-[17px] lg:text-[19px]"
+                  } leading-tight truncate`}
                 >
-                  <button
-                    className={`flex items-center gap-1 font-bold rounded-lg transition-all duration-200 ${
-                      scrolled
-                        ? "px-2.5 py-1.5 text-xs xl:text-sm"
-                        : "px-3 py-2 text-sm xl:text-[15px]"
-                    } ${
-                      isActive
-                        ? "text-[#016B00] bg-green-50"
-                        : "text-gray-800 hover:text-[#016B00] hover:bg-gray-50"
-                    }`}
-                    aria-expanded={openDropdown === link.href}
-                    aria-haspopup="true"
-                  >
-                    {isActive && <span className="text-[#016B00] text-[11px]">▶</span>}
-                    <span>{t(link.label)}</span>
-                    <ChevronDown
-                      size={13}
-                      className={`transition-transform duration-200 opacity-60 ${
-                        openDropdown === link.href ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
+                  {language === "bn" ? schoolData.name.bengali : schoolData.name.english}
+                </h1>
+                <p
+                  className={`text-[#151A17]/70 font-medium transition-all duration-300 ${
+                    isScrolled ? "text-[9px] lg:text-[11px]" : "text-[10px] sm:text-[11px] lg:text-xs"
+                  } leading-tight mt-[1px] truncate`}
+                >
+                  {language === "bn"
+                    ? "চরফ্যাশন, ভোলা • প্রতিষ্ঠাকাল: ১৯৬৬"
+                    : "Charfashion, Bhola • Est: 1966"}
+                </p>
+              </div>
+            </Link>
 
-                  {/* Dropdown Menu */}
-                  {openDropdown === link.href && (
-                    <div className="absolute top-full left-0 mt-1 bg-white text-gray-900 rounded-xl shadow-xl min-w-48 py-2 z-50 border border-gray-100 animate-in fade-in slide-in-from-top-1 duration-150">
-                      {link.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className="block px-4 py-2 text-xs xl:text-sm font-semibold text-gray-700 hover:bg-green-50 hover:text-[#016B00] transition-colors"
-                        >
-                          {t(child.label)}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`flex items-center gap-1 font-bold rounded-lg transition-all duration-200 ${
-                    scrolled
-                      ? "px-2.5 py-1.5 text-xs xl:text-sm"
-                      : "px-3 py-2 text-sm xl:text-[15px]"
-                  } ${
-                    isActive
-                      ? "text-[#016B00] bg-green-50"
-                      : "text-gray-800 hover:text-[#016B00] hover:bg-gray-50"
+            {/* ─── Desktop Navigation (Centered) ─── */}
+            <nav className="hidden xl:flex flex-1 justify-center items-center gap-1 2xl:gap-3 px-4">
+              {navLinks.map((link) => {
+                const hasChildren = link.children && link.children.length > 0;
+                const isActive = link.href === "/"; // Simple active check for "Home"
+
+                // Adjust font size smaller for English to prevent overflow
+                const textClass = language === "en" 
+                  ? "text-[13px] 2xl:text-[14px]" 
+                  : "text-[15px] 2xl:text-[16px]";
+
+                return (
+                  <div
+                    key={link.href}
+                    className="relative group"
+                    onMouseEnter={() => hasChildren && setActiveDropdown(link.href)}
+                    onMouseLeave={() => hasChildren && setActiveDropdown(null)}
+                  >
+                    <Link
+                      href={link.href}
+                      className={`flex items-center gap-1.5 px-2.5 py-2 ${textClass} font-medium transition-colors ${
+                        isActive ? "text-[#063F20]" : "text-[#151A17] hover:text-[#063F20]"
+                      }`}
+                    >
+                      {isActive && <span className="w-1.5 h-1.5 bg-[#063F20] rounded-full" />}
+                      <span>{language === "bn" ? link.label.bengali : link.label.english}</span>
+                      {hasChildren && <ChevronDown className="w-3.5 h-3.5 opacity-50" />}
+                    </Link>
+
+                    {/* Dropdown Menu */}
+                    {hasChildren && (
+                      <div
+                        className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 bg-white rounded-xl shadow-xl border border-gray-100 py-2 transition-all duration-200 ${
+                          activeDropdown === link.href
+                            ? "opacity-100 translate-y-0 visible"
+                            : "opacity-0 translate-y-2 invisible"
+                        }`}
+                      >
+                        {link.children?.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className="block px-4 py-2.5 text-sm text-gray-700 hover:text-[#063F20] hover:bg-emerald-50/50 transition-colors"
+                          >
+                            {language === "bn" ? child.label.bengali : child.label.english}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </nav>
+
+            {/* ─── Right Side Actions ─── */}
+            <div className="flex items-center justify-end gap-2 lg:gap-4 shrink-0 z-10 h-full">
+              {/* Language Toggle */}
+              <div className="hidden lg:flex items-center bg-gray-100 rounded-full p-0.5">
+                <button
+                  onClick={() => setLanguage("bn")}
+                  className={`px-4 py-1.5 rounded-full text-xs lg:text-sm font-semibold transition-all ${
+                    language === "bn"
+                      ? "bg-[#063F20] text-white shadow-sm"
+                      : "text-gray-600 hover:text-[#063F20]"
                   }`}
                 >
-                  {isActive && <span className="text-[#016B00] text-[11px]">▶</span>}
-                  <span>{t(link.label)}</span>
-                </Link>
-              );
-            })}
-          </nav>
+                  বাংলা
+                </button>
+                <button
+                  onClick={() => setLanguage("en")}
+                  className={`px-4 py-1.5 rounded-full text-xs lg:text-sm font-bold transition-all ${
+                    language === "en"
+                      ? "bg-[#063F20] text-white shadow-sm"
+                      : "text-gray-600 hover:text-[#063F20]"
+                  }`}
+                >
+                  EN
+                </button>
+              </div>
 
-          {/* Right Language Toggle & Contact for Desktop */}
-          <div className="hidden lg:flex items-center gap-2.5">
-            {/* Language Switch */}
-            <div className="flex bg-gray-100 p-0.5 border border-gray-200 rounded-lg text-xs font-bold">
+              {/* Mobile Menu Toggle */}
               <button
-                onClick={() => setLanguage("bn")}
-                className={`px-2 py-0.5 rounded-md transition-all ${
-                  language === "bn"
-                    ? "bg-[#016B00] text-white shadow-xs"
-                    : "text-gray-600 hover:text-gray-900"
-                }`}
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="xl:hidden p-2 -mr-2 flex items-center justify-center text-gray-700 hover:text-[#063F20] transition-colors z-50 h-full"
+                aria-label="Toggle menu"
               >
-                বাং
-              </button>
-              <button
-                onClick={() => setLanguage("en")}
-                className={`px-2 py-0.5 rounded-md transition-all ${
-                  language === "en"
-                    ? "bg-[#016B00] text-white shadow-xs"
-                    : "text-gray-600 hover:text-gray-900"
-                }`}
-              >
-                EN
+                {mobileMenuOpen ? <X className="w-[22px] h-[22px]" /> : <Menu className="w-[22px] h-[22px]" />}
               </button>
             </div>
-
-            {/* Quick Contact Button */}
-            <Link
-              href="/contact"
-              className={`inline-flex items-center gap-1.5 bg-[#016B00] hover:bg-[#024D00] text-white font-bold rounded-xl shadow-xs hover:shadow-md transition-all duration-200 ${
-                scrolled ? "px-3 py-1.5 text-xs" : "px-3.5 py-2 text-xs xl:text-sm"
-              }`}
-            >
-              <Phone size={13} />
-              <span>{language === "bn" ? "যোগাযোগ" : "Contact"}</span>
-            </Link>
           </div>
+        </div>
+      </header>
 
-          {/* Mobile Right Bar: Language Switch + Menu Toggle Button */}
-          <div className="lg:hidden flex items-center gap-2">
-            <div className="flex bg-gray-100 p-0.5 border border-gray-200 rounded-md text-[11px] font-bold">
-              <button
-                onClick={() => setLanguage("bn")}
-                className={`px-2 py-0.5 rounded ${
-                  language === "bn" ? "bg-[#016B00] text-white" : "text-gray-600"
-                }`}
-              >
-                বাং
-              </button>
-              <button
-                onClick={() => setLanguage("en")}
-                className={`px-2 py-0.5 rounded ${
-                  language === "en" ? "bg-[#016B00] text-white" : "text-gray-600"
-                }`}
-              >
-                EN
-              </button>
-            </div>
+      {/* ─── Mobile Navigation Overlay & Drawer ─── */}
+      <div
+        className={`xl:hidden fixed inset-0 z-[100] transition-all duration-300 ${
+          mobileMenuOpen ? "visible" : "invisible"
+        }`}
+      >
+        {/* Backdrop */}
+        <div 
+          className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+            mobileMenuOpen ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
 
+        {/* Drawer panel */}
+        <div
+          className={`absolute top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl transition-transform duration-300 ease-out flex flex-col ${
+            mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          {/* Mobile Drawer Header */}
+          <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+            <h2 className="font-bold text-[#063F20] text-lg">
+              {language === "bn" ? "মেনু" : "Menu"}
+            </h2>
             <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 transition-colors"
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileOpen}
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2 -mr-2 text-gray-500 hover:text-[#063F20] bg-gray-50 rounded-full transition-colors"
             >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+              <X className="w-5 h-5" />
             </button>
           </div>
 
+          {/* Drawer Scrollable Content */}
+          <div className="flex-1 overflow-y-auto px-6 py-6 flex flex-col gap-6">
+            
+            {/* Language Switch inside Mobile Drawer */}
+            <div className="flex justify-center lg:hidden">
+              <div className="inline-flex items-center bg-gray-100 rounded-full p-1 w-full">
+                <button
+                  onClick={() => setLanguage("bn")}
+                  className={`flex-1 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                    language === "bn"
+                      ? "bg-[#063F20] text-white shadow-md"
+                      : "text-gray-600 hover:bg-gray-200"
+                  }`}
+                >
+                  বাংলা
+                </button>
+                <button
+                  onClick={() => setLanguage("en")}
+                  className={`flex-1 py-2.5 rounded-full text-sm font-bold transition-all ${
+                    language === "en"
+                      ? "bg-[#063F20] text-white shadow-md"
+                      : "text-gray-600 hover:bg-gray-200"
+                  }`}
+                >
+                  EN
+                </button>
+              </div>
+            </div>
+
+            <nav className="flex flex-col space-y-1">
+              {navLinks.map((link) => {
+                const hasChildren = link.children && link.children.length > 0;
+                const isAccordionOpen = mobileAccordion === link.href;
+
+                return (
+                  <div key={link.href} className="flex flex-col border-b border-gray-50 last:border-0">
+                    <div className="flex items-center justify-between">
+                      <Link
+                        href={link.href}
+                        className="flex-1 py-3.5 text-[17px] font-medium text-gray-800"
+                        onClick={() => !hasChildren && setMobileMenuOpen(false)}
+                      >
+                        {language === "bn" ? link.label.bengali : link.label.english}
+                      </Link>
+                      
+                      {hasChildren && (
+                        <button 
+                          onClick={() => toggleAccordion(link.href)}
+                          className="p-3 -mr-3 text-gray-500"
+                        >
+                          {isAccordionOpen ? (
+                            <ChevronUp className="w-5 h-5" />
+                          ) : (
+                            <ChevronDown className="w-5 h-5" />
+                          )}
+                        </button>
+                      )}
+                    </div>
+                    
+                    {/* Accordion Content */}
+                    {hasChildren && (
+                      <div 
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isAccordionOpen ? "max-h-96 opacity-100 mb-3" : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="flex flex-col pl-4 border-l-2 border-emerald-100 space-y-1 py-1">
+                          {link.children?.map((child) => (
+                            <Link
+                              key={child.href}
+                              href={child.href}
+                              className="px-4 py-2.5 text-[15px] text-gray-600 hover:text-[#063F20] rounded-lg hover:bg-emerald-50/50 transition-colors"
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              {language === "bn" ? child.label.bengali : child.label.english}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </nav>
+          </div>
         </div>
       </div>
-
-      {/* Mobile Drawer */}
-      {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 shadow-2xl mt-2">
-          <nav className="max-w-7xl mx-auto px-4 py-4 space-y-1" aria-label="Mobile navigation">
-            {navLinks.map((link) => {
-              const isActive =
-                pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
-
-              return (
-                <div key={link.href} className="border-b border-gray-50 pb-1">
-                  <Link
-                    href={link.href}
-                    className={`block px-3 py-2 rounded-lg text-sm font-bold transition-colors ${
-                      isActive
-                        ? "bg-[#016B00] text-white"
-                        : "text-gray-800 hover:bg-gray-50 hover:text-[#016B00]"
-                    }`}
-                  >
-                    {isActive && <span className="mr-1.5 text-xs">▶</span>}
-                    {t(link.label)}
-                  </Link>
-
-                  {link.children && (
-                    <div className="pl-4 mt-1 space-y-1 border-l-2 border-green-600/30 ml-3">
-                      {link.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className="block px-3 py-1.5 rounded text-xs font-semibold text-gray-600 hover:text-[#016B00] hover:bg-green-50 transition-colors"
-                        >
-                          {t(child.label)}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-
-            <div className="pt-2">
-              <Link
-                href="/contact"
-                className="flex items-center justify-center gap-2 bg-[#016B00] text-white font-bold py-2.5 rounded-xl text-xs w-full shadow-xs"
-              >
-                <Phone size={14} />
-                <span>{language === "bn" ? "সরাসরি যোগাযোগ করুন" : "Contact School Office"}</span>
-              </Link>
-            </div>
-          </nav>
-        </div>
-      )}
-    </header>
+    </>
   );
 }

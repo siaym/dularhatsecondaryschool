@@ -63,12 +63,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="bn" className={notoSansBengali.variable}>
+    <html lang="bn" className={notoSansBengali.variable} suppressHydrationWarning>
       <body className={`${notoSansBengali.className} antialiased bg-white text-gray-900`}>
         <LanguageProvider>
-          <TopBar />
           <Header />
-          <main>{children}</main>
+          <main className="pt-[72px] lg:pt-[90px]">{children}</main>
           <Footer />
         </LanguageProvider>
       </body>

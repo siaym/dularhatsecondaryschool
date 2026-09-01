@@ -29,6 +29,10 @@
     --color-text-muted:    #718071;
   }
 
+  @theme {
+    --breakpoint-lg: 992px;
+  }
+
   html {
     scroll-behavior: smooth;
   }

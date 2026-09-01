@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <>
+    <div className="-mt-[72px] lg:-mt-[90px]">
       <HeroSection />
       <StatsSection />
       <AboutSection />
@@ -30,6 +30,6 @@ export default function HomePage() {
       <AcademicsSection />
       <GallerySection />
       <ContactSection />
-    </>
+    </div>
   );
 }
