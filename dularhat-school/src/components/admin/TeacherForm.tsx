@@ -97,9 +97,13 @@ export function TeacherForm({ teacher }: { teacher?: Teacher }) {
             <div className="space-y-2">
               <label htmlFor="sort_order" className="block text-sm font-medium text-gray-700">Sort Order</label>
               <input type="number" id="sort_order" name="sort_order" defaultValue={teacher?.sort_order ?? 10} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#016B00] outline-none" />
-              <p className="text-xs text-gray-500">Lower numbers appear first. Headmaster should be 1.</p>
+              <p className="text-xs text-gray-500">Lower numbers appear first.</p>
             </div>
-            <div className="space-y-2 flex flex-col justify-center pt-6">
+            <div className="space-y-4 flex flex-col justify-center pt-6">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" name="is_headmaster" defaultChecked={teacher?.is_headmaster ?? false} className="w-4 h-4 text-[#016B00] rounded border-gray-300 focus:ring-[#016B00]" />
+                <span className="text-sm font-medium text-gray-900 font-bold">Is Headmaster</span>
+              </label>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" name="is_active" defaultChecked={teacher?.is_active ?? true} className="w-4 h-4 text-[#016B00] rounded border-gray-300 focus:ring-[#016B00]" />
                 <span className="text-sm font-medium text-gray-700">Currently Active</span>

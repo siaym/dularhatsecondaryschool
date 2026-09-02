@@ -42,8 +42,8 @@ export default async function HomePage() {
   const { data: headmasters } = await supabase
     .from('teachers')
     .select('*')
+    .eq('is_headmaster', true)
     .eq('is_active', true)
-    .order('sort_order', { ascending: true })
     .order('created_at', { ascending: true })
     .limit(1)
 

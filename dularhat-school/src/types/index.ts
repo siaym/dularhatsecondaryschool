@@ -35,6 +35,7 @@ export type Teacher = {
   subject_en: string | null;
   photo_url: string | null;
   sort_order: number;
+  is_headmaster: boolean;
   is_active: boolean;
   created_at: string;
 };
@@ -49,5 +50,26 @@ export type Staff = {
   sort_order: number;
   is_active: boolean;
   created_at: string;
+  updated_at: string;
+};
+
+export type SchoolSettings = {
+  id: number;
+  school_name_bn: string | null;
+  school_name_en: string | null;
+  phone: string | null;
+  email: string | null;
+  address_bn: string | null;
+  address_en: string | null;
+  established_year: number | null;
+  eiin: string | null;
+  facebook_url: string | null;
+  youtube_url: string | null;
+  headmaster_message_bn: string | null;
+  headmaster_message_en: string | null;
+  chairman_message_bn: string | null;
+  chairman_message_en: string | null;
+  footer_description_bn: string | null;
+  footer_description_en: string | null;
   updated_at: string;
 };

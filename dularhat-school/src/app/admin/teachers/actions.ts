@@ -78,8 +78,9 @@ export async function createTeacher(formData: FormData) {
     subject_bn: formData.get('subject_bn') || null,
     subject_en: formData.get('subject_en') || null,
     photo_url,
+    is_headmaster: formData.get('is_headmaster') === 'on',
     is_active: formData.get('is_active') === 'on',
-    sort_order: parseInt(formData.get('sort_order') as string || '0', 10),
+    sort_order: parseInt(formData.get('sort_order') as string || '10', 10),
   })
 
   if (dbError) {
@@ -161,8 +162,10 @@ export async function updateTeacher(id: string, formData: FormData) {
     subject_bn: formData.get('subject_bn') || null,
     subject_en: formData.get('subject_en') || null,
     photo_url,
+    sort_order: parseInt(formData.get('sort_order') as string || '10', 10),
+    is_headmaster: formData.get('is_headmaster') === 'on',
     is_active: formData.get('is_active') === 'on',
-    sort_order: parseInt(formData.get('sort_order') as string || '0', 10),
+    updated_at: new Date().toISOString()
   }).eq('id', id)
 
   if (dbError) {

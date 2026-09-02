@@ -16,9 +16,8 @@ export default async function TeachersPage() {
 
   const teachersList = allTeachers || [];
   
-  // We consider the teacher with sort_order 1 (or the first one) to be the headmaster for the featured section.
-  const headmaster = teachersList.length > 0 && teachersList[0].sort_order === 1 ? teachersList[0] : undefined;
-  const assistantTeachers = headmaster ? teachersList.slice(1) : teachersList;
+  const headmaster = teachersList.find(t => t.is_headmaster);
+  const assistantTeachers = teachersList.filter(t => !t.is_headmaster);
 
   return (
     <div>
