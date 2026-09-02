@@ -15,7 +15,7 @@ export function AcademicsSection() {
   const { t, language } = useLanguage();
 
   return (
-    <section className="py-16 bg-white" aria-labelledby="academics-heading">
+    <section className="py-16 bg-[#EEF3F0]" aria-labelledby="academics-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <span className="inline-block bg-blue-50 text-blue-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-3">

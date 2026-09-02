@@ -10,7 +10,7 @@ export function HeadmasterSection({ headmaster }: { headmaster?: Teacher }) {
   const { language } = useLanguage();
 
   return (
-    <section className="py-16 bg-gradient-to-br from-green-50 to-white" aria-labelledby="headmaster-heading">
+    <section className="py-16 bg-white" aria-labelledby="headmaster-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">

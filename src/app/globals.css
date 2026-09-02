@@ -23,7 +23,9 @@
     --color-gold-dark: #D4A900;
 
     /* Site canvas */
-    --site-bg: #F5FAF6;
+    --site-bg: #F5F7F5;
+    --site-alt: #EEF3F0;
+    --site-dark: #12352F;
 
     /* Text */
     --text-body: #1A2E1A;
