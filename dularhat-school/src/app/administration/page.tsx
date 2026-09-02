@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { ArrowRight, Users } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { PageSidebar } from "@/components/ui/PageSidebar";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function AdministrationPage() {
@@ -35,63 +34,44 @@ export default function AdministrationPage() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-3 gap-10">
-          <div className="lg:col-span-2">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              {language === "bn" ? "প্রশাসনিক কার্যক্রম" : "Administrative Structure"}
-            </h2>
-            <div className="w-16 h-1 bg-[#016B00] rounded mb-8" />
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          {language === "bn" ? "প্রশাসনিক কার্যক্রম" : "Administrative Structure"}
+        </h2>
+        <div className="w-16 h-1 bg-[#016B00] rounded mb-8" />
 
-            <div className="grid sm:grid-cols-2 gap-5">
-              {adminLinks.map((link, i) => (
-                <Link
-                  key={i}
-                  href={link.href}
-                  className="group bg-white border border-gray-100 rounded-2xl p-6 hover:border-[#016B00] hover:shadow-md transition-all"
-                >
-                  <span className="text-4xl mb-4 block">{link.icon}</span>
-                  <h3 className="font-bold text-gray-900 text-lg mb-2 group-hover:text-[#016B00] transition-colors">
-                    {language === "bn" ? link.title.bengali : link.title.english}
-                  </h3>
-                  <p className="text-gray-500 text-sm mb-4">
-                    {language === "bn" ? link.desc.bengali : link.desc.english}
-                  </p>
-                  <div className="flex items-center gap-1 text-[#016B00] text-sm font-medium">
-                    {language === "bn" ? "বিস্তারিত দেখুন" : "View Details"}
-                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-            {/* Overview */}
-            <div className="mt-10 bg-green-50 border border-green-100 rounded-2xl p-6">
-              <h3 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                <Users size={20} className="text-[#016B00]" />
-                {language === "bn" ? "প্রশাসন সম্পর্কে" : "About Administration"}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+          {adminLinks.map((link, i) => (
+            <Link
+              key={i}
+              href={link.href}
+              className="group bg-white border border-gray-100 rounded-2xl p-6 hover:border-[#016B00] hover:shadow-md transition-all"
+            >
+              <span className="text-4xl mb-4 block">{link.icon}</span>
+              <h3 className="font-bold text-gray-900 text-lg mb-2 group-hover:text-[#016B00] transition-colors">
+                {language === "bn" ? link.title.bengali : link.title.english}
               </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                {language === "bn"
-                  ? "দুলারহাট মাধ্যমিক বিদ্যালয় একটি ম্যানেজিং কমিটির তত্ত্বাবধানে পরিচালিত হয়। প্রধান শিক্ষক বিদ্যালয়ের সার্বিক একাডেমিক ও প্রশাসনিক কার্যক্রম পরিচালনা করেন।"
-                  : "Dularhat Secondary School is managed under a Managing Committee. The Headmaster oversees all academic and administrative activities of the school."}
+              <p className="text-gray-500 text-sm mb-4">
+                {language === "bn" ? link.desc.bengali : link.desc.english}
               </p>
-            </div>
-          </div>
+              <div className="flex items-center gap-1 text-[#016B00] text-sm font-medium">
+                {language === "bn" ? "বিস্তারিত দেখুন" : "View Details"}
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+          ))}
+        </div>
 
-          <div>
-            <PageSidebar
-              sectionLinks={[
-                { label: language === "bn" ? "প্রশাসন" : "Administration", href: "/administration", active: true },
-                { label: language === "bn" ? "প্রধান শিক্ষক" : "Headmaster", href: "/administration/headmaster" },
-                { label: language === "bn" ? "ম্যানেজিং কমিটি" : "Managing Committee", href: "/administration/committee" },
-              ]}
-              quickLinks={[
-                { label: language === "bn" ? "শিক্ষকবৃন্দ" : "Teachers", href: "/teachers" },
-                { label: language === "bn" ? "কর্মচারীবৃন্দ" : "Staff", href: "/staff" },
-                { label: language === "bn" ? "নোটিশ" : "Notices", href: "/notices" },
-              ]}
-            />
-          </div>
+        {/* Overview */}
+        <div className="bg-green-50 border border-green-100 rounded-2xl p-6">
+          <h3 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
+            <Users size={20} className="text-[#016B00]" />
+            {language === "bn" ? "প্রশাসন সম্পর্কে" : "About Administration"}
+          </h3>
+          <p className="text-gray-600 text-sm leading-relaxed">
+            {language === "bn"
+              ? "দুলারহাট মাধ্যমিক বিদ্যালয় একটি ম্যানেজিং কমিটির তত্ত্বাবধানে পরিচালিত হয়। প্রধান শিক্ষক বিদ্যালয়ের সার্বিক একাডেমিক ও প্রশাসনিক কার্যক্রম পরিচালনা করেন।"
+              : "Dularhat Secondary School is managed under a Managing Committee. The Headmaster oversees all academic and administrative activities of the school."}
+          </p>
         </div>
       </div>
     </div>

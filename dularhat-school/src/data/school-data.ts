@@ -129,6 +129,10 @@ export const navLinks = [
     href: "/teachers",
   },
   {
+    label: { bengali: "কর্মচারীবৃন্দ", english: "Staff" },
+    href: "/staff",
+  },
+  {
     label: { bengali: "একাডেমিক", english: "Academics" },
     href: "/academics",
     children: [

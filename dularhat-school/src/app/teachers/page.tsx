@@ -2,7 +2,6 @@
 
 import { GraduationCap } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { PageSidebar } from "@/components/ui/PageSidebar";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 // Sample teacher cards - in production, fetched from Supabase
@@ -29,16 +28,14 @@ export default function TeachersPage() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-3 gap-10">
-          <div className="lg:col-span-2">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900">
-                  {language === "bn" ? "শিক্ষকমণ্ডলী" : "Teaching Faculty"}
-                </h2>
-                <div className="w-16 h-1 bg-[#016B00] rounded mt-2" />
-              </div>
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900">
+                {language === "bn" ? "শিক্ষকমণ্ডলী" : "Teaching Faculty"}
+              </h2>
+              <div className="w-16 h-1 bg-[#016B00] rounded mt-2" />
             </div>
+          </div>
 
             {/* Info Notice */}
             <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 mb-8">
@@ -53,9 +50,9 @@ export default function TeachersPage() {
             </div>
 
             {/* Teacher Cards Grid */}
-            <div className="grid sm:grid-cols-2 gap-5">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {/* Headmaster Card */}
-              <div className="bg-gradient-to-br from-[#016B00] to-[#024D00] rounded-2xl p-6 text-white col-span-full sm:col-span-2 flex items-center gap-6">
+              <div className="bg-gradient-to-br from-[#016B00] to-[#024D00] rounded-2xl p-6 text-white col-span-full flex items-center gap-6">
                 <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 border-2 border-white/30">
                   <GraduationCap size={36} className="text-white" />
                 </div>
@@ -101,19 +98,6 @@ export default function TeachersPage() {
                 </div>
               ))}
             </div>
-          </div>
-
-          <div>
-            <PageSidebar
-              quickLinks={[
-                { label: language === "bn" ? "কর্মচারীবৃন্দ" : "Staff", href: "/staff" },
-                { label: language === "bn" ? "প্রধান শিক্ষক" : "Headmaster", href: "/administration/headmaster" },
-                { label: language === "bn" ? "নোটিশ" : "Notices", href: "/notices" },
-                { label: language === "bn" ? "ভর্তি" : "Admission", href: "/admission" },
-              ]}
-            />
-          </div>
-        </div>
       </div>
     </div>
   );
