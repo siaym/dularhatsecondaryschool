@@ -6,6 +6,7 @@ import { Phone, Mail, MapPin, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { schoolData, navLinks } from "@/data/school-data";
 
+
 export function Footer() {
   const { t, language } = useLanguage();
   const year = new Date().getFullYear();
@@ -42,7 +43,7 @@ export function Footer() {
             <p className="text-green-200 text-sm leading-relaxed">
               {language === "bn"
                 ? "চরফ্যাশন উপজেলার পশ্চিমাঞ্চলের প্রথম শিক্ষা প্রতিষ্ঠান। ১৯৬৩ সালে প্রতিষ্ঠিত।"
-                : "The first educational institution in the western part of Charfashion Upazila. Established in 1963."}
+                : `${schoolData.description.english.split(".")[0]}. Established in ${schoolData.established_en}.`}
             </p>
             <p className="mt-3 text-xs text-green-300 italic">
               &ldquo;{t(schoolData.tagline)}&rdquo;

@@ -41,7 +41,7 @@ export function AboutClient() {
                   {language === "bn" ? "সংক্ষিপ্ত তথ্য" : "At a Glance"}
                 </h3>
                 {[
-                  { icon: "📅", label: language === "bn" ? "প্রতিষ্ঠাকাল" : "Established", value: language === "bn" ? "১লা এপ্রিল, ১৯৬৩" : "1 April 1963" },
+                  { icon: "📅", label: language === "bn" ? "প্রতিষ্ঠাকাল" : "Established", value: language === "bn" ? `১লা এপ্রিল, ${schoolData.established}` : `1 April ${schoolData.established_en}` },
                   { icon: "🔢", label: "EIIN", value: schoolData.eiin },
                   { icon: "🏛️", label: language === "bn" ? "শিক্ষা বোর্ড" : "Board", value: language === "bn" ? "বরিশাল" : "Barisal" },
                   { icon: "👤", label: language === "bn" ? "প্রতিষ্ঠাতা" : "Founder", value: "Mr. Mahabubur Rahaman" },

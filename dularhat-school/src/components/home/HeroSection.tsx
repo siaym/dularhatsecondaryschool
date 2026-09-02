@@ -100,17 +100,17 @@ export function HeroSection() {
           <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 mb-4 min-[400px]:mb-5 text-[10px] sm:text-[11px] font-medium text-[#F2F5F2]">
             <div className="flex items-center gap-1">
               <Calendar className="w-[11px] h-[11px] text-[#F4C430]" />
-              <span>{language === "bn" ? "প্রতিষ্ঠাকাল: ১৯৬৩" : "Established: 1963"}</span>
+              <span>{language === "bn" ? `প্রতিষ্ঠাকাল: ${schoolData.established}` : `Established: ${schoolData.established_en}`}</span>
             </div>
             <div className="text-[#F4C430]">|</div>
             <div className="flex items-center gap-1">
               <Building2 className="w-[11px] h-[11px] text-[#F4C430]" />
-              <span className="font-mono">EIIN: 101297</span>
+              <span className="font-mono">EIIN: {schoolData.eiin}</span>
             </div>
             <div className="text-[#F2F5F2] text-[8px]">●</div>
             <div className="flex items-center gap-1">
               <MapPin className="w-[11px] h-[11px] text-[#F4C430]" />
-              <span>{language === "bn" ? "বরিশাল শিক্ষা বোর্ড" : "Barisal Education Board"}</span>
+              <span>{language === "bn" ? schoolData.education_board : schoolData.education_board_en}</span>
             </div>
           </div>
 
@@ -132,7 +132,7 @@ export function HeroSection() {
           {/* Location */}
           <div className="flex items-center gap-1.5 text-[#F2F5F2] text-[14px] sm:text-[15px] font-semibold mb-2">
             <MapPin className="w-4 h-4 text-[#F4C430]" strokeWidth={2.5} />
-            <p>{language === "bn" ? "চরফ্যাশন, ভোলা, বাংলাদেশ" : "Charfashion, Bhola, Bangladesh"}</p>
+            <p>{language === "bn" ? schoolData.address.bengali : schoolData.address.english}</p>
           </div>
 
           {/* Gold Divider */}
@@ -182,10 +182,10 @@ export function HeroSection() {
             </div>
             <div className="flex flex-col">
               <div className="font-bold text-[12px] tracking-wide leading-tight">
-                যোগাযোগ: ০১৭২৭৯৯১২২০
+                {language === "bn" ? `যোগাযোগ: ${schoolData.contact.mobile_1}` : `Contact: ${schoolData.contact.mobile_1}`}
               </div>
               <div className="text-[9px] text-[#F2F5F2]/80 font-medium tracking-wider leading-tight mt-0.5">
-                EIIN: 101297 • Barisal Education Board
+                EIIN: {schoolData.eiin} • {schoolData.education_board_en}
               </div>
             </div>
           </a>
@@ -254,16 +254,16 @@ export function HeroSection() {
             <div className="flex flex-wrap items-center gap-4 mb-4 text-xs xl:text-sm font-medium text-[#F2F5F2]">
               <div className="flex items-center gap-2">
                 <Calendar className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-[#F4C430]" />
-                <span>{language === "bn" ? "প্রতিষ্ঠাকাল: ১৯৬৩" : "Established: 1963"}</span>
+                <span>{language === "bn" ? `প্রতিষ্ঠাকাল: ${schoolData.established}` : `Established: ${schoolData.established_en}`}</span>
               </div>
               <div className="text-[#F4C430]">|</div>
               <div className="flex items-center gap-2">
                 <Building2 className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-[#F4C430]" />
-                <span className="font-mono">EIIN: 101297</span>
+                <span className="font-mono">EIIN: {schoolData.eiin}</span>
               </div>
               <div className="text-[#F2F5F2] text-[10px] xl:text-xs">●</div>
               <div className="flex items-center">
-                <span>{language === "bn" ? "বরিশাল শিক্ষা বোর্ড" : "Barisal Education Board"}</span>
+                <span>{language === "bn" ? schoolData.education_board : schoolData.education_board_en}</span>
               </div>
             </div>
 
@@ -285,7 +285,7 @@ export function HeroSection() {
             {/* Location */}
             <div className="flex items-center gap-2 text-[#F2F5F2] text-base xl:text-[19px] font-semibold mb-5">
               <MapPin className="w-4 h-4 xl:w-5 xl:h-5 text-[#F4C430]" />
-              <p>{language === "bn" ? "চরফ্যাশন, ভোলা, বাংলাদেশ" : "Charfashion, Bhola, Bangladesh"}</p>
+              <p>{language === "bn" ? schoolData.address.bengali : schoolData.address.english}</p>
             </div>
 
             {/* Gold Divider */}
@@ -293,14 +293,14 @@ export function HeroSection() {
 
             {/* Quote */}
             <p className="text-[17px] xl:text-[22px] text-[#F4C430] font-bold mb-4 leading-snug">
-              “দক্ষ মানবসম্পদ গড়ে তুলতে আমরা অঙ্গীকারবদ্ধ”
+              “{language === "bn" ? schoolData.tagline.bengali : schoolData.tagline.english}”
             </p>
 
             {/* Description */}
             <p className="text-[#F2F5F2] text-[14px] xl:text-[16px] leading-[1.65] mb-8 max-w-[95%] font-medium">
               {language === "bn" 
-                ? "চরফ্যাশন উপজেলার পশ্চিমাঞ্চলের প্রথম শিক্ষা প্রতিষ্ঠান। ১৯৬৩ সালে প্রতিষ্ঠার পর থেকে ছাত্র-ছাত্রী, শিক্ষক-শিক্ষিকা, অভিভাবক, এলাকার সর্বস্তরের মানুষের সহযোগিতায় বিদ্যালয়টি শিক্ষার মান ও ফলাফলে জেলার অন্যতম শ্রেষ্ঠ প্রতিষ্ঠানে পরিণত হয়েছে।"
-                : "The first educational institution in the western region of Charfashion Upazila. Since its establishment in 1963, with the cooperation of students, teachers, parents, and people of all levels, the school has become one of the best institutions in the district in terms of quality of education and results."
+                ? schoolData.description.bengali
+                : schoolData.description.english
               }
             </p>
 
@@ -328,9 +328,9 @@ export function HeroSection() {
               <div className="flex flex-col">
                 <div className="flex items-center gap-1.5 mb-1">
                   <Calendar className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-[#F4C430]" />
-                  <div className="text-[18px] xl:text-[24px] font-bold text-white leading-none">১৯৬৬</div>
+                  <div className="text-[18px] xl:text-[24px] font-bold text-white leading-none">{language === "bn" ? schoolData.established : schoolData.established_en}</div>
                 </div>
-                <div className="text-[10px] xl:text-[11px] text-[#F2F5F2]/80 font-medium tracking-wide">প্রতিষ্ঠাকাল</div>
+                <div className="text-[10px] xl:text-[11px] text-[#F2F5F2]/80 font-medium tracking-wide">{language === "bn" ? "প্রতিষ্ঠাকাল" : "Established"}</div>
               </div>
 
               <div className="w-px h-10 bg-white/10 block" />
@@ -387,10 +387,10 @@ export function HeroSection() {
             </div>
             <div className="flex flex-col">
               <div className="font-bold text-[14px] tracking-wide mb-0.5">
-                যোগাযোগ: ০১৭২৭৩৭৯১২০
+                {language === "bn" ? `যোগাযোগ: ${schoolData.contact.mobile_1}` : `Contact: ${schoolData.contact.mobile_1}`}
               </div>
               <div className="text-[9px] text-white/70 font-mono tracking-wider">
-                EIIN: 101297 • Barisal Education Board
+                EIIN: {schoolData.eiin} • {schoolData.education_board_en}
               </div>
             </div>
           </a>

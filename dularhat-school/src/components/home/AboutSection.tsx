@@ -36,7 +36,7 @@ export function AboutSection() {
             <div className="grid grid-cols-2 gap-4 mb-8">
               <div className="bg-green-50 rounded-xl p-4">
                 <div className="text-[#016B00] font-bold text-lg">
-                  {language === "bn" ? "১লা এপ্রিল, ১৯৬৩" : "1st April, 1963"}
+                  {language === "bn" ? `১লা এপ্রিল, ${schoolData.established}` : `1st April, ${schoolData.established_en}`}
                 </div>
                 <div className="text-gray-500 text-sm">
                   {language === "bn" ? "প্রতিষ্ঠার তারিখ" : "Date of Establishment"}

@@ -80,7 +80,7 @@ export function Header() {
                 >
                   {language === "bn"
                     ? "চরফ্যাশন, ভোলা • প্রতিষ্ঠাকাল: ১৯৬৩"
-                    : "Charfashion, Bhola • Est: 1963"}
+                    : `${schoolData.address.upazila.english}, ${schoolData.address.district.english} • Est: ${schoolData.established_en}`}
                 </p>
               </div>
             </Link>

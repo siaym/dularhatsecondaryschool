@@ -5,6 +5,8 @@ import { ArrowRight, GraduationCap, Quote } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { schoolData } from "@/data/school-data";
+
 
 export default function HeadmasterPage() {
   const { language } = useLanguage();
@@ -57,7 +59,7 @@ export default function HeadmasterPage() {
                 ) : (
                   <>
                     <p className="font-semibold text-[#003D1A]">Dear students, guardians, and education enthusiasts,</p>
-                    <p>On behalf of Dularhat Secondary School, I extend a warm welcome and greetings to all of you. Since 1963, this school has been spreading the light of education throughout the Charfashion region.</p>
+                    <p>On behalf of Dularhat Secondary School, I extend a warm welcome and greetings to all of you. Since {schoolData.established_en}, this school has been spreading the light of education throughout the Charfashion region.</p>
                     <p>Our goal is to enrich every student not only with textbook knowledge, but also with ethical values, creativity, and patriotism.</p>
                     <p>Our faculty members are highly qualified and dedicated. They work tirelessly for the overall development of every student.</p>
                     <p>&ldquo;We are committed to developing skilled human resources&rdquo; — with this promise, we work every day.</p>

@@ -9,8 +9,8 @@ export default function AboutPage() {
       <PageHeader
         title={{ bengali: "আমাদের সম্পর্কে", english: "About Us" }}
         subtitle={{
-          bengali: "চরফ্যাশন, ভোলা · EIIN: 101297 · প্রতিষ্ঠাকাল ১৯৬৩",
-          english: "Charfashion, Bhola · EIIN: 101297 · Established 1963",
+          bengali: `${schoolData.address.upazila.bengali}, ${schoolData.address.district.bengali} · EIIN: ${schoolData.eiin} · প্রতিষ্ঠাকাল ${schoolData.established}`,
+          english: `${schoolData.address.upazila.english}, ${schoolData.address.district.english} · EIIN: ${schoolData.eiin} · Established ${schoolData.established_en}`,
         }}
         breadcrumbs={[
           { label: { bengali: "আমাদের সম্পর্কে", english: "About" } },

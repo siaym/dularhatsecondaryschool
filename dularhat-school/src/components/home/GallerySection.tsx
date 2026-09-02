@@ -5,14 +5,7 @@ import { ArrowRight, ImageIcon } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 // Sample gallery items - in production these come from Supabase
-const sampleGalleryImages = [
-  { id: 1, placeholder: "🏫", label_bn: "বিদ্যালয় ভবন", label_en: "School Building" },
-  { id: 2, placeholder: "🎓", label_bn: "সমাবর্তন অনুষ্ঠান", label_en: "Graduation Ceremony" },
-  { id: 3, placeholder: "📚", label_bn: "শ্রেণিকক্ষ", label_en: "Classroom" },
-  { id: 4, placeholder: "⚽", label_bn: "ক্রীড়া প্রতিযোগিতা", label_en: "Sports Event" },
-  { id: 5, placeholder: "🏆", label_bn: "পুরস্কার বিতরণী", label_en: "Award Ceremony" },
-  { id: 6, placeholder: "🌳", label_bn: "বিদ্যালয় প্রাঙ্গণ", label_en: "School Grounds" },
-];
+const sampleGalleryImages: any[] = [];
 
 export function GallerySection() {
   const { language } = useLanguage();
@@ -40,29 +33,43 @@ export function GallerySection() {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-          {sampleGalleryImages.map((img) => (
-            <Link
-              key={img.id}
-              href="/gallery"
-              className="group relative bg-white rounded-2xl overflow-hidden aspect-square border border-gray-100 hover:border-[#016B00] transition-colors shadow-sm hover:shadow-md"
-            >
-              {/* Placeholder - in production replace with actual <Image /> */}
-              <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-6">
-                <span className="text-5xl sm:text-6xl mb-3">{img.placeholder}</span>
-                <span className="text-center text-sm font-medium text-gray-600">
-                  {language === "bn" ? img.label_bn : img.label_en}
-                </span>
-              </div>
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-[#016B00]/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <span className="text-white font-medium text-sm">
-                  {language === "bn" ? "বড় করে দেখুন" : "View Image"}
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
+        {sampleGalleryImages.length > 0 ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            {sampleGalleryImages.map((img) => (
+              <Link
+                key={img.id}
+                href="/gallery"
+                className="group relative bg-white rounded-2xl overflow-hidden aspect-square border border-gray-100 hover:border-[#016B00] transition-colors shadow-sm hover:shadow-md"
+              >
+                {/* Placeholder - in production replace with actual <Image /> */}
+                <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-6">
+                  <span className="text-5xl sm:text-6xl mb-3">{img.placeholder}</span>
+                  <span className="text-center text-sm font-medium text-gray-600">
+                    {language === "bn" ? img.label_bn : img.label_en}
+                  </span>
+                </div>
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-[#016B00]/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <span className="text-white font-medium text-sm">
+                    {language === "bn" ? "বড় করে দেখুন" : "View Image"}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="bg-white border border-gray-100 rounded-2xl p-12 text-center flex flex-col items-center justify-center">
+            <ImageIcon size={48} className="text-gray-200 mb-4" />
+            <h3 className="text-gray-900 font-semibold mb-2 text-lg">
+              {language === "bn" ? "কোনো ছবি নেই" : "No Photos"}
+            </h3>
+            <p className="text-gray-500 text-sm max-w-sm mx-auto leading-relaxed">
+              {language === "bn"
+                ? "বর্তমানে গ্যালারিতে কোনো ছবি যুক্ত করা হয়নি।"
+                : "No photos have been added to the gallery yet."}
+            </p>
+          </div>
+        )}
 
         <div className="mt-6 text-center text-sm text-gray-400">
           {language === "bn"

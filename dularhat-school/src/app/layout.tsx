@@ -5,6 +5,8 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { TopBar } from "@/components/layout/TopBar";
+import { schoolData } from "@/data/school-data";
+
 
 export const metadata: Metadata = {
   title: {
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | দুলারহাট মাধ্যমিক বিদ্যালয়",
   },
   description:
-    "চরফ্যাশন উপজেলার পশ্চিমাঞ্চলের প্রথম শিক্ষা প্রতিষ্ঠান। দক্ষ মানবসম্পদ গড়ে তুলতে আমরা অঙ্গীকারাবদ্ধ। EIIN: 101297",
+    `চরফ্যাশন উপজেলার পশ্চিমাঞ্চলের প্রথম শিক্ষা প্রতিষ্ঠান। ${schoolData.tagline.bengali} EIIN: ${schoolData.eiin}`,
   keywords: [
     "দুলারহাট মাধ্যমিক বিদ্যালয়",
     "Dularhat Secondary School",
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     "Bhola",
     "Bangladesh",
     "School",
-    "EIIN 101297",
+    `EIIN ${schoolData.eiin}`,
   ],
   authors: [{ name: "Dularhat Secondary School" }],
   openGraph: {
@@ -30,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "দুলারহাট মাধ্যমিক বিদ্যালয়",
     title: "দুলারহাট মাধ্যমিক বিদ্যালয় | Dularhat Secondary School",
     description:
-      "চরফ্যাশন উপজেলার পশ্চিমাঞ্চলের প্রথম শিক্ষা প্রতিষ্ঠান। EIIN: 101297",
+      `চরফ্যাশন উপজেলার পশ্চিমাঞ্চলের প্রথম শিক্ষা প্রতিষ্ঠান। EIIN: ${schoolData.eiin}`,
   },
   twitter: {
     card: "summary_large_image",

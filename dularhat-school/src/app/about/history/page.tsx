@@ -3,6 +3,8 @@
 import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { schoolData } from "@/data/school-data";
+
 
 export default function AboutHistoryPage() {
   const { language } = useLanguage();
@@ -10,7 +12,7 @@ export default function AboutHistoryPage() {
     <div>
       <PageHeader
         title={{ bengali: "বিদ্যালয়ের ইতিহাস", english: "School History" }}
-        subtitle={{ bengali: "১৯৬৩ সাল থেকে শিক্ষার আলো ছড়িয়ে আসছে দুলারহাট মাধ্যমিক বিদ্যালয়", english: "Spreading the light of education since 1963" }}
+        subtitle={{ bengali: `${schoolData.established} সাল থেকে শিক্ষার আলো ছড়িয়ে আসছে দুলারহাট মাধ্যমিক বিদ্যালয়`, english: `Spreading the light of education since ${schoolData.established_en}` }}
         breadcrumbs={[
           { label: { bengali: "আমাদের সম্পর্কে", english: "About" }, href: "/about" },
           { label: { bengali: "ইতিহাস", english: "History" } },
@@ -33,7 +35,7 @@ export default function AboutHistoryPage() {
               </>
             ) : (
               <>
-                <p>Dularhat Secondary School was established on 1st April 1963. It became the first secondary educational institution in the western part of Charfashion Upazila.</p>
+                <p>Dularhat Secondary School was established on 1st April {schoolData.established_en}. It became the first secondary educational institution in the western part of Charfashion Upazila.</p>
                 <p>Mr. Mahabubur Rahaman, the then Chairman of Nilkomol Union Council, founded this school with the noble purpose of spreading education to the community.</p>
                 <p>The first headmaster was Mr. Arab Ali Mia (M.A), who built the school on a strong foundation through his dedication and hard work.</p>
                 <p>On 1st January 1964, the school received official recognition and began operating under the Barisal Education Board.</p>
@@ -49,7 +51,7 @@ export default function AboutHistoryPage() {
           />
           <div className="relative pl-8 space-y-6 before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-[#DDE8DD]">
             {[
-              { year: language === "bn" ? "১৯৬৩" : "1963", event_bn: "বিদ্যালয় প্রতিষ্ঠা। চরফ্যাশনের পশ্চিমাঞ্চলে প্রথম মাধ্যমিক বিদ্যালয় স্থাপিত।", event_en: "School established — first secondary school in western Charfashion." },
+              { year: language === "bn" ? schoolData.established : schoolData.established_en, event_bn: "বিদ্যালয় প্রতিষ্ঠা। চরফ্যাশনের পশ্চিমাঞ্চলে প্রথম মাধ্যমিক বিদ্যালয় স্থাপিত।", event_en: "School established — first secondary school in western Charfashion." },
               { year: language === "bn" ? "১৯৬৪" : "1964", event_bn: "বরিশাল শিক্ষা বোর্ডের আনুষ্ঠানিক স্বীকৃতি প্রাপ্তি।", event_en: "Official recognition from Barisal Education Board." },
               { year: language === "bn" ? "বর্তমান" : "Present", event_bn: "JSC ও SSC পরীক্ষার অনুমোদিত কেন্দ্র এবং জেলার অন্যতম শ্রেষ্ঠ বিদ্যাপীঠ।", event_en: "Authorized JSC and SSC exam centre, one of the best schools in the district." },
             ].map((item, i) => (

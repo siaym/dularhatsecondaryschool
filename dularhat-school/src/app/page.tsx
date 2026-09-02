@@ -8,24 +8,36 @@ import { AcademicsSection } from "@/components/home/AcademicsSection";
 import { GallerySection } from "@/components/home/GallerySection";
 import { ContactSection } from "@/components/home/ContactSection";
 import type { Metadata } from "next";
+import { schoolData } from "@/data/school-data";
+import { createClient } from "@/utils/supabase/server";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "দুলারহাট মাধ্যমিক বিদ্যালয় | Dularhat Secondary School",
   description:
-    "চরফ্যাশন উপজেলার পশ্চিমাঞ্চলের প্রথম শিক্ষা প্রতিষ্ঠান। ১৯৬৩ সাল থেকে শিক্ষার মান ও ফলাফলে জেলার অন্যতম শ্রেষ্ঠ বিদ্যাপীঠ। EIIN: 101297",
+    `${schoolData.description.bengali} EIIN: ${schoolData.eiin}`,
   alternates: {
     canonical: "https://dularhatsecondaryschool.edu.bd",
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const supabase = await createClient()
+  const { data: notices } = await supabase
+    .from('notices')
+    .select('*')
+    .eq('is_published', true)
+    .order('created_at', { ascending: false })
+    .limit(6)
+
   return (
     <div className="-mt-[72px] lg:-mt-[90px]">
       <HeroSection />
       <StatsSection />
       <AboutSection />
       <HeadmasterSection />
-      <NoticesSection />
+      <NoticesSection notices={notices || []} />
 
       <AcademicsSection />
       <GallerySection />

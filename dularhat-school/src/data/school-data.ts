@@ -95,6 +95,10 @@ export const schoolData = {
   building_image: "/images/school-photo-main2.jpg",
   founder: "Mr. Mahabubur Rahaman",
   first_headmaster: "Mr. Arab Ali Mia (M.A)",
+  headmaster: {
+    bengali: "মোহাম্মদ হোসাইন",
+    english: "Mohammad Hossain",
+  },
 } as const;
 
 export const navLinks = [

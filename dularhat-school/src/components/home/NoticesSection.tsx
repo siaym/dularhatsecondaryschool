@@ -4,75 +4,6 @@ import Link from "next/link";
 import { ArrowRight, Bell, Calendar, Download, Tag } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// Sample notices - in production these come from Supabase
-const sampleNotices = [
-  {
-    id: "1",
-    title_bn: "বার্ষিক পরীক্ষার সময়সূচি ২০২৪",
-    title_en: "Annual Examination Schedule 2024",
-    date: "2024-11-15",
-    category_bn: "পরীক্ষা",
-    category_en: "Examination",
-    category_color: "#DC2626",
-    is_important: true,
-    document_url: null,
-  },
-  {
-    id: "2",
-    title_bn: "ষষ্ঠ থেকে দশম শ্রেণির ভর্তি বিজ্ঞপ্তি",
-    title_en: "Admission Notice for Class 6-10",
-    date: "2024-11-10",
-    category_bn: "ভর্তি",
-    category_en: "Admission",
-    category_color: "#059669",
-    is_important: false,
-    document_url: null,
-  },
-  {
-    id: "3",
-    title_bn: "জাতীয় দিবস উপলক্ষে বিশেষ অনুষ্ঠান",
-    title_en: "Special Program for National Day",
-    date: "2024-11-05",
-    category_bn: "অনুষ্ঠান",
-    category_en: "Event",
-    category_color: "#DB2777",
-    is_important: false,
-    document_url: null,
-  },
-  {
-    id: "4",
-    title_bn: "প্রাক-নির্বাচনী পরীক্ষার ফলাফল প্রকাশ",
-    title_en: "Pre-selection Examination Results Published",
-    date: "2024-10-28",
-    category_bn: "ফলাফল",
-    category_en: "Result",
-    category_color: "#D97706",
-    is_important: false,
-    document_url: null,
-  },
-  {
-    id: "5",
-    title_bn: "শীতকালীন ছুটির সময়সূচি",
-    title_en: "Winter Holiday Schedule",
-    date: "2024-10-20",
-    category_bn: "ছুটি",
-    category_en: "Holiday",
-    category_color: "#7C3AED",
-    is_important: false,
-    document_url: null,
-  },
-  {
-    id: "6",
-    title_bn: "বার্ষিক ক্রীড়া প্রতিযোগিতা",
-    title_en: "Annual Sports Competition",
-    date: "2024-10-15",
-    category_bn: "অনুষ্ঠান",
-    category_en: "Event",
-    category_color: "#DB2777",
-    is_important: false,
-    document_url: null,
-  },
-];
 
 function formatDate(dateStr: string, language: string) {
   const date = new Date(dateStr);
@@ -90,7 +21,7 @@ function formatDate(dateStr: string, language: string) {
   });
 }
 
-export function NoticesSection() {
+export function NoticesSection({ notices }: { notices: any[] }) {
   const { language } = useLanguage();
 
   return (
@@ -117,66 +48,80 @@ export function NoticesSection() {
         </div>
 
         {/* Notices Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {sampleNotices.map((notice) => (
-            <article
-              key={notice.id}
-              className={`bg-white border rounded-xl p-5 hover:shadow-md transition-all ${
-                notice.is_important
-                  ? "border-red-200 bg-red-50/30"
-                  : "border-gray-100"
-              }`}
-            >
-              {/* Category Badge + Important */}
-              <div className="flex items-center gap-2 mb-3">
-                <span
-                  className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-0.5 rounded-full text-white"
-                  style={{ backgroundColor: notice.category_color }}
-                >
-                  <Tag size={10} />
-                  {language === "bn" ? notice.category_bn : notice.category_en}
-                </span>
-                {notice.is_important && (
-                  <span className="inline-flex items-center gap-1 text-xs font-bold text-red-600 bg-red-100 px-2 py-0.5 rounded-full">
-                    ⚡ {language === "bn" ? "জরুরি" : "Important"}
-                  </span>
-                )}
-              </div>
-
-              {/* Title */}
-              <h3 className="font-semibold text-gray-900 text-sm leading-relaxed mb-3 line-clamp-2">
-                {language === "bn" ? notice.title_bn : notice.title_en}
-              </h3>
-
-              {/* Date + Actions */}
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5 text-xs text-gray-400">
-                  <Calendar size={12} />
-                  {formatDate(notice.date, language)}
-                </span>
-                <div className="flex items-center gap-2">
-                  {notice.document_url && (
-                    <a
-                      href={notice.document_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#016B00] hover:text-[#024D00] transition-colors"
-                      aria-label="Download document"
-                    >
-                      <Download size={15} />
-                    </a>
-                  )}
-                  <Link
-                    href={`/notices/${notice.id}`}
-                    className="text-xs text-[#016B00] hover:underline font-medium"
+        {notices?.length > 0 ? (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {notices.slice(0, 6).map((notice) => (
+              <article
+                key={notice.id}
+                className={`bg-white border rounded-xl p-5 hover:shadow-md transition-all ${
+                  notice.is_important
+                    ? "border-red-200 bg-red-50/30"
+                    : "border-gray-100"
+                }`}
+              >
+                {/* Category Badge + Important */}
+                <div className="flex items-center gap-2 mb-3">
+                  <span
+                    className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-0.5 rounded-full text-white"
+                    style={{ backgroundColor: notice.category_color }}
                   >
-                    {language === "bn" ? "বিস্তারিত" : "Details"}
-                  </Link>
+                    <Tag size={10} />
+                    {language === "bn" ? notice.category_bn : notice.category_en}
+                  </span>
+                  {notice.is_important && (
+                    <span className="inline-flex items-center gap-1 text-xs font-bold text-red-600 bg-red-100 px-2 py-0.5 rounded-full">
+                      ⚡ {language === "bn" ? "জরুরি" : "Important"}
+                    </span>
+                  )}
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
+
+                {/* Title */}
+                <h3 className="font-semibold text-gray-900 text-sm leading-relaxed mb-3 line-clamp-2">
+                  {language === "bn" ? notice.title_bn : notice.title_en}
+                </h3>
+
+                {/* Date + Actions */}
+                <div className="flex items-center justify-between">
+                  <span className="flex items-center gap-1.5 text-xs text-gray-400">
+                    <Calendar size={12} />
+                    {formatDate(notice.created_at, language)}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    {notice.attachment_url && (
+                      <a
+                        href={notice.attachment_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#016B00] hover:text-[#024D00] transition-colors"
+                        aria-label="Download document"
+                      >
+                        <Download size={15} />
+                      </a>
+                    )}
+                    <Link
+                      href={`/notices/${notice.id}`}
+                      className="text-xs text-[#016B00] hover:underline font-medium"
+                    >
+                      {language === "bn" ? "বিস্তারিত" : "Details"}
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="bg-white border border-gray-100 rounded-2xl p-12 text-center flex flex-col items-center justify-center">
+            <Bell size={48} className="text-gray-200 mb-4" />
+            <h3 className="text-gray-900 font-semibold mb-2 text-lg">
+              {language === "bn" ? "কোনো নোটিশ নেই" : "No Notices"}
+            </h3>
+            <p className="text-gray-500 text-sm max-w-sm mx-auto leading-relaxed">
+              {language === "bn"
+                ? "বর্তমানে কোনো নতুন নোটিশ নেই। বিদ্যালয়ের নতুন বিজ্ঞপ্তি প্রকাশিত হলে এখানে দেখা যাবে।"
+                : "There are currently no new notices. New school announcements will appear here when published."}
+            </p>
+          </div>
+        )}
 
         {/* Notice Alert Banner */}
         <div className="mt-8 bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
