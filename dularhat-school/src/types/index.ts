@@ -73,3 +73,33 @@ export type SchoolSettings = {
   footer_description_en: string | null;
   updated_at: string;
 };
+
+export type DocumentItem = {
+  id: string;
+  title_bn: string;
+  title_en: string | null;
+  description_bn: string | null;
+  description_en: string | null;
+  category: string;
+  file_url: string;
+  file_name: string | null;
+  file_size: number | null;
+  mime_type: string | null;
+  is_published: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+};
+
+export type CommitteeItem = {
+  id: string;
+  name_bn: string;
+  name_en: string | null;
+  designation_bn: string;
+  designation_en: string | null;
+  photo_url: string | null;
+  sort_order: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+};

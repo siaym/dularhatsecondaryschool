@@ -3,6 +3,7 @@
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { uploadFile, deleteFileFromUrl } from '@/utils/supabase/storage'
 
 function validateTeacherStrings(formData: FormData) {
   const name_bn = formData.get('name_bn') as string
@@ -42,32 +43,18 @@ export async function createTeacher(formData: FormData) {
 
   if (photoFile && photoFile.size > 0) {
     const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-    if (photoFile.size > MAX_FILE_SIZE) {
-      throw new Error('Photo size must be less than 5MB')
-    }
-
     const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']
-    if (!allowedTypes.includes(photoFile.type)) {
-      throw new Error('Only JPG, PNG, and WEBP images are allowed')
-    }
-
-    const fileExt = photoFile.name.split('.').pop()?.replace(/[^a-zA-Z0-9]/g, '') || 'jpg'
-    const fileName = `${crypto.randomUUID()}_${Date.now()}.${fileExt}`
-    
-    const { error: uploadError } = await supabase.storage
-      .from('teachers')
-      .upload(fileName, photoFile, {
-        cacheControl: '3600',
-        upsert: false
+    try {
+      photo_url = await uploadFile({
+        bucket: 'school-media',
+        folder: 'teachers',
+        file: photoFile,
+        maxSizeBytes: MAX_FILE_SIZE,
+        allowedMimeTypes: allowedTypes
       })
-
-    if (uploadError) {
-      console.error('Upload Error:', uploadError)
-      throw new Error('Failed to upload photo')
+    } catch (e: any) {
+      throw new Error(e.message || 'Failed to upload photo')
     }
-
-    const { data: publicUrlData } = supabase.storage.from('teachers').getPublicUrl(fileName)
-    photo_url = publicUrlData.publicUrl
   }
 
   const { error: dbError } = await supabase.from('teachers').insert({
@@ -86,8 +73,7 @@ export async function createTeacher(formData: FormData) {
   if (dbError) {
     console.error('DB Error:', dbError)
     if (photo_url) {
-      const oldPath = photo_url.split('/teachers/')[1]
-      if (oldPath) await supabase.storage.from('teachers').remove([oldPath])
+      await deleteFileFromUrl('school-media', photo_url)
     }
     throw new Error('Failed to create teacher')
   }
@@ -112,46 +98,22 @@ export async function updateTeacher(id: string, formData: FormData) {
   const photoFile = formData.get('photo') as File | null
   let photo_url = formData.get('current_photo_url') as string | null
 
+  let new_photo_url = photo_url
   if (photoFile && photoFile.size > 0) {
     const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-    if (photoFile.size > MAX_FILE_SIZE) {
-      throw new Error('Photo size must be less than 5MB')
-    }
-
     const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']
-    if (!allowedTypes.includes(photoFile.type)) {
-      throw new Error('Only JPG, PNG, and WEBP images are allowed')
-    }
 
-    const fileExt = photoFile.name.split('.').pop()?.replace(/[^a-zA-Z0-9]/g, '') || 'jpg'
-    const fileName = `${crypto.randomUUID()}_${Date.now()}.${fileExt}`
-
-    const { error: uploadError } = await supabase.storage
-      .from('teachers')
-      .upload(fileName, photoFile, {
-        cacheControl: '3600',
-        upsert: false
+    try {
+      new_photo_url = await uploadFile({
+        bucket: 'school-media',
+        folder: 'teachers',
+        file: photoFile,
+        maxSizeBytes: MAX_FILE_SIZE,
+        allowedMimeTypes: allowedTypes
       })
-
-    if (uploadError) {
-      console.error('Upload Error:', uploadError)
-      throw new Error('Failed to upload photo')
+    } catch (e: any) {
+      throw new Error(e.message || 'Failed to upload photo')
     }
-
-    const { data: publicUrlData } = supabase.storage.from('teachers').getPublicUrl(fileName)
-    
-    if (photo_url) {
-      try {
-        const oldPath = photo_url.split('/teachers/')[1]
-        if (oldPath) {
-          await supabase.storage.from('teachers').remove([oldPath])
-        }
-      } catch (e) {
-        console.error('Error deleting old photo', e)
-      }
-    }
-
-    photo_url = publicUrlData.publicUrl
   }
 
   const { error: dbError } = await supabase.from('teachers').update({
@@ -161,7 +123,7 @@ export async function updateTeacher(id: string, formData: FormData) {
     designation_en: formData.get('designation_en') || null,
     subject_bn: formData.get('subject_bn') || null,
     subject_en: formData.get('subject_en') || null,
-    photo_url,
+    photo_url: new_photo_url,
     sort_order: parseInt(formData.get('sort_order') as string || '10', 10),
     is_headmaster: formData.get('is_headmaster') === 'on',
     is_active: formData.get('is_active') === 'on',
@@ -170,7 +132,14 @@ export async function updateTeacher(id: string, formData: FormData) {
 
   if (dbError) {
     console.error('DB Error:', dbError)
+    if (photoFile && photoFile.size > 0 && new_photo_url !== photo_url) {
+      await deleteFileFromUrl('school-media', new_photo_url)
+    }
     throw new Error('Failed to update teacher')
+  }
+
+  if (photoFile && photoFile.size > 0 && photo_url) {
+    await deleteFileFromUrl('school-media', photo_url)
   }
 
   revalidatePath('/admin/teachers')
@@ -187,22 +156,13 @@ export async function deleteTeacher(id: string, photoUrl: string | null) {
     throw new Error('Unauthorized')
   }
 
+  await deleteFileFromUrl('school-media', photoUrl)
+
   const { error: dbError } = await supabase.from('teachers').delete().eq('id', id)
 
   if (dbError) {
     console.error('DB Error:', dbError)
     throw new Error('Failed to delete teacher')
-  }
-
-  if (photoUrl) {
-    try {
-      const oldPath = photoUrl.split('/teachers/')[1]
-      if (oldPath) {
-        await supabase.storage.from('teachers').remove([oldPath])
-      }
-    } catch (e) {
-      console.error('Error deleting photo from storage', e)
-    }
   }
 
   revalidatePath('/admin/teachers')

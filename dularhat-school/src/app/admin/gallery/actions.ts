@@ -3,6 +3,7 @@
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { uploadFile, deleteFileFromUrl } from '@/utils/supabase/storage'
 
 function validateGalleryStrings(formData: FormData) {
   const title_bn = formData.get('title_bn') as string
@@ -30,34 +31,20 @@ export async function createGalleryItem(formData: FormData) {
   }
 
   const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-  if (imageFile.size > MAX_FILE_SIZE) {
-    throw new Error('Image size must be less than 5MB')
-  }
-
   const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']
-  if (!allowedTypes.includes(imageFile.type)) {
-    throw new Error('Only JPG, PNG, and WEBP images are allowed')
-  }
 
-  // Upload image
-  const fileExt = imageFile.name.split('.').pop()?.replace(/[^a-zA-Z0-9]/g, '') || 'jpg'
-  const fileName = `${crypto.randomUUID()}_${Date.now()}.${fileExt}`
-  const filePath = `${fileName}`
-
-  const { error: uploadError } = await supabase.storage
-    .from('gallery')
-    .upload(filePath, imageFile, {
-      cacheControl: '3600',
-      upsert: false
+  let imageUrl = ''
+  try {
+    imageUrl = await uploadFile({
+      bucket: 'school-media',
+      folder: 'gallery',
+      file: imageFile,
+      maxSizeBytes: MAX_FILE_SIZE,
+      allowedMimeTypes: allowedTypes
     })
-
-  if (uploadError) {
-    console.error('Upload Error:', uploadError)
-    throw new Error('Failed to upload image')
+  } catch (e: any) {
+    throw new Error(e.message || 'Failed to upload image')
   }
-
-  const { data: publicUrlData } = supabase.storage.from('gallery').getPublicUrl(filePath)
-  const imageUrl = publicUrlData.publicUrl
 
   // Insert into DB
   const { error: dbError } = await supabase.from('gallery').insert({
@@ -71,8 +58,7 @@ export async function createGalleryItem(formData: FormData) {
 
   if (dbError) {
     console.error('DB Error:', dbError)
-    // Optionally delete uploaded image if DB insert fails
-    await supabase.storage.from('gallery').remove([filePath])
+    await deleteFileFromUrl('school-media', imageUrl)
     throw new Error('Failed to create gallery item')
   }
 
@@ -97,63 +83,43 @@ export async function updateGalleryItem(id: string, formData: FormData) {
   let imageUrl = formData.get('current_image_url') as string
 
   // If a new image is uploaded
+  let newImageUrl = imageUrl
   if (imageFile && imageFile.size > 0) {
     const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-    if (imageFile.size > MAX_FILE_SIZE) {
-      throw new Error('Image size must be less than 5MB')
-    }
-
     const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']
-    if (!allowedTypes.includes(imageFile.type)) {
-      throw new Error('Only JPG, PNG, and WEBP images are allowed')
-    }
 
-    const fileExt = imageFile.name.split('.').pop()?.replace(/[^a-zA-Z0-9]/g, '') || 'jpg'
-    const fileName = `${crypto.randomUUID()}_${Date.now()}.${fileExt}`
-    const filePath = `${fileName}`
-
-    const { error: uploadError } = await supabase.storage
-      .from('gallery')
-      .upload(filePath, imageFile, {
-        cacheControl: '3600',
-        upsert: false
+    try {
+      newImageUrl = await uploadFile({
+        bucket: 'school-media',
+        folder: 'gallery',
+        file: imageFile,
+        maxSizeBytes: MAX_FILE_SIZE,
+        allowedMimeTypes: allowedTypes
       })
-
-    if (uploadError) {
-      console.error('Upload Error:', uploadError)
-      throw new Error('Failed to upload image')
+    } catch (e: any) {
+      throw new Error(e.message || 'Failed to upload image')
     }
-
-    const { data: publicUrlData } = supabase.storage.from('gallery').getPublicUrl(filePath)
-    
-    // Optional: Delete old image from storage. 
-    // Requires parsing the file path from the old URL.
-    if (imageUrl) {
-      try {
-        const oldPath = imageUrl.split('/gallery/')[1]
-        if (oldPath) {
-          await supabase.storage.from('gallery').remove([oldPath])
-        }
-      } catch (e) {
-        console.error('Error deleting old image', e)
-      }
-    }
-
-    imageUrl = publicUrlData.publicUrl
   }
 
   const { error: dbError } = await supabase.from('gallery').update({
     title_bn,
     title_en: formData.get('title_en'),
     category: formData.get('category'),
-    image_url: imageUrl,
+    image_url: newImageUrl,
     is_published: formData.get('is_published') === 'on',
     sort_order: parseInt(formData.get('sort_order') as string || '0', 10),
   }).eq('id', id)
 
   if (dbError) {
     console.error('DB Error:', dbError)
+    if (imageFile && imageFile.size > 0 && newImageUrl !== imageUrl) {
+      await deleteFileFromUrl('school-media', newImageUrl)
+    }
     throw new Error('Failed to update gallery item')
+  }
+
+  if (imageFile && imageFile.size > 0 && imageUrl) {
+    await deleteFileFromUrl('school-media', imageUrl)
   }
 
   revalidatePath('/admin/gallery')
@@ -177,16 +143,7 @@ export async function deleteGalleryItem(id: string, imageUrl: string) {
     throw new Error('Failed to delete gallery item')
   }
 
-  if (imageUrl) {
-    try {
-      const oldPath = imageUrl.split('/gallery/')[1]
-      if (oldPath) {
-        await supabase.storage.from('gallery').remove([oldPath])
-      }
-    } catch (e) {
-      console.error('Error deleting image from storage', e)
-    }
-  }
+  await deleteFileFromUrl('school-media', imageUrl)
 
   revalidatePath('/admin/gallery')
   revalidatePath('/gallery')

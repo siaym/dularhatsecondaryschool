@@ -145,18 +145,10 @@ export const navLinks = [
         href: "/academics",
       },
       {
-        label: { bengali: "রুটিন", english: "Routine" },
-        href: "/academics/routine",
-      },
-      {
-        label: { bengali: "পরীক্ষা", english: "Examination" },
-        href: "/academics/examination",
+        label: { bengali: "ডকুমেন্ট", english: "Documents" },
+        href: "/documents",
       },
     ],
-  },
-  {
-    label: { bengali: "ভর্তি", english: "Admission" },
-    href: "/admission",
   },
   {
     label: { bengali: "নোটিশ", english: "Notices" },
