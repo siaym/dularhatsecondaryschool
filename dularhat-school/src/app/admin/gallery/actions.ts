@@ -22,9 +22,19 @@ export async function createGalleryItem(formData: FormData) {
     throw new Error('Image is required')
   }
 
+  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+  if (imageFile.size > MAX_FILE_SIZE) {
+    throw new Error('Image size must be less than 5MB')
+  }
+
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']
+  if (!allowedTypes.includes(imageFile.type)) {
+    throw new Error('Only JPG, PNG, and WEBP images are allowed')
+  }
+
   // Upload image
-  const fileExt = imageFile.name.split('.').pop()
-  const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`
+  const fileExt = imageFile.name.split('.').pop()?.replace(/[^a-zA-Z0-9]/g, '') || 'jpg'
+  const fileName = `${crypto.randomUUID()}_${Date.now()}.${fileExt}`
   const filePath = `${fileName}`
 
   const { error: uploadError } = await supabase.storage
@@ -83,8 +93,18 @@ export async function updateGalleryItem(id: string, formData: FormData) {
 
   // If a new image is uploaded
   if (imageFile && imageFile.size > 0) {
-    const fileExt = imageFile.name.split('.').pop()
-    const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`
+    const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+    if (imageFile.size > MAX_FILE_SIZE) {
+      throw new Error('Image size must be less than 5MB')
+    }
+
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']
+    if (!allowedTypes.includes(imageFile.type)) {
+      throw new Error('Only JPG, PNG, and WEBP images are allowed')
+    }
+
+    const fileExt = imageFile.name.split('.').pop()?.replace(/[^a-zA-Z0-9]/g, '') || 'jpg'
+    const fileName = `${crypto.randomUUID()}_${Date.now()}.${fileExt}`
     const filePath = `${fileName}`
 
     const { error: uploadError } = await supabase.storage

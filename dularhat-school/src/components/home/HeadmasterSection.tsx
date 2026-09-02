@@ -3,8 +3,10 @@
 import Link from "next/link";
 import { GraduationCap, ArrowRight, Quote } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Teacher } from "@/types";
+import Image from "next/image";
 
-export function HeadmasterSection() {
+export function HeadmasterSection({ headmaster }: { headmaster?: Teacher }) {
   const { language } = useLanguage();
 
   return (
@@ -26,12 +28,21 @@ export function HeadmasterSection() {
             <div className="grid md:grid-cols-3 gap-0">
               {/* Photo/Avatar Column */}
               <div className="bg-gradient-to-b from-[#016B00] to-[#024D00] p-8 flex flex-col items-center justify-center text-white text-center">
-                <div className="w-28 h-28 bg-white/20 rounded-full flex items-center justify-center mb-4 border-4 border-white/30">
-                  <GraduationCap size={52} className="text-white/80" />
+                <div className="w-28 h-28 bg-white/20 rounded-full flex items-center justify-center mb-4 border-4 border-white/30 overflow-hidden relative">
+                  {headmaster?.photo_url ? (
+                    <Image src={headmaster.photo_url} alt={language === "bn" ? headmaster.name_bn : (headmaster.name_en || headmaster.name_bn)} fill className="object-cover" unoptimized />
+                  ) : (
+                    <GraduationCap size={52} className="text-white/80" />
+                  )}
                 </div>
-                <h3 className="font-bold text-lg mb-1">
-                  {language === "bn" ? "প্রধান শিক্ষক" : "Headmaster"}
+                <h3 className="font-bold text-lg mb-1 leading-snug">
+                  {headmaster ? (language === "bn" ? headmaster.name_bn : (headmaster.name_en || headmaster.name_bn)) : (language === "bn" ? "প্রধান শিক্ষক" : "Headmaster")}
                 </h3>
+                {headmaster?.designation_bn && (
+                  <p className="text-green-200 text-sm font-medium mb-1">
+                    {language === "bn" ? headmaster.designation_bn : (headmaster.designation_en || headmaster.designation_bn)}
+                  </p>
+                )}
                 <p className="text-green-200 text-sm">
                   {language === "bn"
                     ? "দুলারহাট মাধ্যমিক বিদ্যালয়"

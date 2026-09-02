@@ -24,3 +24,18 @@ export type GalleryItem = {
   display_order: number;
   created_at: string;
 };
+
+export type Teacher = {
+  id: string;
+  name_bn: string;
+  name_en: string | null;
+  designation_bn: string;
+  designation_en: string | null;
+  subject_bn: string | null;
+  subject_en: string | null;
+  photo_url: string | null;
+  sort_order: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+};

@@ -39,12 +39,22 @@ export default async function HomePage() {
     .order('created_at', { ascending: false })
     .limit(6)
 
+  const { data: headmasters } = await supabase
+    .from('teachers')
+    .select('*')
+    .eq('is_active', true)
+    .order('sort_order', { ascending: true })
+    .order('created_at', { ascending: true })
+    .limit(1)
+
+  const headmaster = headmasters?.[0]
+
   return (
     <div className="-mt-[72px] lg:-mt-[90px]">
       <HeroSection />
       <StatsSection />
       <AboutSection />
-      <HeadmasterSection />
+      <HeadmasterSection headmaster={headmaster} />
       <NoticesSection notices={notices || []} />
 
       <AcademicsSection />

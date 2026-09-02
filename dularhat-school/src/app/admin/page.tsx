@@ -23,7 +23,7 @@ export default function AdminDashboard() {
           </div>
           <div className="p-4 border border-gray-100 rounded-lg bg-gray-50">
             <h3 className="font-semibold text-gray-900 mb-1">Settings</h3>
-            <p className="text-sm text-gray-500">Update global configuration like the headmaster's name.</p>
+            <p className="text-sm text-gray-500">Update global configuration like the headmaster&apos;s name.</p>
           </div>
         </div>
       </div>
