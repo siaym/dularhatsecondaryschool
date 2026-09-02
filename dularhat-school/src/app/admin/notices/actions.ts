@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/utils/supabase/server'
+import { requireAdmin } from '@/utils/supabase/admin'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
@@ -21,11 +22,7 @@ function validateNoticeStrings(formData: FormData) {
 
 export async function createNotice(formData: FormData) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    throw new Error('Unauthorized')
-  }
+  await requireAdmin()
 
   validateNoticeStrings(formData)
   const title_bn = formData.get('title_bn') as string
@@ -53,11 +50,7 @@ export async function createNotice(formData: FormData) {
 
 export async function updateNotice(id: string, formData: FormData) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    throw new Error('Unauthorized')
-  }
+  await requireAdmin()
 
   validateNoticeStrings(formData)
   const title_bn = formData.get('title_bn') as string
@@ -85,11 +78,7 @@ export async function updateNotice(id: string, formData: FormData) {
 
 export async function deleteNotice(id: string) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    throw new Error('Unauthorized')
-  }
+  await requireAdmin()
 
   const { error } = await supabase.from('notices').delete().eq('id', id)
 

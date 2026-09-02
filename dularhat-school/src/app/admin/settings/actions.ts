@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/utils/supabase/server'
+import { requireAdmin } from '@/utils/supabase/admin'
 import { revalidatePath } from 'next/cache'
 
 function validateSettingsStrings(formData: FormData) {
@@ -26,11 +27,7 @@ function validateSettingsStrings(formData: FormData) {
 
 export async function updateSettings(formData: FormData) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    throw new Error('Unauthorized')
-  }
+  await requireAdmin()
 
   validateSettingsStrings(formData)
 

@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/utils/supabase/server'
+import { requireAdmin } from '@/utils/supabase/admin'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { uploadFile, deleteFileFromUrl } from '@/utils/supabase/storage'
@@ -42,11 +43,7 @@ function validateResultStrings(formData: FormData) {
 
 export async function createResult(formData: FormData) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    throw new Error('Unauthorized')
-  }
+  await requireAdmin()
 
   validateResultStrings(formData)
 
@@ -64,9 +61,9 @@ export async function createResult(formData: FormData) {
       maxSizeBytes: MAX_FILE_SIZE,
       allowedMimeTypes: ALLOWED_MIME_TYPES
     })
-  } catch (e: any) {
-    throw new Error(e.message || 'Failed to upload document file')
-  }
+  } catch (e: unknown) {
+      throw new Error(e instanceof Error ? e.message : 'Failed to upload document file')
+    }
 
   const { error: dbError } = await supabase.from('results').insert({
     title_bn: formData.get('title_bn') as string,
@@ -96,11 +93,7 @@ export async function createResult(formData: FormData) {
 
 export async function updateResult(id: string, formData: FormData) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    throw new Error('Unauthorized')
-  }
+  await requireAdmin()
 
   validateResultStrings(formData)
 
@@ -124,8 +117,8 @@ export async function updateResult(id: string, formData: FormData) {
       final_file_name = docFile.name
       final_file_size = docFile.size
       final_mime_type = docFile.type
-    } catch (e: any) {
-      throw new Error(e.message || 'Failed to upload new document file')
+    } catch (e: unknown) {
+      throw new Error(e instanceof Error ? e.message : 'Failed to upload new document file')
     }
   }
 
@@ -164,11 +157,7 @@ export async function updateResult(id: string, formData: FormData) {
 
 export async function deleteResult(id: string, fileUrl: string) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    throw new Error('Unauthorized')
-  }
+  await requireAdmin()
 
   const { error: dbError } = await supabase.from('results').delete().eq('id', id)
 

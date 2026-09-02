@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/utils/supabase/server'
+import { requireAdmin } from '@/utils/supabase/admin'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { uploadFile, deleteFileFromUrl } from '@/utils/supabase/storage'
@@ -16,11 +17,7 @@ function validateGalleryStrings(formData: FormData) {
 
 export async function createGalleryItem(formData: FormData) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    throw new Error('Unauthorized')
-  }
+  await requireAdmin()
 
   validateGalleryStrings(formData)
   const title_bn = formData.get('title_bn') as string
@@ -42,9 +39,9 @@ export async function createGalleryItem(formData: FormData) {
       maxSizeBytes: MAX_FILE_SIZE,
       allowedMimeTypes: allowedTypes
     })
-  } catch (e: any) {
-    throw new Error(e.message || 'Failed to upload image')
-  }
+  } catch (e: unknown) {
+      throw new Error(e instanceof Error ? e.message : 'Failed to upload image')
+    }
 
   // Insert into DB
   const { error: dbError } = await supabase.from('gallery').insert({
@@ -70,17 +67,13 @@ export async function createGalleryItem(formData: FormData) {
 
 export async function updateGalleryItem(id: string, formData: FormData) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    throw new Error('Unauthorized')
-  }
+  await requireAdmin()
 
   validateGalleryStrings(formData)
   const title_bn = formData.get('title_bn') as string
 
   const imageFile = formData.get('image') as File | null
-  let imageUrl = formData.get('current_image_url') as string
+  const imageUrl = formData.get('current_image_url') as string
 
   // If a new image is uploaded
   let newImageUrl = imageUrl
@@ -96,8 +89,8 @@ export async function updateGalleryItem(id: string, formData: FormData) {
         maxSizeBytes: MAX_FILE_SIZE,
         allowedMimeTypes: allowedTypes
       })
-    } catch (e: any) {
-      throw new Error(e.message || 'Failed to upload image')
+    } catch (e: unknown) {
+      throw new Error(e instanceof Error ? e.message : 'Failed to upload image')
     }
   }
 
@@ -130,11 +123,7 @@ export async function updateGalleryItem(id: string, formData: FormData) {
 
 export async function deleteGalleryItem(id: string, imageUrl: string) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    throw new Error('Unauthorized')
-  }
+  await requireAdmin()
 
   const { error: dbError } = await supabase.from('gallery').delete().eq('id', id)
 

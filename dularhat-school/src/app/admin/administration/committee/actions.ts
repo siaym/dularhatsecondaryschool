@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/utils/supabase/server'
+import { requireAdmin } from '@/utils/supabase/admin'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { uploadFile, deleteFileFromUrl } from '@/utils/supabase/storage'
@@ -23,11 +24,7 @@ function validateCommitteeStrings(formData: FormData) {
 
 export async function createCommitteeMember(formData: FormData) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    throw new Error('Unauthorized')
-  }
+  await requireAdmin()
 
   validateCommitteeStrings(formData)
   
@@ -43,8 +40,8 @@ export async function createCommitteeMember(formData: FormData) {
         maxSizeBytes: 5 * 1024 * 1024,
         allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp']
       })
-    } catch (e: any) {
-      throw new Error(e.message || 'Failed to upload photo')
+    } catch (e: unknown) {
+      throw new Error(e instanceof Error ? e.message : 'Failed to upload photo')
     }
   }
 
@@ -73,16 +70,12 @@ export async function createCommitteeMember(formData: FormData) {
 
 export async function updateCommitteeMember(id: string, formData: FormData) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    throw new Error('Unauthorized')
-  }
+  await requireAdmin()
 
   validateCommitteeStrings(formData)
 
   const photoFile = formData.get('photo') as File | null
-  let photo_url = formData.get('current_photo_url') as string | null
+  const photo_url = formData.get('current_photo_url') as string | null
 
   let new_photo_url = photo_url
   if (photoFile && photoFile.size > 0) {
@@ -94,8 +87,8 @@ export async function updateCommitteeMember(id: string, formData: FormData) {
         maxSizeBytes: 5 * 1024 * 1024,
         allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp']
       })
-    } catch (e: any) {
-      throw new Error(e.message || 'Failed to upload new photo')
+    } catch (e: unknown) {
+      throw new Error(e instanceof Error ? e.message : 'Failed to upload new photo')
     }
   } else if (formData.get('remove_photo') === 'true') {
     new_photo_url = null
@@ -133,11 +126,7 @@ export async function updateCommitteeMember(id: string, formData: FormData) {
 
 export async function deleteCommitteeMember(id: string, photoUrl: string | null) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    throw new Error('Unauthorized')
-  }
+  await requireAdmin()
 
   await deleteFileFromUrl('school-media', photoUrl)
 
