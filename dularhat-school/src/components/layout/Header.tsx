@@ -79,8 +79,8 @@ export function Header() {
                   } leading-tight mt-[1px] truncate`}
                 >
                   {language === "bn"
-                    ? "চরফ্যাশন, ভোলা • প্রতিষ্ঠাকাল: ১৯৬৬"
-                    : "Charfashion, Bhola • Est: 1966"}
+                    ? "চরফ্যাশন, ভোলা • প্রতিষ্ঠাকাল: ১৯৬৩"
+                    : "Charfashion, Bhola • Est: 1963"}
                 </p>
               </div>
             </Link>

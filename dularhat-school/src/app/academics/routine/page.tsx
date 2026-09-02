@@ -1,18 +1,16 @@
 "use client";
 
 import { Download } from "lucide-react";
-import { PageHero } from "@/components/ui/PageHero";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function RoutinePage() {
   const { language } = useLanguage();
   return (
     <div>
-      <PageHero
-        variant="green"
-        eyebrow={{ bengali: "একাডেমিক", english: "Academic" }}
+      <PageHeader
         title={{ bengali: "ক্লাস রুটিন", english: "Class Routine" }}
-        description={{ bengali: "বিদ্যালয়ের সাপ্তাহিক ক্লাস রুটিন", english: "Weekly class routine of the school" }}
+        subtitle={{ bengali: "বিদ্যালয়ের সাপ্তাহিক ক্লাস রুটিন", english: "Weekly class routine of the school" }}
         breadcrumbs={[
           { label: { bengali: "একাডেমিক", english: "Academics" }, href: "/academics" },
           { label: { bengali: "ক্লাস রুটিন", english: "Class Routine" } },

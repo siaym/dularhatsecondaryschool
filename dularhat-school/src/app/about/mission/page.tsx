@@ -1,6 +1,6 @@
 "use client";
 
-import { PageHero } from "@/components/ui/PageHero";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { schoolData } from "@/data/school-data";
@@ -9,11 +9,9 @@ export default function MissionPage() {
   const { t, language } = useLanguage();
   return (
     <div>
-      <PageHero
-        variant="light"
-        eyebrow={{ bengali: "আমাদের সম্পর্কে", english: "About Us" }}
+      <PageHeader
         title={{ bengali: "লক্ষ্য ও উদ্দেশ্য", english: "Mission & Vision" }}
-        description={{ bengali: "আমাদের শিক্ষাগত দর্শন ও মূল্যবোধ", english: "Our educational philosophy and values" }}
+        subtitle={{ bengali: "আমাদের শিক্ষাগত দর্শন ও মূল্যবোধ", english: "Our educational philosophy and values" }}
         breadcrumbs={[
           { label: { bengali: "আমাদের সম্পর্কে", english: "About" }, href: "/about" },
           { label: { bengali: "লক্ষ্য ও উদ্দেশ্য", english: "Mission & Vision" } },

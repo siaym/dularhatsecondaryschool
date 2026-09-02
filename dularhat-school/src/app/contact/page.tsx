@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Phone, Mail, MapPin, ExternalLink, Clock } from "lucide-react";
-import { PageHero } from "@/components/ui/PageHero";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { schoolData } from "@/data/school-data";
@@ -13,24 +13,13 @@ export default function ContactPage() {
   return (
     <div>
       {/* ── HERO ── */}
-      <PageHero
-        variant="green"
-        eyebrow={language === "bn" ? "আমাদের সাথে যোগাযোগ করুন" : "Get in Touch"}
+      <PageHeader
         title={{ bengali: "যোগাযোগ", english: "Contact Us" }}
-        description={{
+        subtitle={{
           bengali: "দুলারহাট মাধ্যমিক বিদ্যালয়, চরফ্যাশন, ভোলা",
           english: "Dularhat Secondary School, Charfashion, Bhola",
         }}
         breadcrumbs={[{ label: { bengali: "যোগাযোগ", english: "Contact" } }]}
-        visual={
-          <div className="flex flex-col items-center gap-4 text-white/80">
-            <MapPin size={64} className="text-white/40" />
-            <div className="text-center space-y-1">
-              <p className="font-bold text-white text-sm">{language === "bn" ? "দুলারহাট বাজার" : "Dularhat Bazar"}</p>
-              <p className="text-green-200 text-xs">{language === "bn" ? "চরফ্যাশন, ভোলা" : "Charfashion, Bhola"}</p>
-            </div>
-          </div>
-        }
       />
 
       {/* ── SECTION 1 — WHITE: Contact info + styled location panel ── */}

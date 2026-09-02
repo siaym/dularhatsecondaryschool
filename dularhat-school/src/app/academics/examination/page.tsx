@@ -1,6 +1,6 @@
 "use client";
 
-import { PageHero } from "@/components/ui/PageHero";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -8,11 +8,9 @@ export default function ExaminationPage() {
   const { language } = useLanguage();
   return (
     <div>
-      <PageHero
-        variant="green"
-        eyebrow={{ bengali: "একাডেমিক", english: "Academic" }}
+      <PageHeader
         title={{ bengali: "পরীক্ষার তথ্য", english: "Examination Information" }}
-        description={{ bengali: "পরীক্ষার সময়সূচি, নিয়মাবলী ও কেন্দ্র", english: "Exam schedule, regulations and centre" }}
+        subtitle={{ bengali: "পরীক্ষার সময়সূচি, নিয়মাবলী ও কেন্দ্র", english: "Exam schedule, regulations and centre" }}
         breadcrumbs={[
           { label: { bengali: "একাডেমিক", english: "Academics" }, href: "/academics" },
           { label: { bengali: "পরীক্ষা", english: "Examination" } },
@@ -21,7 +19,6 @@ export default function ExaminationPage() {
       <section className="bg-white py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow={language === "bn" ? "পরীক্ষার ধরন" : "Exam Types"}
             title={language === "bn" ? "পরীক্ষাসমূহ" : "Examinations"}
           />
           <div className="grid sm:grid-cols-2 gap-4 mb-10">

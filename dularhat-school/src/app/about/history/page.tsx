@@ -1,6 +1,6 @@
 "use client";
 
-import { PageHero } from "@/components/ui/PageHero";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -8,11 +8,9 @@ export default function AboutHistoryPage() {
   const { language } = useLanguage();
   return (
     <div>
-      <PageHero
-        variant="light"
-        eyebrow={{ bengali: "আমাদের সম্পর্কে", english: "About Us" }}
+      <PageHeader
         title={{ bengali: "বিদ্যালয়ের ইতিহাস", english: "School History" }}
-        description={{ bengali: "১৯৬৩ সাল থেকে শিক্ষার আলো ছড়িয়ে আসছে দুলারহাট মাধ্যমিক বিদ্যালয়", english: "Spreading the light of education since 1963" }}
+        subtitle={{ bengali: "১৯৬৩ সাল থেকে শিক্ষার আলো ছড়িয়ে আসছে দুলারহাট মাধ্যমিক বিদ্যালয়", english: "Spreading the light of education since 1963" }}
         breadcrumbs={[
           { label: { bengali: "আমাদের সম্পর্কে", english: "About" }, href: "/about" },
           { label: { bengali: "ইতিহাস", english: "History" } },

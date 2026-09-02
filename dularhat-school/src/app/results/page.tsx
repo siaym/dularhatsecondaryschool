@@ -1,7 +1,7 @@
 "use client";
 
 import { Trophy } from "lucide-react";
-import { PageHero } from "@/components/ui/PageHero";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -9,17 +9,14 @@ export default function ResultsPage() {
   const { language } = useLanguage();
   return (
     <div>
-      <PageHero
-        variant="gold"
-        eyebrow={{ bengali: "ফলাফল", english: "Results" }}
+      <PageHeader
         title={{ bengali: "পরীক্ষার ফলাফল", english: "Examination Results" }}
-        description={{ bengali: "JSC ও SSC পরীক্ষার ফলাফল", english: "JSC and SSC examination results" }}
+        subtitle={{ bengali: "JSC ও SSC পরীক্ষার ফলাফল", english: "JSC and SSC examination results" }}
         breadcrumbs={[{ label: { bengali: "ফলাফল", english: "Results" } }]}
       />
       <section className="bg-white py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow={language === "bn" ? "বোর্ড পরীক্ষা" : "Board Exams"}
             title={language === "bn" ? "পরীক্ষার ফলাফল" : "Exam Results"}
           />
           <div className="grid sm:grid-cols-2 gap-5 mb-10">

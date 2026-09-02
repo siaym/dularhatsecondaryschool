@@ -12,11 +12,11 @@ interface SidebarLink {
 
 interface PageSidebarProps {
   sectionLinks?: SidebarLink[];
-  quickLinks?: SidebarLink[];
+
   contactCard?: boolean;
 }
 
-export function PageSidebar({ sectionLinks = [], quickLinks = [], contactCard = true }: PageSidebarProps) {
+export function PageSidebar({ sectionLinks = [], contactCard = true }: PageSidebarProps) {
   const { language } = useLanguage();
 
   return (
@@ -46,26 +46,7 @@ export function PageSidebar({ sectionLinks = [], quickLinks = [], contactCard = 
         </div>
       )}
 
-      {/* Quick Links */}
-      {quickLinks.length > 0 && (
-        <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100">
-          <h3 className="font-bold text-gray-900 mb-4">
-            {language === "bn" ? "দ্রুত লিঙ্ক" : "Quick Links"}
-          </h3>
-          <nav className="space-y-2">
-            {quickLinks.map((link, i) => (
-              <Link
-                key={i}
-                href={link.href}
-                className="flex items-center gap-2 text-gray-600 hover:text-[#016B00] text-sm py-1.5 transition-colors"
-              >
-                <span className="text-[#016B00]">›</span>
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
+
 
       {/* Contact Card */}
       {contactCard && (

@@ -35,22 +35,17 @@ export function AcademicsSection() {
               <span className="w-8 h-8 bg-[#016B00] text-white rounded-lg flex items-center justify-center text-sm">✓</span>
               {language === "bn" ? "শ্রেণিসমূহ" : "Classes"}
             </h3>
-            <div className="space-y-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {schoolData.academics.classes.map((cls, i) => (
                 <div
                   key={i}
-                  className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-green-50 transition-colors"
+                  className="relative flex flex-col items-center justify-center p-4 bg-white border border-[#DDE8DD] rounded-xl hover:border-[#006B2D] hover:shadow-sm transition-all"
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="w-8 h-8 bg-[#016B00] text-white rounded-lg flex items-center justify-center text-sm font-bold">
-                      {cls.grade}
-                    </span>
-                    <span className="font-medium text-gray-900">
-                      {t(cls)}
-                    </span>
-                  </div>
-                  <span className="text-xs text-gray-400">
-                    {language === "bn" ? "শ্রেণি" : "Grade"} {cls.grade}
+                  <span className="text-3xl font-black text-[#006B2D] mb-1" style={{ fontVariantNumeric: "tabular-nums" }}>
+                    {String(cls.grade).padStart(2, "0")}
+                  </span>
+                  <span className="text-xs font-bold text-[#003D1A] text-center leading-tight">
+                    {t(cls)}
                   </span>
                 </div>
               ))}

@@ -1,6 +1,6 @@
 "use client";
 
-import { PageHero } from "@/components/ui/PageHero";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -8,11 +8,9 @@ export default function CommitteePage() {
   const { language } = useLanguage();
   return (
     <div>
-      <PageHero
-        variant="dark"
-        eyebrow={{ bengali: "প্রশাসন", english: "Administration" }}
+      <PageHeader
         title={{ bengali: "ম্যানেজিং কমিটি", english: "Managing Committee" }}
-        description={{ bengali: "বিদ্যালয় পরিচালনা কমিটির সদস্যগণ", english: "Members of the school managing committee" }}
+        subtitle={{ bengali: "বিদ্যালয় পরিচালনা কমিটির সদস্যগণ", english: "Members of the school managing committee" }}
         breadcrumbs={[
           { label: { bengali: "প্রশাসন", english: "Administration" }, href: "/administration" },
           { label: { bengali: "ম্যানেজিং কমিটি", english: "Managing Committee" } },
@@ -27,7 +25,6 @@ export default function CommitteePage() {
               : "Detailed committee member list is not published online. Contact the school directly."}
           </div>
           <SectionHeading
-            eyebrow={language === "bn" ? "কমিটির ভূমিকা" : "Committee Roles"}
             title={language === "bn" ? "পদবিসমূহ" : "Positions"}
           />
           <div className="space-y-3">

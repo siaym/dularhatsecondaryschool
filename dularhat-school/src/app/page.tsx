@@ -3,7 +3,7 @@ import { AboutSection } from "@/components/home/AboutSection";
 import { StatsSection } from "@/components/home/StatsSection";
 import { HeadmasterSection } from "@/components/home/HeadmasterSection";
 import { NoticesSection } from "@/components/home/NoticesSection";
-import { QuickLinksSection } from "@/components/home/QuickLinksSection";
+
 import { AcademicsSection } from "@/components/home/AcademicsSection";
 import { GallerySection } from "@/components/home/GallerySection";
 import { ContactSection } from "@/components/home/ContactSection";
@@ -26,7 +26,7 @@ export default function HomePage() {
       <AboutSection />
       <HeadmasterSection />
       <NoticesSection />
-      <QuickLinksSection />
+
       <AcademicsSection />
       <GallerySection />
       <ContactSection />

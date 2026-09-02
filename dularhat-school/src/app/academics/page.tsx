@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { PageHero } from "@/components/ui/PageHero";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { schoolData } from "@/data/school-data";
@@ -15,11 +15,9 @@ export default function AcademicsPage() {
   return (
     <div>
       {/* ── HERO ── */}
-      <PageHero
-        variant="green"
-        eyebrow={language === "bn" ? "একাডেমিক" : "Academic"}
+      <PageHeader
         title={{ bengali: "একাডেমিক তথ্য", english: "Academic Information" }}
-        description={{
+        subtitle={{
           bengali: "শ্রেণি, বিভাগ, রুটিন ও পরীক্ষা সম্পর্কিত সমস্ত তথ্য",
           english: "All information about classes, disciplines, routine and examinations",
         }}
@@ -30,7 +28,6 @@ export default function AcademicsPage() {
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow={language === "bn" ? "শ্রেণিসমূহ" : "Classes"}
             title={language === "bn" ? "পাঁচটি শ্রেণি" : "Five Grade Levels"}
             description={
               language === "bn"
@@ -97,7 +94,6 @@ export default function AcademicsPage() {
       <section className="bg-[#F0FAF3] py-16 border-y border-[#DDE8DD]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow={language === "bn" ? "৯ম–১০ম শ্রেণি" : "Grade 9–10"}
             title={language === "bn" ? "তিনটি একাডেমিক বিভাগ" : "Three Academic Disciplines"}
             description={
               language === "bn"
@@ -160,7 +156,6 @@ export default function AcademicsPage() {
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow={language === "bn" ? "আরও তথ্য" : "More Info"}
             title={language === "bn" ? "রুটিন ও পরীক্ষা" : "Routine & Examination"}
           />
           <div className="grid sm:grid-cols-2 gap-6">

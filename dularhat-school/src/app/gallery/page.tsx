@@ -1,7 +1,7 @@
 "use client";
 
 import { ImageIcon } from "lucide-react";
-import { PageHero } from "@/components/ui/PageHero";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -21,21 +21,10 @@ export default function GalleryPage() {
   const { language } = useLanguage();
   return (
     <div>
-      <PageHero
-        variant="green"
-        eyebrow={{ bengali: "গ্যালারি", english: "Gallery" }}
+      <PageHeader
         title={{ bengali: "ফটো গ্যালারি", english: "Photo Gallery" }}
-        description={{ bengali: "বিদ্যালয়ের অনুষ্ঠান ও কার্যক্রমের ছবি", english: "Photos of school events and activities" }}
+        subtitle={{ bengali: "বিদ্যালয়ের অনুষ্ঠান ও কার্যক্রমের ছবি", english: "Photos of school events and activities" }}
         breadcrumbs={[{ label: { bengali: "গ্যালারি", english: "Gallery" } }]}
-        visual={
-          <div className="flex items-center justify-center gap-3 flex-wrap">
-            {["🏫", "🎓", "⚽", "🎭"].map((e, i) => (
-              <div key={i} className={`w-16 h-16 bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center text-3xl ${i === 0 ? "rotate-3" : i === 1 ? "-rotate-2" : i === 2 ? "rotate-1" : "-rotate-3"}`}>
-                {e}
-              </div>
-            ))}
-          </div>
-        }
       />
 
       <section className="bg-white py-16">

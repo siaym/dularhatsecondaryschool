@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Phone, Mail } from "lucide-react";
-import { PageHero } from "@/components/ui/PageHero";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { schoolData } from "@/data/school-data";
@@ -11,11 +11,9 @@ export default function AdmissionPage() {
   const { t, language } = useLanguage();
   return (
     <div>
-      <PageHero
-        variant="green"
-        eyebrow={{ bengali: "ভর্তি", english: "Admission" }}
+      <PageHeader
         title={{ bengali: "ভর্তি তথ্য", english: "Admission Information" }}
-        description={{ bengali: "বিদ্যালয়ে ভর্তির নিয়মাবলী ও প্রক্রিয়া", english: "Admission rules and process" }}
+        subtitle={{ bengali: "বিদ্যালয়ে ভর্তির নিয়মাবলী ও প্রক্রিয়া", english: "Admission rules and process" }}
         breadcrumbs={[{ label: { bengali: "ভর্তি", english: "Admission" } }]}
       />
 
@@ -23,7 +21,6 @@ export default function AdmissionPage() {
       <section className="bg-white py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow={language === "bn" ? "ভর্তি প্রক্রিয়া" : "Process"}
             title={language === "bn" ? "কীভাবে ভর্তি হবেন" : "How to Apply"}
           />
           <div className="bg-[#F0FAF3] border border-[#DDE8DD] rounded-xl p-6 mb-10 text-[#003D1A] text-sm leading-relaxed">

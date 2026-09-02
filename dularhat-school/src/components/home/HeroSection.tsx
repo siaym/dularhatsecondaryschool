@@ -100,7 +100,7 @@ export function HeroSection() {
           <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 mb-4 min-[400px]:mb-5 text-[10px] sm:text-[11px] font-medium text-[#F2F5F2]">
             <div className="flex items-center gap-1">
               <Calendar className="w-[11px] h-[11px] text-[#F4C430]" />
-              <span>{language === "bn" ? "প্রতিষ্ঠাকাল: ১৯৬৬" : "Established: 1966"}</span>
+              <span>{language === "bn" ? "প্রতিষ্ঠাকাল: ১৯৬৩" : "Established: 1963"}</span>
             </div>
             <div className="text-[#F4C430]">|</div>
             <div className="flex items-center gap-1">
@@ -254,7 +254,7 @@ export function HeroSection() {
             <div className="flex flex-wrap items-center gap-4 mb-4 text-xs xl:text-sm font-medium text-[#F2F5F2]">
               <div className="flex items-center gap-2">
                 <Calendar className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-[#F4C430]" />
-                <span>{language === "bn" ? "প্রতিষ্ঠাকাল: ১৯৬৬" : "Established: 1966"}</span>
+                <span>{language === "bn" ? "প্রতিষ্ঠাকাল: ১৯৬৩" : "Established: 1963"}</span>
               </div>
               <div className="text-[#F4C430]">|</div>
               <div className="flex items-center gap-2">
@@ -299,8 +299,8 @@ export function HeroSection() {
             {/* Description */}
             <p className="text-[#F2F5F2] text-[14px] xl:text-[16px] leading-[1.65] mb-8 max-w-[95%] font-medium">
               {language === "bn" 
-                ? "চরফ্যাশন উপজেলার পশ্চিমাঞ্চলের প্রথম শিক্ষা প্রতিষ্ঠান। ১৯৬৬ সালে প্রতিষ্ঠার পর থেকে ছাত্র-ছাত্রী, শিক্ষক-শিক্ষিকা, অভিভাবক, এলাকার সর্বস্তরের মানুষের সহযোগিতায় বিদ্যালয়টি শিক্ষার মান ও ফলাফলে জেলার অন্যতম শ্রেষ্ঠ প্রতিষ্ঠানে পরিণত হয়েছে।"
-                : "The first educational institution in the western region of Charfashion Upazila. Since its establishment in 1966, with the cooperation of students, teachers, parents, and people of all levels, the school has become one of the best institutions in the district in terms of quality of education and results."
+                ? "চরফ্যাশন উপজেলার পশ্চিমাঞ্চলের প্রথম শিক্ষা প্রতিষ্ঠান। ১৯৬৩ সালে প্রতিষ্ঠার পর থেকে ছাত্র-ছাত্রী, শিক্ষক-শিক্ষিকা, অভিভাবক, এলাকার সর্বস্তরের মানুষের সহযোগিতায় বিদ্যালয়টি শিক্ষার মান ও ফলাফলে জেলার অন্যতম শ্রেষ্ঠ প্রতিষ্ঠানে পরিণত হয়েছে।"
+                : "The first educational institution in the western region of Charfashion Upazila. Since its establishment in 1963, with the cooperation of students, teachers, parents, and people of all levels, the school has become one of the best institutions in the district in terms of quality of education and results."
               }
             </p>
 

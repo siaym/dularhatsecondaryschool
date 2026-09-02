@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, GraduationCap, Quote } from "lucide-react";
-import { PageHero } from "@/components/ui/PageHero";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -11,22 +11,13 @@ export default function HeadmasterPage() {
 
   return (
     <div>
-      <PageHero
-        variant="dark"
-        eyebrow={{ bengali: "প্রশাসন", english: "Administration" }}
+      <PageHeader
         title={{ bengali: "প্রধান শিক্ষকের বাণী", english: "Headmaster's Message" }}
-        description={{ bengali: "বিদ্যালয়ের প্রধান শিক্ষকের পক্ষ থেকে বিশেষ বার্তা", english: "A special message from the Headmaster" }}
+        subtitle={{ bengali: "বিদ্যালয়ের প্রধান শিক্ষকের পক্ষ থেকে বিশেষ বার্তা", english: "A special message from the Headmaster" }}
         breadcrumbs={[
           { label: { bengali: "প্রশাসন", english: "Administration" }, href: "/administration" },
           { label: { bengali: "প্রধান শিক্ষক", english: "Headmaster" } },
         ]}
-        visual={
-          <div className="flex items-center justify-center">
-            <div className="w-32 h-32 bg-white/10 rounded-full flex items-center justify-center border-4 border-white/20">
-              <GraduationCap size={60} className="text-white/60" />
-            </div>
-          </div>
-        }
       />
 
       {/* Message */}

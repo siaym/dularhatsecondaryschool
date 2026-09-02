@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Bell, Calendar, Tag, Search } from "lucide-react";
-import { PageHero } from "@/components/ui/PageHero";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const notices = [
@@ -38,23 +38,13 @@ export default function NoticesPage() {
   return (
     <div>
       {/* ── HERO — notice variant (green + red accent strip) ── */}
-      <PageHero
-        variant="notice"
-        eyebrow={language === "bn" ? "সর্বশেষ বিজ্ঞপ্তি" : "Latest Announcements"}
+      <PageHeader
         title={{ bengali: "নোটিশ বোর্ড", english: "Notice Board" }}
-        description={{
+        subtitle={{
           bengali: "বিদ্যালয়ের গুরুত্বপূর্ণ ঘোষণা ও আপডেট",
           english: "Important school announcements and updates",
         }}
         breadcrumbs={[{ label: { bengali: "নোটিশ", english: "Notices" } }]}
-        visual={
-          <div className="text-center space-y-3">
-            <Bell size={80} className="text-white/30 mx-auto" />
-            <div className="text-white/60 text-sm font-medium">
-              {notices.length} {language === "bn" ? "টি বিজ্ঞপ্তি" : "notices"}
-            </div>
-          </div>
-        }
       />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
