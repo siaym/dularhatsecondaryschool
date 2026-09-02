@@ -1,9 +1,10 @@
 'use client';
 
 import Link from "next/link";
-import { Bell, Calendar, Search, ArrowRight } from "lucide-react";
+import { Bell, Calendar, Search } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Notice } from "@/types";
 
 const typeStyles: Record<string, { bg: string; text: string; dot: string }> = {
   exam:      { bg: "bg-red-50",    text: "text-red-700",    dot: "bg-red-500" },
@@ -21,7 +22,7 @@ function formatDate(dateStr: string, language: string) {
     : date.toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" });
 }
 
-export function NoticesClient({ notices }: { notices: any[] }) {
+export function NoticesClient({ notices }: { notices: Notice[] }) {
   const { language } = useLanguage();
 
   const urgent = notices.find((n) => n.is_important);

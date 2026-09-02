@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowLeft, Calendar, Tag, Bell, Download } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Notice } from "@/types";
 
 function formatDate(dateStr: string, language: string) {
   const date = new Date(dateStr);
@@ -11,7 +12,7 @@ function formatDate(dateStr: string, language: string) {
     : date.toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" });
 }
 
-export function NoticeDetailClient({ notice }: { notice: any }) {
+export function NoticeDetailClient({ notice }: { notice: Notice }) {
   const { language } = useLanguage();
 
   if (!notice) {

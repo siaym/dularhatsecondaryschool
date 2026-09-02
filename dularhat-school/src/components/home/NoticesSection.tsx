@@ -3,6 +3,16 @@
 import Link from "next/link";
 import { ArrowRight, Bell, Calendar, Download, Tag } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Notice } from "@/types";
+
+const categoryMap: Record<string, { bn: string, en: string, color: string }> = {
+  exam: { bn: "পরীক্ষা", en: "Exam", color: "#DC2626" },
+  holiday: { bn: "ছুটি", en: "Holiday", color: "#F97316" },
+  academic: { bn: "একাডেমিক", en: "Academic", color: "#2563EB" },
+  admission: { bn: "ভর্তি", en: "Admission", color: "#10B981" },
+  event: { bn: "অনুষ্ঠান", en: "Event", color: "#8B5CF6" },
+  general: { bn: "সাধারণ", en: "General", color: "#6B7280" }
+};
 
 
 function formatDate(dateStr: string, language: string) {
@@ -21,7 +31,7 @@ function formatDate(dateStr: string, language: string) {
   });
 }
 
-export function NoticesSection({ notices }: { notices: any[] }) {
+export function NoticesSection({ notices }: { notices: Notice[] }) {
   const { language } = useLanguage();
 
   return (
@@ -63,10 +73,10 @@ export function NoticesSection({ notices }: { notices: any[] }) {
                 <div className="flex items-center gap-2 mb-3">
                   <span
                     className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-0.5 rounded-full text-white"
-                    style={{ backgroundColor: notice.category_color }}
+                    style={{ backgroundColor: categoryMap[notice.category]?.color || "#6B7280" }}
                   >
                     <Tag size={10} />
-                    {language === "bn" ? notice.category_bn : notice.category_en}
+                    {language === "bn" ? (categoryMap[notice.category]?.bn || notice.category) : (categoryMap[notice.category]?.en || notice.category)}
                   </span>
                   {notice.is_important && (
                     <span className="inline-flex items-center gap-1 text-xs font-bold text-red-600 bg-red-100 px-2 py-0.5 rounded-full">

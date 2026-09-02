@@ -140,7 +140,7 @@ export function HeroSection() {
 
           {/* Quote / Tagline */}
           <p className="text-[14px] sm:text-[15px] text-[#F4C430] font-bold mb-2 min-[400px]:mb-2.5 leading-snug drop-shadow-sm">
-            "দক্ষ মানবসম্পদ গড়ে তুলতে আমরা অঙ্গীকারবদ্ধ"
+            &quot;দক্ষ মানবসম্পদ গড়ে তুলতে আমরা অঙ্গীকারবদ্ধ&quot;
           </p>
 
           {/* Description */}

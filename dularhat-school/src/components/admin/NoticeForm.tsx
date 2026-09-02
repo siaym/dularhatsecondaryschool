@@ -3,8 +3,9 @@
 import { createNotice, updateNotice } from '@/app/admin/notices/actions'
 import Link from 'next/link'
 import { useState } from 'react'
+import { Notice } from '@/types'
 
-export function NoticeForm({ notice }: { notice?: any }) {
+export function NoticeForm({ notice }: { notice?: Notice }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const action = notice ? updateNotice.bind(null, notice.id) : createNotice

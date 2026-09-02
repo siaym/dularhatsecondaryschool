@@ -5,7 +5,7 @@ export default function AdminDashboard() {
       <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm max-w-3xl">
         <h2 className="text-lg font-semibold text-gray-900 mb-2">Welcome to the Admin Panel</h2>
         <p className="text-gray-600 mb-6">
-          From here you can manage all the dynamic content of the Dularhat Secondary School website.
+          Manage the school&apos;s website content from this dashboard.
         </p>
         
         <div className="grid sm:grid-cols-2 gap-4">

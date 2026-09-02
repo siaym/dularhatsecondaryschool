@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ImageIcon } from "lucide-react";
+import { Camera, Image as ImageIcon, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { GalleryItem } from "@/types";
 
-// Sample gallery items - in production these come from Supabase
-const sampleGalleryImages: any[] = [];
+import Image from "next/image";
 
-export function GallerySection() {
+export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
   const { language } = useLanguage();
 
   return (
@@ -33,25 +33,27 @@ export function GallerySection() {
         </div>
 
         {/* Gallery Grid */}
-        {sampleGalleryImages.length > 0 ? (
+        {items.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {sampleGalleryImages.map((img) => (
+            {items.slice(0, 6).map((img) => (
               <Link
                 key={img.id}
                 href="/gallery"
                 className="group relative bg-white rounded-2xl overflow-hidden aspect-square border border-gray-100 hover:border-[#016B00] transition-colors shadow-sm hover:shadow-md"
               >
-                {/* Placeholder - in production replace with actual <Image /> */}
-                <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-6">
-                  <span className="text-5xl sm:text-6xl mb-3">{img.placeholder}</span>
-                  <span className="text-center text-sm font-medium text-gray-600">
-                    {language === "bn" ? img.label_bn : img.label_en}
-                  </span>
-                </div>
+                <Image
+                  src={img.image_url}
+                  alt={language === "bn" ? img.title_bn : (img.title_en || img.title_bn)}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 640px) 50vw, 33vw"
+                  unoptimized
+                />
+                
                 {/* Hover overlay */}
-                <div className="absolute inset-0 bg-[#016B00]/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="text-white font-medium text-sm">
-                    {language === "bn" ? "বড় করে দেখুন" : "View Image"}
+                <div className="absolute inset-0 bg-[#016B00]/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4 text-center">
+                  <span className="text-white font-medium text-sm line-clamp-2">
+                    {language === "bn" ? img.title_bn : (img.title_en || img.title_bn)}
                   </span>
                 </div>
               </Link>

@@ -6,9 +6,19 @@ import { redirect } from 'next/navigation'
 
 export async function createNotice(formData: FormData) {
   const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) {
+    throw new Error('Unauthorized')
+  }
+
+  const title_bn = formData.get('title_bn') as string
+  if (!title_bn || title_bn.trim() === '') {
+    throw new Error('Title (Bengali) is required')
+  }
 
   const { error } = await supabase.from('notices').insert({
-    title_bn: formData.get('title_bn'),
+    title_bn: title_bn,
     title_en: formData.get('title_en'),
     description_bn: formData.get('description_bn'),
     description_en: formData.get('description_en'),
@@ -30,9 +40,19 @@ export async function createNotice(formData: FormData) {
 
 export async function updateNotice(id: string, formData: FormData) {
   const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) {
+    throw new Error('Unauthorized')
+  }
+
+  const title_bn = formData.get('title_bn') as string
+  if (!title_bn || title_bn.trim() === '') {
+    throw new Error('Title (Bengali) is required')
+  }
 
   const { error } = await supabase.from('notices').update({
-    title_bn: formData.get('title_bn'),
+    title_bn: title_bn,
     title_en: formData.get('title_en'),
     description_bn: formData.get('description_bn'),
     description_en: formData.get('description_en'),
@@ -54,6 +74,11 @@ export async function updateNotice(id: string, formData: FormData) {
 
 export async function deleteNotice(id: string) {
   const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) {
+    throw new Error('Unauthorized')
+  }
 
   const { error } = await supabase.from('notices').delete().eq('id', id)
 

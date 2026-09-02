@@ -31,6 +31,14 @@ export default async function HomePage() {
     .order('created_at', { ascending: false })
     .limit(6)
 
+  const { data: galleryItems } = await supabase
+    .from('gallery')
+    .select('*')
+    .eq('is_published', true)
+    .order('display_order', { ascending: true })
+    .order('created_at', { ascending: false })
+    .limit(6)
+
   return (
     <div className="-mt-[72px] lg:-mt-[90px]">
       <HeroSection />
@@ -40,7 +48,7 @@ export default async function HomePage() {
       <NoticesSection notices={notices || []} />
 
       <AcademicsSection />
-      <GallerySection />
+      <GallerySection items={galleryItems || []} />
       <ContactSection />
     </div>
   );
