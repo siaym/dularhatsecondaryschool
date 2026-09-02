@@ -12,15 +12,92 @@ export function HeroSection() {
   return (
     <>
       {/* =========================================
-          MOBILE HERO (Stacked Layout, < lg)
+          MOBILE HERO (< lg) — Single-boundary architecture:
+          Image fills full section. One green SVG overlay covers
+          the top portion. The SVG's bottom Bézier path IS the
+          only green/image boundary. No stacked green divs.
           ========================================= */}
-      <section className="flex flex-col lg:hidden w-full h-[100dvh] min-h-[700px] bg-[#063F20] pt-[84px]" aria-label="Mobile Hero section">
-        
-        {/* ─── Top Solid Green Content Block ─── */}
-        <div className="relative z-20 w-full px-[14px] sm:px-4 pt-1 pb-2 bg-[#063F20] flex-shrink-0">
-          
+      <section
+        className="lg:hidden relative w-full h-[100dvh] min-h-[700px] overflow-hidden"
+        aria-label="Mobile Hero section"
+      >
+        <div className="absolute bottom-0 left-0 w-full h-[38%] min-[400px]:h-[45%] z-0 overflow-hidden">
+          <div className="absolute top-[8%] min-[400px]:top-[10%] -left-[5%] w-[180%] h-[160%]">
+            <Image
+              src={schoolData.hero_image}
+              alt="Dularhat Secondary School Campus"
+              fill
+              className="object-cover object-left-top"
+              priority
+              sizes="100vw"
+            />
+          </div>
+        </div>
+
+        {/* ── 2. Single green SVG overlay — bottom edge IS the organic curve ──
+              viewBox 0 0 100 100 so all values are percentages of section size.
+              Path covers the top ~56% on the left, dipping to ~46% at the peak
+              (~40% x), then returning to ~60% on the right.
+              This is the ONE and ONLY green/image boundary. ── */}
+        <svg
+          className="absolute inset-0 w-full h-full z-10 pointer-events-none"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <defs>
+            <filter id="mobileHeroCurveShadow" x="-5%" y="-10%" width="110%" height="130%">
+              <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" floodColor="#000" floodOpacity="0.2" />
+            </filter>
+          </defs>
+          {/*
+            Asymmetric organic Bézier:
+            • Top-left  → top-right  → descend right edge to y=60
+            • Cubic curve from (100,60) back to (0,52):
+                CP1 (70, 46): pulls curve HIGH around 70% x
+                CP2 (30, 56): gentle valley near 30% x
+            Resulting boundary (left→right): 52 → dips toward 46 near 70% → 60
+          {/* Mobile curve (< 400px) - Pushed down slightly to give text more solid green space */}
+          <path
+            d="M 0 0 L 100 0 L 100 72 C 60 62, 30 62, 0 68 Z"
+            fill="#063F20"
+            className="block min-[400px]:hidden"
+            filter="url(#mobileHeroCurveShadow)"
+          />
+          {/* Pro Max curve (>= 400px) - Original exact math */}
+          <path
+            d="M 0 0 L 100 0 L 100 68 C 60 55, 30 55, 0 65 Z"
+            fill="#063F20"
+            className="hidden min-[400px]:block"
+            filter="url(#mobileHeroCurveShadow)"
+          />
+        </svg>
+
+        {/* ── 3. Decorative dot grids (Left and Right) ── */}
+        {/* Right side dots (faint green) */}
+        <div className="absolute top-[20%] right-0 z-20 opacity-20 pointer-events-none">
+          <svg width="44" height="88" viewBox="0 0 44 88" fill="currentColor" className="text-[#86B986]">
+            <pattern id="dot-pattern-right" x="0" y="0" width="11" height="11" patternUnits="userSpaceOnUse">
+              <circle cx="1.5" cy="1.5" r="1.5" />
+            </pattern>
+            <rect x="0" y="0" width="44" height="88" fill="url(#dot-pattern-right)" />
+          </svg>
+        </div>
+        {/* Left side dots (yellow) - overlaps curve into image */}
+        <div className="absolute top-[67%] min-[400px]:top-[60%] left-0 z-20 opacity-40 pointer-events-none">
+          <svg width="33" height="88" viewBox="0 0 33 88" fill="currentColor" className="text-[#F4C430]">
+            <pattern id="dot-pattern-left" x="0" y="0" width="11" height="11" patternUnits="userSpaceOnUse">
+              <circle cx="1.5" cy="1.5" r="1.5" />
+            </pattern>
+            <rect x="0" y="0" width="33" height="88" fill="url(#dot-pattern-left)" />
+          </svg>
+        </div>
+
+      {/* ── 4. Hero text content (layered above the green SVG) ── */}
+      <div className="relative z-20 w-full px-[14px] sm:px-5 pt-[70px] min-[400px]:pt-[120px] sm:pt-[130px]">
+
           {/* Metadata Row */}
-          <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 mb-2 text-[10px] sm:text-[11px] font-medium text-[#F2F5F2]">
+          <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 mb-4 min-[400px]:mb-5 text-[10px] sm:text-[11px] font-medium text-[#F2F5F2]">
             <div className="flex items-center gap-1">
               <Calendar className="w-[11px] h-[11px] text-[#F4C430]" />
               <span>{language === "bn" ? "প্রতিষ্ঠাকাল: ১৯৬৬" : "Established: 1966"}</span>
@@ -38,44 +115,44 @@ export function HeroSection() {
           </div>
 
           {/* Main Heading */}
-          <h1 className="text-[36px] sm:text-[38px] font-extrabold tracking-tight leading-[1.05] mb-1 text-white">
+          <h1 className="text-[46px] min-[400px]:text-[52px] sm:text-[56px] font-extrabold tracking-tight leading-[1] mb-4 min-[400px]:mb-5 text-white">
             {language === "bn" ? (
               <>
-                <span className="block mb-0.5 drop-shadow-sm">দুলারহাট</span>
-                <span className="block drop-shadow-sm">মাধ্যমিক বিদ্যালয়</span>
+                <span className="block drop-shadow-sm">দুলারহাট</span>
+                <span className="block drop-shadow-sm text-[32px] min-[400px]:text-[36px] sm:text-[40px] leading-[1.1] mt-1">মাধ্যমিক বিদ্যালয়</span>
               </>
             ) : (
               <>
-                <span className="block mb-0.5 drop-shadow-sm">Dularhat</span>
-                <span className="block drop-shadow-sm text-[26px] sm:text-[30px] leading-[1.1]">Secondary School</span>
+                <span className="block drop-shadow-sm">Dularhat</span>
+                <span className="block drop-shadow-sm text-[32px] min-[400px]:text-[36px] sm:text-[40px] leading-[1.1] mt-1">Secondary School</span>
               </>
             )}
           </h1>
 
           {/* Location */}
-          <div className="flex items-center gap-1 text-[#F2F5F2] text-[13px] sm:text-[14px] font-semibold mb-1.5">
-            <span className="text-[#F4C430] text-[14px]">📍</span>
+          <div className="flex items-center gap-1.5 text-[#F2F5F2] text-[14px] sm:text-[15px] font-semibold mb-2">
+            <MapPin className="w-4 h-4 text-[#F4C430]" strokeWidth={2.5} />
             <p>{language === "bn" ? "চরফ্যাশন, ভোলা, বাংলাদেশ" : "Charfashion, Bhola, Bangladesh"}</p>
           </div>
 
           {/* Gold Divider */}
-          <div className="w-[40px] h-[2px] bg-[#F4C430] rounded-full mb-1.5 shadow-sm" />
+          <div className="w-[40px] h-[2.5px] bg-[#F4C430] rounded-full mb-4 min-[400px]:mb-6 shadow-sm" />
 
-          {/* Quote */}
-          <p className="text-[13px] sm:text-[14px] text-[#F4C430] font-bold mb-1 leading-snug">
-            “দক্ষ মানবসম্পদ গড়ে তুলতে আমরা অঙ্গীকারবদ্ধ”
+          {/* Quote / Tagline */}
+          <p className="text-[14px] sm:text-[15px] text-[#F4C430] font-bold mb-2 min-[400px]:mb-2.5 leading-snug drop-shadow-sm">
+            "দক্ষ মানবসম্পদ গড়ে তুলতে আমরা অঙ্গীকারবদ্ধ"
           </p>
 
           {/* Description */}
-          <p className="text-[#F2F5F2] text-[12px] sm:text-[13px] leading-[1.4] mb-2 w-full font-medium">
-            {language === "bn" 
-              ? "চরফ্যাশন উপজেলার পশ্চিমাঞ্চলের প্রথম শিক্ষা প্রতিষ্ঠান। ১৯৬৬ সালে প্রতিষ্ঠার পর থেকে ছাত্র-ছাত্রী, শিক্ষক-শিক্ষিকা, অভিভাবক, এলাকার সর্বস্তরের মানুষের সহযোগিতায় বিদ্যালয়টি শিক্ষার মান ও ফলাফলে জেলার অন্যতম শ্রেষ্ঠ প্রতিষ্ঠানে পরিণত হয়েছে।"
-              : "The first educational institution in the western region of Charfashion Upazila. Since its establishment in 1966, with the cooperation of students, teachers, parents, and people of all levels, the school has become one of the best institutions in the district in terms of quality of education and results."
+          <p className="text-[#F2F5F2] text-[13px] sm:text-[14px] leading-[1.6] mb-5 min-[400px]:mb-10 w-[95%] min-[400px]:w-[90%] sm:w-[85%] font-medium">
+            {language === "bn"
+              ? "চরফ্যাশন উপজেলার পশ্চিমাঞ্চলের প্রথম শিক্ষা প্রতিষ্ঠান। প্রতিষ্ঠার শুরু থেকেই কৃতিত্বের, একতা ও সৃজনশীলতার শিক্ষায়াতন রূপ শিক্ষার মান ও ফলাফলে এলাকার অন্যতম শ্রেষ্ঠ প্রতিষ্ঠানে পরিণত হয়েছে।"
+              : "The first educational institution in the western region of Charfashion Upazila. Since its inception, it has become one of the best institutions in the area in terms of quality of education and results."
             }
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-row items-center gap-2 mb-0 w-full relative z-30">
+          <div className="flex flex-row items-center gap-2 w-full">
             <Link
               href="/about"
               className="flex-1 inline-flex items-center justify-center gap-1.5 bg-[#F4C430] hover:bg-[#e0b228] text-[#063F20] text-[12px] sm:text-[13px] font-bold rounded-lg px-2 sm:px-3 py-2 transition-transform hover:-translate-y-0.5 shadow-md whitespace-nowrap"
@@ -83,7 +160,6 @@ export function HeroSection() {
               <span>{language === "bn" ? "বিদ্যালয় সম্পর্কে জানুন" : "About School"}</span>
               <ArrowRight className="w-3.5 h-3.5 shrink-0" />
             </Link>
-
             <Link
               href="/notices"
               className="flex-1 inline-flex items-center justify-center gap-1.5 bg-transparent hover:bg-white/5 text-white border border-[#F4C430]/60 text-[12px] sm:text-[13px] font-bold rounded-lg px-2 sm:px-3 py-2 transition-transform hover:-translate-y-0.5 whitespace-nowrap"
@@ -94,67 +170,25 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* ─── Bottom Curve & Image Area ─── */}
-        <div className="relative w-full flex-grow min-h-[300px] overflow-hidden">
-          
-          {/* Mobile SVG Organic Curve */}
-          <svg 
-            className="absolute top-[-1px] left-0 w-full h-[80px] sm:h-[90px] z-20" 
-            viewBox="0 0 100 100" 
-            preserveAspectRatio="none"
+        {/* ── 5. Floating contact pill — anchored to bottom of section ── */}
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 w-max max-w-[90%] z-30">
+          <a
+            href={`tel:${schoolData.contact.mobile_1}`}
+            className="flex items-center gap-2 bg-[#063F20] text-white rounded-full pl-1.5 pr-4 py-1.5 shadow-lg border border-white/20"
+            aria-label="Call school directly"
           >
-            <defs>
-              <filter id="heroShadowMobile" x="-10%" y="-10%" width="120%" height="120%">
-                <feDropShadow dx="0" dy="4" stdDeviation="4" floodOpacity="0.4" />
-              </filter>
-            </defs>
-            <path 
-              d="M 0 0 L 0 55 C 40 5, 60 95, 100 85 L 100 0 Z" 
-              fill="#063F20" 
-              filter="url(#heroShadowMobile)"
-            />
-          </svg>
-
-          {/* Decorative Dot Pattern (Right Side, near curve) */}
-          <div className="absolute top-[10px] right-[5%] z-20 opacity-30 pointer-events-none">
-            <svg width="40" height="60" viewBox="0 0 40 60" fill="currentColor" className="text-[#F4C430]">
-              <pattern id="dot-pattern-mobile" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-                <circle cx="1.5" cy="1.5" r="1.5" />
-              </pattern>
-              <rect x="0" y="0" width="40" height="60" fill="url(#dot-pattern-mobile)" />
-            </svg>
-          </div>
-
-          {/* Background Photograph */}
-          <Image
-            src={schoolData.hero_image}
-            alt="Dularhat Secondary School Campus"
-            fill
-            className="object-cover object-[center_30%] z-0"
-            priority
-            sizes="100vw"
-          />
-
-          {/* Floating Contact Pill */}
-          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 w-max max-w-[90%] z-30 flex">
-            <a
-              href={`tel:${schoolData.contact.mobile_1}`}
-              className="flex items-center gap-2 bg-[#063F20] text-white rounded-full pl-1.5 pr-4 py-1.5 shadow-lg border border-white/20"
-              aria-label="Call school directly"
-            >
-              <div className="bg-[#F4C430] p-1.5 rounded-full flex items-center justify-center">
-                <Phone className="w-3.5 h-3.5 text-[#063F20]" fill="currentColor" />
+            <div className="bg-[#F4C430] p-1.5 rounded-full flex items-center justify-center">
+              <Phone className="w-3.5 h-3.5 text-[#063F20]" fill="currentColor" />
+            </div>
+            <div className="flex flex-col">
+              <div className="font-bold text-[12px] tracking-wide leading-tight">
+                যোগাযোগ: ০১৭২৭৯৯১২২০
               </div>
-              <div className="flex flex-col">
-                <div className="font-bold text-[12px] tracking-wide leading-tight">
-                  যোগাযোগ: ০১৭২৭৯৯১২২০
-                </div>
-                <div className="text-[9px] text-[#F2F5F2]/80 font-medium tracking-wider leading-tight mt-0.5">
-                  EIIN: 101297 • Barisal Education Board
-                </div>
+              <div className="text-[9px] text-[#F2F5F2]/80 font-medium tracking-wider leading-tight mt-0.5">
+                EIIN: 101297 • Barisal Education Board
               </div>
-            </a>
-          </div>
+            </div>
+          </a>
         </div>
 
       </section>

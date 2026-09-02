@@ -43,15 +43,15 @@ export function Header() {
     <>
       <header
         className={`fixed w-full top-0 z-50 transition-all duration-300 ease-in-out ${
-          isScrolled ? "pt-2 pb-2" : "pt-[10px] lg:pt-4 pb-0"
+          isScrolled ? "pt-0 lg:pt-2 pb-2" : "pt-0 lg:pt-4 pb-0"
         } pointer-events-none`}
       >
-        <div className="w-full max-w-[1536px] mx-auto px-[14px] lg:px-10 pointer-events-auto">
+        <div className="w-full max-w-[1536px] mx-auto px-0 lg:px-10 pointer-events-auto">
           <div
             className={`relative flex items-center justify-between bg-white transition-all duration-300 ease-in-out mx-auto h-[60px] lg:h-auto ${
               isScrolled
-                ? "rounded-[20px] lg:rounded-[16px] shadow-md px-4 sm:px-6 py-2 lg:py-1.5"
-                : "rounded-[20px] shadow-lg px-4 sm:px-6 lg:px-8 py-2.5 lg:py-2.5"
+                ? "rounded-none lg:rounded-[16px] shadow-md px-4 sm:px-6 py-2 lg:py-1.5"
+                : "rounded-none lg:rounded-[20px] shadow-lg px-4 sm:px-6 lg:px-8 py-2.5 lg:py-2.5"
             }`}
           >
             {/* ─── Logo and Identity (Left) ─── */}
