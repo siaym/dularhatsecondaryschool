@@ -107,7 +107,20 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-green-200 text-sm">
                 <MapPin size={15} className="mt-0.5 flex-shrink-0 text-green-400" />
-                <span>{t(schoolData.address)}</span>
+                <div className="flex flex-col">
+                  <span>{t(schoolData.address)}</span>
+                  <span className="text-green-300 mt-0.5">
+                    {language === "bn" ? `পোস্ট কোড: ${schoolData.address.postal_code.bengali}` : `Postal Code: ${schoolData.address.postal_code.english}`}
+                  </span>
+                  <a 
+                    href={schoolData.address.map_url}
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="text-green-400 hover:text-white flex items-center gap-1 mt-1 text-xs transition-colors"
+                  >
+                    {language === "bn" ? "ম্যাপে দেখুন" : "View on Map"} <ExternalLink size={10} />
+                  </a>
+                </div>
               </li>
               <li>
                 <a

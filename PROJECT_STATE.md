@@ -112,6 +112,14 @@ Phase 8: Staff CMS
   ⬜ Admin interfaces and actions
   ⬜ Update public `/staff` directory
 
+Phase E: Academic CMS
+  ✅ Designed `academic_events` schema
+  ✅ Created server actions (`src/app/admin/academics/actions.ts`)
+  ✅ Built Admin UI (`/admin/academics/*`)
+  ✅ Integrated into public pages (`/academics`, `/academics/routine`, `/academics/examination`)
+  ✅ Refactored public pages to Server Components with client children
+  ✅ Maintained `school-media` centralized storage usage
+
 BLOCKED
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   🚫 None

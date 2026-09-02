@@ -1,6 +1,6 @@
 'use client'
 
-import { createNotice, updateNotice } from '@/app/admin/notices/actions'
+import { createNotice, updateNotice } from '@/app/admin/(dashboard)/notices/actions'
 import Link from 'next/link'
 import { useState } from 'react'
 import { Notice } from '@/types'

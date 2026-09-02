@@ -35,9 +35,9 @@ export default async function HomePage() {
     .from('gallery')
     .select('*')
     .eq('is_published', true)
-    .order('sort_order', { ascending: true })
+    .order('display_order', { ascending: true })
     .order('created_at', { ascending: false })
-    .limit(6)
+    .limit(8)
 
   const { data: headmasters } = await supabase
     .from('teachers')

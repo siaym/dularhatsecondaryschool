@@ -1,6 +1,7 @@
 import { login } from './actions'
 
-export default function LoginPage({ searchParams }: { searchParams: { error?: string } }) {
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+  const resolvedSearchParams = await searchParams;
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
@@ -14,9 +15,9 @@ export default function LoginPage({ searchParams }: { searchParams: { error?: st
         </div>
         
         <form className="mt-8 space-y-6" action={login}>
-          {searchParams?.error && (
+          {resolvedSearchParams?.error && (
             <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm text-center border border-red-100">
-              {searchParams.error}
+              {resolvedSearchParams.error}
             </div>
           )}
           

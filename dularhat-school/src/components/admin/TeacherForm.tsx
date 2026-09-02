@@ -1,6 +1,6 @@
 'use client'
 
-import { createTeacher, updateTeacher } from '@/app/admin/teachers/actions'
+import { createTeacher, updateTeacher } from '@/app/admin/(dashboard)/teachers/actions'
 import Link from 'next/link'
 import { useState } from 'react'
 import { Teacher } from '@/types'
@@ -84,12 +84,23 @@ export function TeacherForm({ teacher }: { teacher?: Teacher }) {
 
           <div className="grid sm:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label htmlFor="subject_bn" className="block text-sm font-medium text-gray-700">Subject (Bengali)</label>
+              <label htmlFor="subject_bn" className="text-sm font-medium text-gray-700">Subject (Bengali)</label>
               <input type="text" id="subject_bn" name="subject_bn" defaultValue={teacher?.subject_bn || ''} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#016B00] outline-none" />
             </div>
+  
             <div className="space-y-2">
-              <label htmlFor="subject_en" className="block text-sm font-medium text-gray-700">Subject (English)</label>
+              <label htmlFor="subject_en" className="text-sm font-medium text-gray-700">Subject (English) <span className="text-gray-400 font-normal">(Optional)</span></label>
               <input type="text" id="subject_en" name="subject_en" defaultValue={teacher?.subject_en || ''} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#016B00] outline-none" />
+            </div>
+            
+            <div className="space-y-2">
+              <label htmlFor="phone" className="text-sm font-medium text-gray-700">Phone Number <span className="text-gray-400 font-normal">(Optional)</span></label>
+              <input type="tel" id="phone" name="phone" defaultValue={teacher?.phone || ''} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#016B00] outline-none" />
+            </div>
+  
+            <div className="space-y-2">
+              <label htmlFor="email" className="text-sm font-medium text-gray-700">Email Address <span className="text-gray-400 font-normal">(Optional)</span></label>
+              <input type="email" id="email" name="email" defaultValue={teacher?.email || ''} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#016B00] outline-none" />
             </div>
           </div>
 

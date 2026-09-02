@@ -6,7 +6,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { uploadFile, deleteFileFromUrl } from '@/utils/supabase/storage'
 
-const ALLOWED_CATEGORIES = ['admission', 'routine', 'syllabus', 'examination', 'academic', 'forms', 'other']
+const ALLOWED_CATEGORIES = ['admission', 'routine', 'syllabus', 'examination', 'academic', 'academic_calendar', 'forms', 'other']
 const ALLOWED_MIME_TYPES = [
   'application/pdf', 
   'application/msword', 

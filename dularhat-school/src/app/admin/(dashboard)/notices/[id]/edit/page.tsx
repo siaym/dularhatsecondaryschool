@@ -4,12 +4,13 @@ import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-export default async function EditNoticePage({ params }: { params: { id: string } }) {
+export default async function EditNoticePage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
   const supabase = await createClient()
   const { data: notice } = await supabase
     .from('notices')
     .select('*')
-    .eq('id', params.id)
+    .eq('id', resolvedParams.id)
     .single()
 
   if (!notice) {

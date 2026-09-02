@@ -1,6 +1,6 @@
 'use client'
 
-import { createCommitteeMember, updateCommitteeMember } from '@/app/admin/administration/committee/actions'
+import { createCommitteeMember, updateCommitteeMember } from '@/app/admin/(dashboard)/administration/committee/actions'
 import Link from 'next/link'
 import { useState } from 'react'
 import Image from 'next/image'

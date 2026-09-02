@@ -1,6 +1,6 @@
 'use client'
 
-import { GraduationCap, UserSquare2 } from "lucide-react"
+import { GraduationCap, UserSquare2, Phone, Mail } from "lucide-react"
 import Image from "next/image"
 import { SectionHeading } from "@/components/ui/SectionHeading"
 import { useLanguage } from "@/contexts/LanguageContext"
@@ -31,15 +31,25 @@ export function TeachersClient({ headmaster, teachers }: { headmaster: Teacher |
               {headmaster ? (language === "bn" ? headmaster.name_bn : (headmaster.name_en || headmaster.name_bn)) : (language === "bn" ? "দুলারহাট মাধ্যমিক বিদ্যালয়" : "Dularhat Secondary School")}
             </h2>
             {headmaster?.subject_bn && (
-              <p className="text-green-100 font-medium mb-3">
+              <p className="text-green-100 font-medium mb-4">
                 {language === "bn" ? headmaster.subject_bn : (headmaster.subject_en || headmaster.subject_bn)}
               </p>
             )}
-            <p className="text-green-200/80 text-sm leading-relaxed max-w-2xl">
-              {language === "bn" 
-                ? "শিক্ষার্থীদের নৈতিক ও আধুনিক শিক্ষায় শিক্ষিত করে তোলার লক্ষ্যে আমরা নিরলসভাবে কাজ করে যাচ্ছি। আমাদের দক্ষ শিক্ষকমণ্ডলী শিক্ষার্থীদের উজ্জ্বল ভবিষ্যৎ গড়তে বদ্ধপরিকর।" 
-                : "We are working tirelessly to educate students with moral and modern education. Our skilled teachers are determined to build a bright future for the students."}
-            </p>
+            
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4">
+              {headmaster?.phone && (
+                <a href={`tel:${headmaster.phone}`} className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg text-sm transition-colors">
+                  <Phone size={16} />
+                  <span>{headmaster.phone}</span>
+                </a>
+              )}
+              {headmaster?.email && (
+                <a href={`mailto:${headmaster.email}`} className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg text-sm transition-colors">
+                  <Mail size={16} />
+                  <span>Email</span>
+                </a>
+              )}
+            </div>
           </div>
         </div>
 
@@ -56,17 +66,36 @@ export function TeachersClient({ headmaster, teachers }: { headmaster: Teacher |
                     <UserSquare2 size={40} className="text-gray-300" />
                   )}
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-1 line-clamp-1">
-                  {language === "bn" ? teacher.name_bn : (teacher.name_en || teacher.name_bn)}
-                </h3>
-                <p className="text-[#016B00] font-medium text-sm mb-1">
-                  {language === "bn" ? teacher.designation_bn : (teacher.designation_en || teacher.designation_bn)}
-                </p>
-                {teacher.subject_bn && (
-                  <p className="text-gray-500 text-xs">
-                    {language === "bn" ? teacher.subject_bn : (teacher.subject_en || teacher.subject_bn)}
+                <div className="flex-1 w-full flex flex-col text-center">
+                  <h3 className="font-bold text-gray-900 text-lg mb-1 group-hover:text-[#016B00] transition-colors">
+                    {language === "bn" ? teacher.name_bn : (teacher.name_en || teacher.name_bn)}
+                  </h3>
+                  <p className="text-gray-500 text-sm font-medium mb-1">
+                    {language === "bn" ? teacher.designation_bn : (teacher.designation_en || teacher.designation_bn)}
                   </p>
-                )}
+                  {teacher.subject_bn && (
+                    <p className="text-gray-400 text-xs">
+                      {language === "bn" ? teacher.subject_bn : (teacher.subject_en || teacher.subject_bn)}
+                    </p>
+                  )}
+                  
+                  {(teacher.phone || teacher.email) && (
+                    <div className="mt-4 pt-4 border-t border-gray-100 flex flex-col items-center gap-2 w-full opacity-70 group-hover:opacity-100 transition-opacity">
+                      {teacher.phone && (
+                        <a href={`tel:${teacher.phone}`} className="flex items-center gap-2 text-sm text-gray-600 hover:text-[#016B00] transition-colors">
+                          <Phone size={14} />
+                          <span>{teacher.phone}</span>
+                        </a>
+                      )}
+                      {teacher.email && (
+                        <a href={`mailto:${teacher.email}`} className="flex items-center gap-2 text-sm text-gray-600 hover:text-[#016B00] transition-colors break-all">
+                          <Mail size={14} />
+                          <span>{teacher.email}</span>
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>

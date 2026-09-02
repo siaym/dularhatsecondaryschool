@@ -53,6 +53,8 @@ export async function createStaff(formData: FormData) {
     name_en: formData.get('name_en') || null,
     designation_bn: formData.get('designation_bn') as string,
     designation_en: formData.get('designation_en') || null,
+    phone: formData.get('phone') || null,
+    email: formData.get('email') || null,
     photo_url,
     sort_order: parseInt(formData.get('sort_order') as string || '10', 10),
     is_active: formData.get('is_active') === 'on'
@@ -106,7 +108,9 @@ export async function updateStaff(id: string, formData: FormData) {
     name_en: formData.get('name_en') || null,
     designation_bn: formData.get('designation_bn') as string,
     designation_en: formData.get('designation_en') || null,
-    photo_url,
+    phone: formData.get('phone') || null,
+    email: formData.get('email') || null,
+    photo_url: new_photo_url,
     sort_order: parseInt(formData.get('sort_order') as string || '10', 10),
     is_active: formData.get('is_active') === 'on',
     updated_at: new Date().toISOString()

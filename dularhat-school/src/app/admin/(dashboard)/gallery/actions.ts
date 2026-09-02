@@ -50,7 +50,7 @@ export async function createGalleryItem(formData: FormData) {
     category: formData.get('category'),
     image_url: imageUrl,
     is_published: formData.get('is_published') === 'on',
-    sort_order: parseInt(formData.get('sort_order') as string || '0', 10),
+    display_order: parseInt(formData.get('sort_order') as string || '0', 10),
   })
 
   if (dbError) {
@@ -100,7 +100,7 @@ export async function updateGalleryItem(id: string, formData: FormData) {
     category: formData.get('category'),
     image_url: newImageUrl,
     is_published: formData.get('is_published') === 'on',
-    sort_order: parseInt(formData.get('sort_order') as string || '0', 10),
+    display_order: parseInt(formData.get('sort_order') as string || '0', 10),
   }).eq('id', id)
 
   if (dbError) {

@@ -37,9 +37,20 @@ export function ContactSection() {
                   <p className="font-semibold text-gray-900 mb-1">
                     {language === "bn" ? "ঠিকানা" : "Address"}
                   </p>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-gray-600 text-sm leading-relaxed mb-1">
                     {t(schoolData.address)}
                   </p>
+                  <p className="text-[#016B00] font-semibold text-sm mb-2">
+                    {language === "bn" ? `পোস্ট কোড: ${schoolData.address.postal_code.bengali}` : `Postal Code: ${schoolData.address.postal_code.english}`}
+                  </p>
+                  <a
+                    href={schoolData.address.map_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-white bg-[#016B00] hover:bg-[#014D00] px-3 py-1.5 rounded-lg transition-colors"
+                  >
+                    {language === "bn" ? "ম্যাপে দেখুন" : "View on Map"} <ExternalLink size={12} />
+                  </a>
                 </div>
               </div>
 
@@ -122,13 +133,16 @@ export function ContactSection() {
                   ? "দুলারহাট মাধ্যমিক বিদ্যালয়"
                   : "Dularhat Secondary School"}
               </p>
-              <p className="text-gray-400 text-sm mb-4">
+              <p className="text-gray-400 text-sm mb-1">
                 {language === "bn"
                   ? "দুলারহাট বাজার, চরফ্যাশন, ভোলা"
                   : "Dularhat Bazar, Charfashion, Bhola"}
               </p>
+              <p className="text-gray-400 text-sm font-semibold mb-4">
+                {language === "bn" ? `পোস্ট কোড: ${schoolData.address.postal_code.bengali}` : `Postal Code: ${schoolData.address.postal_code.english}`}
+              </p>
               <a
-                href={`https://www.google.com/maps/search/Dularhat+Secondary+School+Charfashion+Bhola+Bangladesh`}
+                href={schoolData.address.map_url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-[#016B00] hover:underline text-sm font-medium"

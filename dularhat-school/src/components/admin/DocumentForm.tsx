@@ -1,6 +1,6 @@
 'use client'
 
-import { createDocument, updateDocument } from '@/app/admin/documents/actions'
+import { createDocument, updateDocument } from '@/app/admin/(dashboard)/documents/actions'
 import Link from 'next/link'
 import { useState } from 'react'
 import { DocumentItem } from '@/types'
@@ -38,6 +38,7 @@ export function DocumentForm({ document }: { document?: DocumentItem }) {
     { value: 'syllabus', label: 'Syllabus' },
     { value: 'examination', label: 'Examination' },
     { value: 'academic', label: 'Academic' },
+    { value: 'academic_calendar', label: 'Academic Calendar' },
     { value: 'forms', label: 'Forms' },
     { value: 'other', label: 'Other' },
   ]

@@ -35,9 +35,11 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
+  const isAdminRoute = request.nextUrl.pathname === '/admin' || request.nextUrl.pathname.startsWith('/admin/')
+
   if (
     !user &&
-    request.nextUrl.pathname.startsWith('/admin') &&
+    isAdminRoute &&
     request.nextUrl.pathname !== '/admin/login'
   ) {
     // no user, potentially respond by redirecting the user to the login page

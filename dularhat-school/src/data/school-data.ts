@@ -42,6 +42,8 @@ export const schoolData = {
     upazila: { bengali: "চরফ্যাশন", english: "Charfashion" },
     district: { bengali: "ভোলা", english: "Bhola" },
     division: { bengali: "বরিশাল", english: "Barisal" },
+    postal_code: { bengali: "৮৩৪১", english: "8341" },
+    map_url: "https://maps.app.goo.gl/ymUXn3sYj6MQBKz3A",
   },
   contact: {
     mobile_1: "01727379120",

@@ -1,6 +1,6 @@
 'use client'
 
-import { updateSettings } from '@/app/admin/settings/actions'
+import { updateSettings } from '@/app/admin/(dashboard)/settings/actions'
 import { useState } from 'react'
 import { SchoolSettings } from '@/types'
 import { Settings, Phone, Mail, MapPin, ExternalLink, MessageSquare } from 'lucide-react'

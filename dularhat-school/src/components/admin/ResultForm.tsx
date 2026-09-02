@@ -1,6 +1,6 @@
 'use client'
 
-import { createResult, updateResult } from '@/app/admin/results/actions'
+import { createResult, updateResult } from '@/app/admin/(dashboard)/results/actions'
 import Link from 'next/link'
 import { useState } from 'react'
 import { ResultItem } from '@/types'

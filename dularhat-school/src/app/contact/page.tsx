@@ -110,11 +110,14 @@ export default function ContactPage() {
                 <p className="text-green-200 text-sm mb-1">
                   {language === "bn" ? "দুলারহাট বাজার, বাস স্টেশনের পাশে" : "Dularhat Bazar, Near Bus Station"}
                 </p>
-                <p className="text-green-300 text-sm">
+                <p className="text-green-300 text-sm mb-1">
                   {language === "bn" ? "চরফ্যাশন, ভোলা, বাংলাদেশ" : "Charfashion, Bhola, Bangladesh"}
                 </p>
+                <p className="text-[#F5C400] text-sm font-semibold">
+                  {language === "bn" ? `পোস্ট কোড: ${schoolData.address.postal_code.bengali}` : `Postal Code: ${schoolData.address.postal_code.english}`}
+                </p>
                 <a
-                  href="https://www.google.com/maps/search/Dularhat+Secondary+School+Charfashion+Bhola+Bangladesh"
+                  href={schoolData.address.map_url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-6 inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 transition-colors text-white px-5 py-2.5 rounded-lg text-sm font-semibold border border-white/20"

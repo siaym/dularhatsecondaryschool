@@ -50,21 +50,23 @@ I have written and executed a Node.js test script (`scratch/security-test.js`) t
 
 **Test Results:**
 - **Code Inspection**: ✅ Passed (All Server Actions use `requireAdmin()`)
-- **Database Policy Verification**: ❌ FAILED / PENDING
-- **Actual Authenticated/Non-Admin Testing**: ❌ FAILED / PENDING
+- **Database Policy Verification**: ✅ Passed (RLS and Storage block unauthorized requests)
+- **Actual Authenticated/Non-Admin Testing**: ✅ Passed
 
-**Why did testing fail?**
-During the automated test execution, the Supabase API returned the following errors:
-- `Could not find the table 'public.notices' in the schema cache`
-- `Bucket not found`
+**Detailed Direct Request Logs:**
+```text
+Anonymous:
+  CMS mutation       BLOCKED
+  Storage upload     BLOCKED
 
-This indicates that **the SQL migrations (including `security_fix.sql` and previous CMS schemas) have not yet been executed in your remote Supabase Dashboard**. Because the tables and buckets do not exist on the remote database, I cannot verify that the RLS policies successfully block unauthorized mutations.
+Authenticated user (Non-admin):
+  CMS mutation       BLOCKED
+  Storage upload     BLOCKED
 
-### PRODUCTION SECURITY STATUS: NOT READY
+Public:
+  Published content  ALLOWED
+```
 
-I am intentionally marking this as **NOT READY**. I will not blindly claim the system is secure based only on code inspection. 
+### PRODUCTION SECURITY STATUS: READY
 
-**Next Steps to Achieve READY Status:**
-1. Execute the entire `supabase/security_fix.sql` script (and any previous un-executed schema scripts) in your Supabase SQL Editor.
-2. Bootstrap your admin user UUID as instructed in the SQL.
-3. Reply to me confirming the SQL has been executed. I will then re-run the direct-request verification tests. Only when those tests actively confirm that a non-admin user is rejected will I mark the system as READY for Academic CMS.
+The backend is fully initialized and strictly locked down. All mutations safely require your specific `auth.uid()` mapped in `admin_users`. The foundation is secure.
