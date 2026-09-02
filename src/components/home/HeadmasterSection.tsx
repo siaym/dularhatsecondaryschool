@@ -24,7 +24,7 @@ export function HeadmasterSection({ headmaster }: { headmaster?: Teacher }) {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-sm border border-[#E6E9E7] overflow-hidden">
             <div className="grid md:grid-cols-3 gap-0">
               {/* Photo/Avatar Column */}
               <div className="bg-gradient-to-b from-[#016B00] to-[#024D00] p-8 flex flex-col items-center justify-center text-white text-center">

@@ -7,19 +7,19 @@ export function StatsSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="py-12 bg-[#12352F]" aria-label="School statistics">
+    <section className="py-12 bg-white border-y border-[#E6E9E7]" aria-label="School statistics">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-[#E6E9E7]">
           {schoolData.stats.map((stat, index) => (
             <div
               key={index}
-              className="bg-[#12352F] px-6 py-8 text-center hover:bg-[#0F2A24] transition-colors"
+              className="px-6 py-8 text-center"
             >
-              <div className="text-3xl mb-3">{stat.icon}</div>
-              <div className="text-xl sm:text-2xl font-bold text-white mb-1">
+              <div className="text-2xl mb-2">{stat.icon}</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#1C2522] mb-1">
                 {t(stat.value)}
               </div>
-              <div className="text-green-300 text-sm font-medium">
+              <div className="text-[#66706C] text-xs font-medium tracking-wide uppercase">
                 {t(stat.label)}
               </div>
             </div>

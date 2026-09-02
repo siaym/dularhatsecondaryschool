@@ -12,7 +12,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
   const rest = items.slice(1, 5);
 
   return (
-    <section className="py-16 bg-[#F5F7F5]" aria-labelledby="gallery-heading">
+    <section className="py-16 bg-white" aria-labelledby="gallery-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
           <div>

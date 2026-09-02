@@ -15,7 +15,7 @@ export function Footer() {
   const moreLinks = navLinks.slice(6);
 
   return (
-    <footer className="bg-[#0B2420] text-white mt-16">
+    <footer className="bg-[#17352F] text-white mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* School Info */}
@@ -157,7 +157,7 @@ export function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="bg-[#071A17] py-3">
+      <div className="bg-[#0F2420] py-3">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-green-300">
           <p>
             &copy; {year} {t(schoolData.name)}.{" "}

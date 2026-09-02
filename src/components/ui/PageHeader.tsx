@@ -21,7 +21,7 @@ export function PageHeader({ title, subtitle, breadcrumbs = [] }: PageHeaderProp
     typeof label === "string" ? label : t(label);
 
   return (
-    <div className="bg-[#12352F] text-white py-10 sm:py-14 relative overflow-hidden">
+    <div className="bg-[#17352F] text-white py-10 sm:py-14 relative overflow-hidden">
       {/* Subtle decorative radial glow */}
       <div
         className="absolute inset-0 opacity-10 pointer-events-none"

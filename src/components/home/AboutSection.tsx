@@ -9,7 +9,7 @@ export function AboutSection() {
   const { t, language } = useLanguage();
 
   return (
-    <section className="py-16 bg-[#F5F7F5]" aria-labelledby="about-heading">
+    <section className="py-16 bg-[#F8F8F6]" aria-labelledby="about-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <span className="inline-block bg-[#016B00]/10 text-[#016B00] text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
