@@ -1,92 +1,109 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS — Dularhat Secondary School
+   ═══════════════════════════════════════════ */
 @layer base {
   :root {
-    /* Brand colours */
-    --color-primary:       #015A00;
-    --color-primary-dark:  #013D00;
-    --color-primary-deep:  #012800;
-    --color-primary-light: #028A00;
-    --color-primary-pale:  #EBF7EB;
+    /* Green scale */
+    --green-900: #003D1A;
+    --green-800: #004D24;
+    --green-700: #006B2D;
+    --green-600: #016B00;   /* original primary — keep for legacy compat */
+    --green-50:  #F0FAF3;
 
-    /* Gold accent */
-    --color-gold:          #C2902D;
-    --color-gold-light:    #F5B738;
-    --color-gold-pale:     #FCF6E8;
+    /* Brand */
+    --color-primary:      #006B2D;
+    --color-primary-dark: #004D24;
+    --color-primary-deep: #003D1A;
+    --color-primary-light: #02A200;
 
-    /* Warm background neutrals */
-    --color-warm-white:    #FAFAF7;
-    --color-warm-off:      #F5F3ED;
-    --color-warm-cream:    #EEEBE2;
+    /* Accent */
+    --color-gold:     #F5C400;
+    --color-gold-dark: #D4A900;
 
-    /* Dark section tones */
-    --color-dark:          #111611;
-    --color-dark-green:    #012000;
+    /* Site canvas */
+    --site-bg: #F5FAF6;
 
-    /* Text colors */
-    --color-text-primary:  #141914;
-    --color-text-secondary:#4A554A;
-    --color-text-muted:    #718071;
+    /* Text */
+    --text-body: #1A2E1A;
+
+    /* Neutral */
+    --card-border: #DDE8DD;
   }
 
-  @theme {
-    --breakpoint-lg: 992px;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
-    font-family: var(--font-noto-bengali), 'Noto Sans Bengali', system-ui, sans-serif;
-    color: var(--color-text-primary);
+    background-color: var(--site-bg);
+    color: var(--text-body);
+    font-family: 'Noto Sans Bengali', 'NotoSansBengali', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #FFFFFF;
-  }
-
-  p, li, blockquote {
-    line-height: 1.85;
-  }
-
-  :focus-visible {
-    outline: 2px solid var(--color-gold-light);
-    outline-offset: 2px;
   }
 }
 
+/* ═══════════════════════════════════════════
+   UTILITY CLASSES
+   ═══════════════════════════════════════════ */
 @layer utilities {
-  .text-primary   { color: var(--color-primary); }
-  .bg-primary     { background-color: var(--color-primary); }
-  .bg-primary-dark { background-color: var(--color-primary-dark); }
-  .bg-primary-deep { background-color: var(--color-primary-deep); }
-  .border-primary { border-color: var(--color-primary); }
+  /* Section backgrounds */
+  .section-white    { background-color: #ffffff; }
+  .section-site     { background-color: var(--site-bg); }
+  .section-light    { background-color: var(--green-50); }
+  .section-brand    { background-color: var(--color-primary); }
+  .section-dark     { background-color: var(--color-primary-dark); }
+  .section-deep     { background-color: var(--color-primary-deep); }
 
-  .text-gold      { color: var(--color-gold-light); }
-  .bg-gold        { background-color: var(--color-gold-light); }
-  .border-gold    { border-color: var(--color-gold-light); }
+  /* Text */
+  .text-brand       { color: var(--color-primary); }
+  .text-brand-dark  { color: var(--color-primary-dark); }
+  .text-gold        { color: var(--color-gold); }
 
-  .bg-warm-white  { background-color: var(--color-warm-white); }
-  .bg-warm-off    { background-color: var(--color-warm-off); }
-  .bg-warm-cream  { background-color: var(--color-warm-cream); }
+  /* Bg */
+  .bg-brand         { background-color: var(--color-primary); }
+  .bg-brand-dark    { background-color: var(--color-primary-dark); }
+  .bg-brand-deep    { background-color: var(--color-primary-deep); }
+  .bg-gold          { background-color: var(--color-gold); }
+  .bg-site          { background-color: var(--site-bg); }
+  .bg-green-50      { background-color: var(--green-50); }
 
-  .font-serif-bengali {
-    font-family: var(--font-noto-bengali), Georgia, serif;
+  /* Border */
+  .border-brand     { border-color: var(--color-primary); }
+  .border-card      { border-color: var(--card-border); }
+
+  /* Container */
+  .container-page {
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-page {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-page {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
   }
 }
 
-/* ─── Scroll-reveal keyframe animation ───────────────────── */
-@keyframes fadeInSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fadeInSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* ═══════════════════════════════════════════
+   SECTION DIVIDER
+   ═══════════════════════════════════════════ */
+.section-divider {
+  display: block;
+  width: 3.5rem;
+  height: 3px;
+  background-color: var(--color-primary);
+  border-radius: 9999px;
+  margin-top: 0.75rem;
 }

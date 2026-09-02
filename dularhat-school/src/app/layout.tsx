@@ -1,17 +1,10 @@
 import type { Metadata } from "next";
-import { Noto_Sans_Bengali } from "next/font/google";
+import "@fontsource-variable/noto-sans-bengali";
 import "./globals.css";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { TopBar } from "@/components/layout/TopBar";
-
-const notoSansBengali = Noto_Sans_Bengali({
-  subsets: ["bengali"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-  variable: "--font-noto-bengali",
-});
 
 export const metadata: Metadata = {
   title: {
@@ -47,10 +40,7 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-    },
+    googleBot: { index: true, follow: true },
   },
   icons: {
     icon: "https://dularhatsecondaryschool.edu.bd/storage/uploads/company_assets/org-3/others/1698053681-favicon-32x32.png",
@@ -59,13 +49,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="bn" className={notoSansBengali.variable} suppressHydrationWarning>
-      <body className={`${notoSansBengali.className} antialiased bg-white text-gray-900`}>
+    <html lang="bn" suppressHydrationWarning>
+      <body className="antialiased">
         <LanguageProvider>
+          <TopBar />
           <Header />
           <main className="pt-[72px] lg:pt-[90px]">{children}</main>
           <Footer />

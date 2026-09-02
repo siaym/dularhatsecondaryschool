@@ -1,104 +1,86 @@
 "use client";
 
 import { GraduationCap } from "lucide-react";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { PageHero } from "@/components/ui/PageHero";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// Sample teacher cards - in production, fetched from Supabase
 const sampleTeachers = [
-  { id: 1, initial: "ক", subject_bn: "বাংলা", subject_en: "Bengali", designation_bn: "সহকারী শিক্ষক", designation_en: "Assistant Teacher" },
-  { id: 2, initial: "খ", subject_bn: "ইংরেজি", subject_en: "English", designation_bn: "সহকারী শিক্ষক", designation_en: "Assistant Teacher" },
-  { id: 3, initial: "গ", subject_bn: "গণিত", subject_en: "Mathematics", designation_bn: "সহকারী শিক্ষক", designation_en: "Assistant Teacher" },
-  { id: 4, initial: "ঘ", subject_bn: "বিজ্ঞান", subject_en: "Science", designation_bn: "সহকারী শিক্ষক", designation_en: "Assistant Teacher" },
-  { id: 5, initial: "ঙ", subject_bn: "সমাজ বিজ্ঞান", subject_en: "Social Science", designation_bn: "সহকারী শিক্ষক", designation_en: "Assistant Teacher" },
-  { id: 6, initial: "চ", subject_bn: "ধর্ম শিক্ষা", subject_en: "Religious Studies", designation_bn: "সহকারী শিক্ষক", designation_en: "Assistant Teacher" },
+  { id: 1, initial: "ক", subject_bn: "বাংলা", subject_en: "Bengali" },
+  { id: 2, initial: "খ", subject_bn: "ইংরেজি", subject_en: "English" },
+  { id: 3, initial: "গ", subject_bn: "গণিত", subject_en: "Mathematics" },
+  { id: 4, initial: "ঘ", subject_bn: "বিজ্ঞান", subject_en: "Science" },
+  { id: 5, initial: "ঙ", subject_bn: "সমাজ বিজ্ঞান", subject_en: "Social Science" },
+  { id: 6, initial: "চ", subject_bn: "ধর্ম শিক্ষা", subject_en: "Religious Studies" },
+  { id: 7, initial: "ছ", subject_bn: "শারীরিক শিক্ষা", subject_en: "Physical Education" },
+  { id: 8, initial: "জ", subject_bn: "কৃষি শিক্ষা", subject_en: "Agricultural Studies" },
 ];
 
 export default function TeachersPage() {
   const { language } = useLanguage();
-
   return (
-    <div className="bg-white">
-      <PageHeader
-        title={{ bengali: "শিক্ষকবৃন্দ", english: "Teaching Staff" }}
-        subtitle={{ bengali: "আমাদের দক্ষ ও অভিজ্ঞ শিক্ষকমণ্ডলী", english: "Our qualified and experienced teaching faculty" }}
-        breadcrumbs={[
-          { label: { bengali: "শিক্ষকবৃন্দ", english: "Teachers" } },
-        ]}
+    <div>
+      <PageHero
+        variant="green"
+        eyebrow={{ bengali: "শিক্ষকবৃন্দ", english: "Faculty" }}
+        title={{ bengali: "আমাদের শিক্ষকমণ্ডলী", english: "Our Teaching Faculty" }}
+        description={{ bengali: "দুলারহাট মাধ্যমিক বিদ্যালয়ের দক্ষ ও অভিজ্ঞ শিক্ষকবৃন্দ", english: "Qualified and experienced teachers of Dularhat Secondary School" }}
+        breadcrumbs={[{ label: { bengali: "শিক্ষকবৃন্দ", english: "Teachers" } }]}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="flex items-center justify-between mb-6">
+      {/* Headmaster featured */}
+      <section className="bg-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow={language === "bn" ? "বিদ্যালয়ের প্রধান" : "Head of School"}
+            title={language === "bn" ? "প্রধান শিক্ষক" : "Headmaster"}
+          />
+          <div className="bg-gradient-to-br from-[#006B2D] to-[#003D1A] rounded-2xl p-8 flex flex-col sm:flex-row items-center gap-6 text-white mb-12">
+            <div className="w-24 h-24 bg-white/15 rounded-full flex items-center justify-center border-2 border-white/25 flex-shrink-0">
+              <GraduationCap size={44} className="text-white/70" />
+            </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">
-                {language === "bn" ? "শিক্ষকমণ্ডলী" : "Teaching Faculty"}
+              <span className="text-[#F5C400] text-xs font-bold uppercase tracking-widest">
+                {language === "bn" ? "প্রধান শিক্ষক" : "Headmaster"}
+              </span>
+              <h2 className="text-xl font-bold text-white mt-1">
+                {language === "bn" ? "দুলারহাট মাধ্যমিক বিদ্যালয়" : "Dularhat Secondary School"}
               </h2>
-              <div className="w-16 h-1 bg-[#016B00] rounded mt-2" />
+              <p className="text-green-200 text-sm mt-1">{language === "bn" ? "চরফ্যাশন, ভোলা" : "Charfashion, Bhola"}</p>
+              <p className="text-green-300 text-xs mt-3">
+                {language === "bn" ? "* নাম প্রশাসন কর্তৃক আপডেট করা হবে।" : "* Name will be updated by administration."}
+              </p>
             </div>
           </div>
 
-            {/* Info Notice */}
-            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 mb-8">
-              <p className="text-amber-700 text-sm leading-relaxed">
-                <span className="font-bold">
-                  {language === "bn" ? "নোট: " : "Note: "}
-                </span>
-                {language === "bn"
-                  ? "শিক্ষকদের বিস্তারিত তথ্য বিদ্যালয়ের প্রশাসনিক প্যানেল থেকে আপডেট করা হবে। নিচে কার্ডগুলো উদাহরণ হিসেবে দেখানো হয়েছে।"
-                  : "Detailed teacher information will be updated from the school admin panel. The cards below are shown as examples."}
-              </p>
-            </div>
-
-            {/* Teacher Cards Grid */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {/* Headmaster Card */}
-              <div className="bg-gradient-to-br from-[#016B00] to-[#024D00] rounded-2xl p-6 text-white col-span-full flex items-center gap-6">
-                <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 border-2 border-white/30">
-                  <GraduationCap size={36} className="text-white" />
+          {/* Teacher grid */}
+          <SectionHeading
+            eyebrow={language === "bn" ? "শিক্ষকবৃন্দ" : "Teaching Staff"}
+            title={language === "bn" ? "সহকারী শিক্ষকগণ" : "Assistant Teachers"}
+          />
+          <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-8 text-amber-700 text-sm">
+            <span className="font-bold">{language === "bn" ? "নোট: " : "Note: "}</span>
+            {language === "bn"
+              ? "শিক্ষকদের বিস্তারিত তথ্য প্রশাসনিক প্যানেল থেকে আপডেট করা হবে। নিচের কার্ডগুলো উদাহরণস্বরূপ।"
+              : "Teacher details will be updated from the admin panel. Cards below are illustrative."}
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {sampleTeachers.map((t) => (
+              <div key={t.id} className="bg-[#F5FAF6] border border-[#DDE8DD] rounded-xl p-5 hover:border-[#006B2D]/40 hover:bg-white transition-all">
+                <div className="w-14 h-14 bg-[#006B2D]/10 rounded-full flex items-center justify-center text-[#006B2D] font-black text-xl mb-3">
+                  {t.initial}
                 </div>
-                <div>
-                  <div className="text-green-200 text-sm mb-1">
-                    {language === "bn" ? "বিদ্যালয়ের প্রধান" : "Head of School"}
-                  </div>
-                  <h3 className="font-bold text-xl">
-                    {language === "bn" ? "প্রধান শিক্ষক" : "Headmaster"}
-                  </h3>
-                  <p className="text-green-200 text-sm mt-1">
-                    {language === "bn"
-                      ? "দুলারহাট মাধ্যমিক বিদ্যালয়"
-                      : "Dularhat Secondary School"}
-                  </p>
-                </div>
+                <p className="text-xs font-bold uppercase tracking-wide text-gray-400">
+                  {language === "bn" ? "সহকারী শিক্ষক" : "Assistant Teacher"}
+                </p>
+                <p className="font-semibold text-[#003D1A] text-sm mt-0.5">
+                  {language === "bn" ? t.subject_bn : t.subject_en}
+                </p>
               </div>
-
-              {/* Sample Teacher Cards */}
-              {sampleTeachers.map((teacher) => (
-                <div
-                  key={teacher.id}
-                  className="bg-white border border-gray-100 rounded-2xl p-5 hover:border-[#016B00]/30 hover:shadow-sm transition-all"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center text-[#016B00] font-bold text-xl flex-shrink-0">
-                      {teacher.initial}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-gray-500 text-sm">
-                        {language === "bn" ? teacher.designation_bn : teacher.designation_en}
-                      </p>
-                      <p className="text-gray-400 text-xs mt-0.5">
-                        {language === "bn" ? teacher.subject_bn : teacher.subject_en}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-3 pt-3 border-t border-gray-50">
-                    <span className="text-xs bg-green-50 text-[#016B00] px-2 py-1 rounded-full">
-                      {language === "bn" ? teacher.subject_bn : teacher.subject_en}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-      </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

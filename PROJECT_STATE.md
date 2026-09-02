@@ -21,7 +21,7 @@
 - **Styling**: Tailwind CSS v4
 - **Icons**: lucide-react
 - **Utilities**: clsx, tailwind-merge, class-variance-authority
-- **Font**: Noto Sans Bengali (Google Fonts)
+- **Font**: `@fontsource-variable/noto-sans-bengali` (self-hosted via npm — build-time safe)
 - **Database** (planned): Supabase PostgreSQL
 - **Storage** (planned): Supabase Storage
 - **Auth** (planned): Supabase Auth (admin panel)

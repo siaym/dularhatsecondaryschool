@@ -1,105 +1,157 @@
 "use client";
 
 import Link from "next/link";
-import { Bell, Calendar, Tag, Download, Search, Filter } from "lucide-react";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { Bell, Calendar, Tag, Search } from "lucide-react";
+import { PageHero } from "@/components/ui/PageHero";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const notices = [
-  { id: "1", title_bn: "বার্ষিক পরীক্ষার সময়সূচি ২০২৪", title_en: "Annual Examination Schedule 2024", date: "2024-11-15", category_bn: "পরীক্ষা", category_en: "Examination", color: "#DC2626", is_important: true },
-  { id: "2", title_bn: "ষষ্ঠ থেকে দশম শ্রেণির ভর্তি বিজ্ঞপ্তি", title_en: "Admission Notice for Class 6-10", date: "2024-11-10", category_bn: "ভর্তি", category_en: "Admission", color: "#059669", is_important: false },
-  { id: "3", title_bn: "জাতীয় দিবস উপলক্ষে বিশেষ অনুষ্ঠান", title_en: "Special Program for National Day", date: "2024-11-05", category_bn: "অনুষ্ঠান", category_en: "Event", color: "#DB2777", is_important: false },
-  { id: "4", title_bn: "প্রাক-নির্বাচনী পরীক্ষার ফলাফল প্রকাশ", title_en: "Pre-selection Examination Results Published", date: "2024-10-28", category_bn: "ফলাফল", category_en: "Result", color: "#D97706", is_important: false },
-  { id: "5", title_bn: "শীতকালীন ছুটির সময়সূচি", title_en: "Winter Holiday Schedule", date: "2024-10-20", category_bn: "ছুটি", category_en: "Holiday", color: "#7C3AED", is_important: false },
-  { id: "6", title_bn: "বার্ষিক ক্রীড়া প্রতিযোগিতা ২০২৪", title_en: "Annual Sports Competition 2024", date: "2024-10-15", category_bn: "অনুষ্ঠান", category_en: "Event", color: "#DB2777", is_important: false },
+  { id: "1", title_bn: "বার্ষিক পরীক্ষার সময়সূচি ২০২৪", title_en: "Annual Examination Schedule 2024", date: "2024-11-15", category_bn: "পরীক্ষা", category_en: "Examination", is_important: true, type: "exam" },
+  { id: "2", title_bn: "ষষ্ঠ থেকে দশম শ্রেণির ভর্তি বিজ্ঞপ্তি ২০২৫", title_en: "Admission Notice for Class 6–10 (2025)", date: "2024-11-10", category_bn: "ভর্তি", category_en: "Admission", is_important: false, type: "admission" },
+  { id: "3", title_bn: "জাতীয় দিবস উপলক্ষে বিশেষ অনুষ্ঠান", title_en: "Special Program for National Day", date: "2024-11-05", category_bn: "অনুষ্ঠান", category_en: "Event", is_important: false, type: "event" },
+  { id: "4", title_bn: "প্রাক-নির্বাচনী পরীক্ষার ফলাফল প্রকাশ", title_en: "Pre-selection Examination Results Published", date: "2024-10-28", category_bn: "ফলাফল", category_en: "Result", is_important: false, type: "result" },
+  { id: "5", title_bn: "শীতকালীন ছুটির সময়সূচি ২০২৪", title_en: "Winter Holiday Schedule 2024", date: "2024-10-20", category_bn: "ছুটি", category_en: "Holiday", is_important: false, type: "holiday" },
+  { id: "6", title_bn: "বার্ষিক ক্রীড়া প্রতিযোগিতা ২০২৪", title_en: "Annual Sports Competition 2024", date: "2024-10-15", category_bn: "অনুষ্ঠান", category_en: "Event", is_important: false, type: "event" },
 ];
+
+const typeStyles: Record<string, { bg: string; text: string; dot: string }> = {
+  exam:      { bg: "bg-red-50",    text: "text-red-700",    dot: "bg-red-500" },
+  admission: { bg: "bg-green-50",  text: "text-green-700",  dot: "bg-green-500" },
+  event:     { bg: "bg-pink-50",   text: "text-pink-700",   dot: "bg-pink-500" },
+  result:    { bg: "bg-amber-50",  text: "text-amber-700",  dot: "bg-amber-500" },
+  holiday:   { bg: "bg-blue-50",   text: "text-blue-700",   dot: "bg-blue-500" },
+};
 
 function formatDate(dateStr: string, language: string) {
   const date = new Date(dateStr);
   return language === "bn"
-    ? date.toLocaleDateString("bn-BD", { day: "numeric", month: "long", year: "numeric" })
+    ? date.toLocaleDateString("bn-BD", { day: "numeric", month: "short", year: "numeric" })
     : date.toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" });
 }
 
 export default function NoticesPage() {
   const { language } = useLanguage();
 
+  const urgent = notices.find((n) => n.is_important);
+  const regular = notices.filter((n) => !n.is_important);
+
   return (
-    <div className="bg-white">
-      <PageHeader
+    <div>
+      {/* ── HERO — notice variant (green + red accent strip) ── */}
+      <PageHero
+        variant="notice"
+        eyebrow={language === "bn" ? "সর্বশেষ বিজ্ঞপ্তি" : "Latest Announcements"}
         title={{ bengali: "নোটিশ বোর্ড", english: "Notice Board" }}
-        subtitle={{ bengali: "বিদ্যালয়ের সর্বশেষ নোটিশ ও বিজ্ঞপ্তি", english: "Latest notices and announcements from the school" }}
+        description={{
+          bengali: "বিদ্যালয়ের গুরুত্বপূর্ণ ঘোষণা ও আপডেট",
+          english: "Important school announcements and updates",
+        }}
         breadcrumbs={[{ label: { bengali: "নোটিশ", english: "Notices" } }]}
+        visual={
+          <div className="text-center space-y-3">
+            <Bell size={80} className="text-white/30 mx-auto" />
+            <div className="text-white/60 text-sm font-medium">
+              {notices.length} {language === "bn" ? "টি বিজ্ঞপ্তি" : "notices"}
+            </div>
+          </div>
+        }
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Filters */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        {/* ── URGENT NOTICE (pinned, full-width highlight) ── */}
+        {urgent && (
+          <div className="mb-8">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+              <span className="text-xs font-bold uppercase tracking-widest text-red-600">
+                {language === "bn" ? "জরুরি বিজ্ঞপ্তি" : "Urgent Notice"}
+              </span>
+            </div>
+            <Link
+              href={`/notices/${urgent.id}`}
+              className="block bg-white border-l-4 border-red-500 rounded-r-2xl p-6 shadow-sm hover:shadow-md transition-shadow group"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-red-100 text-red-700 px-3 py-1 rounded-full">
+                      <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
+                      {language === "bn" ? urgent.category_bn : urgent.category_en}
+                    </span>
+                    <span className="text-xs font-bold text-red-600 bg-red-50 border border-red-200 px-2 py-1 rounded-full">
+                      ⚡ {language === "bn" ? "জরুরি" : "Important"}
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-lg text-[#003D1A] group-hover:text-[#006B2D] transition-colors">
+                    {language === "bn" ? urgent.title_bn : urgent.title_en}
+                  </h3>
+                  <div className="flex items-center gap-1.5 text-gray-400 text-xs mt-2">
+                    <Calendar size={12} />
+                    {formatDate(urgent.date, language)}
+                  </div>
+                </div>
+                <span className="text-[#006B2D] text-sm font-semibold group-hover:underline flex-shrink-0 mt-1">
+                  {language === "bn" ? "বিস্তারিত →" : "Details →"}
+                </span>
+              </div>
+            </Link>
+          </div>
+        )}
+
+        {/* ── SEARCH ── */}
+        <div className="flex gap-3 mb-6">
           <div className="relative flex-1">
-            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
-              type="text"
-              placeholder={language === "bn" ? "নোটিশ খুঁজুন..." : "Search notices..."}
-              className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#016B00]/30 focus:border-[#016B00]"
+              type="search"
+              placeholder={language === "bn" ? "নোটিশ খুঁজুন…" : "Search notices…"}
+              className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#DDE8DD] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#006B2D]/20 focus:border-[#006B2D] transition"
             />
           </div>
-          <button className="flex items-center gap-2 px-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-600 hover:border-[#016B00] transition-colors">
-            <Filter size={15} />
-            {language === "bn" ? "ফিল্টার" : "Filter"}
-          </button>
         </div>
 
-        {/* Notice List */}
-        <div className="space-y-4">
-          {notices.map((notice) => (
-            <article
-              key={notice.id}
-              className={`bg-white border rounded-2xl p-5 hover:shadow-md transition-all ${
-                notice.is_important ? "border-red-200 bg-red-50/20" : "border-gray-100"
-              }`}
-            >
-              <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+        {/* ── REGULAR NOTICES ── */}
+        <div className="space-y-3">
+          {regular.map((notice) => {
+            const style = typeStyles[notice.type] ?? typeStyles.event;
+            return (
+              <Link
+                key={notice.id}
+                href={`/notices/${notice.id}`}
+                className="group flex items-start gap-4 bg-white border border-[#DDE8DD] rounded-xl p-4 hover:border-[#006B2D]/40 hover:shadow-sm transition-all"
+              >
+                {/* Category dot */}
+                <div className={`w-1.5 self-stretch rounded-full flex-shrink-0 mt-1 ${style.dot}`} />
+
+                {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <div className="flex flex-wrap items-center gap-2 mb-2">
-                    <span
-                      className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-0.5 rounded-full text-white"
-                      style={{ backgroundColor: notice.color }}
-                    >
-                      <Tag size={10} />
+                  <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                    <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${style.bg} ${style.text}`}>
                       {language === "bn" ? notice.category_bn : notice.category_en}
                     </span>
-                    {notice.is_important && (
-                      <span className="text-xs font-bold text-red-600 bg-red-100 px-2 py-0.5 rounded-full">
-                        ⚡ {language === "bn" ? "জরুরি" : "Important"}
-                      </span>
-                    )}
-                    <span className="flex items-center gap-1 text-xs text-gray-400 ml-auto sm:ml-0">
-                      <Calendar size={12} />
+                    <span className="flex items-center gap-1 text-xs text-gray-400">
+                      <Calendar size={11} />
                       {formatDate(notice.date, language)}
                     </span>
                   </div>
-                  <h3 className="font-semibold text-gray-900 text-base leading-relaxed">
+                  <h3 className="font-semibold text-[#003D1A] text-sm leading-snug group-hover:text-[#006B2D] transition-colors">
                     {language === "bn" ? notice.title_bn : notice.title_en}
                   </h3>
                 </div>
-                <div className="flex items-center gap-3 flex-shrink-0">
-                  <Link
-                    href={`/notices/${notice.id}`}
-                    className="text-sm text-[#016B00] hover:underline font-medium whitespace-nowrap"
-                  >
-                    {language === "bn" ? "বিস্তারিত" : "Details"}
-                  </Link>
-                </div>
-              </div>
-            </article>
-          ))}
+
+                <span className="text-gray-300 group-hover:text-[#006B2D] text-lg flex-shrink-0 transition-colors">›</span>
+              </Link>
+            );
+          })}
         </div>
 
-        <div className="mt-8 text-center text-sm text-gray-400">
+        {/* Footer note */}
+        <p className="text-center text-xs text-gray-400 mt-8">
           {language === "bn"
             ? "নোটিশগুলো বিদ্যালয়ের প্রশাসনিক প্যানেল থেকে পরিচালিত হবে।"
-            : "Notices will be managed through the school admin panel."}
-        </div>
+            : "Notices are managed via the school admin panel."}
+        </p>
       </div>
     </div>
   );
