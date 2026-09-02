@@ -103,3 +103,21 @@ export type CommitteeItem = {
   created_at: string;
   updated_at: string;
 };
+
+export type ResultItem = {
+  id: string;
+  title_bn: string;
+  title_en: string | null;
+  exam_type: 'SSC' | 'JSC' | 'School Examination' | 'Other';
+  year: number;
+  description_bn: string | null;
+  description_en: string | null;
+  file_url: string;
+  file_name: string;
+  file_size: number;
+  mime_type: string;
+  is_published: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+};
