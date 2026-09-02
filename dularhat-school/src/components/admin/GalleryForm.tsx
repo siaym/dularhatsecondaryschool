@@ -82,8 +82,9 @@ export function GalleryForm({ item }: { item?: GalleryItem }) {
           </select>
         </div>
         <div className="space-y-2">
-          <label htmlFor="display_order" className="block text-sm font-medium text-gray-700">Display Order</label>
-          <input type="number" id="display_order" name="display_order" defaultValue={item?.display_order || 0} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#016B00] focus:border-transparent outline-none" />
+          <label htmlFor="sort_order" className="block text-sm font-medium text-gray-700">Display Order</label>
+          <input type="number" id="sort_order" name="sort_order" defaultValue={item?.sort_order ?? 10} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#016B00] outline-none" />
+          <p className="text-xs text-gray-500">Lower numbers appear first.</p>
         </div>
       </div>
 

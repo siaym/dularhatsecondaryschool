@@ -11,7 +11,7 @@ export default async function GalleryPage() {
     .from("gallery")
     .select("*")
     .eq("is_published", true)
-    .order("display_order", { ascending: true })
+    .order("sort_order", { ascending: true })
     .order("created_at", { ascending: false });
 
   return (

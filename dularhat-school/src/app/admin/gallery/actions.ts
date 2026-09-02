@@ -4,6 +4,15 @@ import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
+function validateGalleryStrings(formData: FormData) {
+  const title_bn = formData.get('title_bn') as string
+  if (!title_bn || title_bn.trim() === '') throw new Error('Title (Bengali) is required')
+  if (title_bn.length > 255) throw new Error('Title (Bengali) is too long (max 255 chars)')
+  
+  const title_en = formData.get('title_en') as string | null
+  if (title_en && title_en.length > 255) throw new Error('Title (English) is too long (max 255 chars)')
+}
+
 export async function createGalleryItem(formData: FormData) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -12,10 +21,8 @@ export async function createGalleryItem(formData: FormData) {
     throw new Error('Unauthorized')
   }
 
+  validateGalleryStrings(formData)
   const title_bn = formData.get('title_bn') as string
-  if (!title_bn || title_bn.trim() === '') {
-    throw new Error('Title (Bengali) is required')
-  }
 
   const imageFile = formData.get('image') as File | null
   if (!imageFile || imageFile.size === 0) {
@@ -59,7 +66,7 @@ export async function createGalleryItem(formData: FormData) {
     category: formData.get('category'),
     image_url: imageUrl,
     is_published: formData.get('is_published') === 'on',
-    display_order: parseInt(formData.get('display_order') as string || '0', 10),
+    sort_order: parseInt(formData.get('sort_order') as string || '0', 10),
   })
 
   if (dbError) {
@@ -83,10 +90,8 @@ export async function updateGalleryItem(id: string, formData: FormData) {
     throw new Error('Unauthorized')
   }
 
+  validateGalleryStrings(formData)
   const title_bn = formData.get('title_bn') as string
-  if (!title_bn || title_bn.trim() === '') {
-    throw new Error('Title (Bengali) is required')
-  }
 
   const imageFile = formData.get('image') as File | null
   let imageUrl = formData.get('current_image_url') as string
@@ -143,7 +148,7 @@ export async function updateGalleryItem(id: string, formData: FormData) {
     category: formData.get('category'),
     image_url: imageUrl,
     is_published: formData.get('is_published') === 'on',
-    display_order: parseInt(formData.get('display_order') as string || '0', 10),
+    sort_order: parseInt(formData.get('sort_order') as string || '0', 10),
   }).eq('id', id)
 
   if (dbError) {

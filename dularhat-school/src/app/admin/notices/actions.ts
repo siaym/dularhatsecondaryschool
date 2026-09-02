@@ -4,6 +4,21 @@ import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
+function validateNoticeStrings(formData: FormData) {
+  const title_bn = formData.get('title_bn') as string
+  if (!title_bn || title_bn.trim() === '') throw new Error('Title (Bengali) is required')
+  if (title_bn.length > 255) throw new Error('Title (Bengali) is too long (max 255 chars)')
+  
+  const title_en = formData.get('title_en') as string | null
+  if (title_en && title_en.length > 255) throw new Error('Title (English) is too long (max 255 chars)')
+    
+  const desc_bn = formData.get('description_bn') as string | null
+  if (desc_bn && desc_bn.length > 5000) throw new Error('Description (Bengali) is too long')
+    
+  const desc_en = formData.get('description_en') as string | null
+  if (desc_en && desc_en.length > 5000) throw new Error('Description (English) is too long')
+}
+
 export async function createNotice(formData: FormData) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -12,10 +27,8 @@ export async function createNotice(formData: FormData) {
     throw new Error('Unauthorized')
   }
 
+  validateNoticeStrings(formData)
   const title_bn = formData.get('title_bn') as string
-  if (!title_bn || title_bn.trim() === '') {
-    throw new Error('Title (Bengali) is required')
-  }
 
   const { error } = await supabase.from('notices').insert({
     title_bn: title_bn,
@@ -46,10 +59,8 @@ export async function updateNotice(id: string, formData: FormData) {
     throw new Error('Unauthorized')
   }
 
+  validateNoticeStrings(formData)
   const title_bn = formData.get('title_bn') as string
-  if (!title_bn || title_bn.trim() === '') {
-    throw new Error('Title (Bengali) is required')
-  }
 
   const { error } = await supabase.from('notices').update({
     title_bn: title_bn,

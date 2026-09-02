@@ -97,18 +97,24 @@ Infrastructure
   ✅ src/app/robots.ts — robots.txt
   ✅ npm run build — PASSES with zero errors (22 static routes)
 
-NOT STARTED
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  ⬜ Supabase integration (database + storage)
-  ⬜ Admin dashboard (/admin routes)
+Phase 4-7: Backend & CMS Foundations
+  ✅ Supabase Auth (admin login/logout)
+  ✅ Notices CMS (CRUD, publish/draft)
+  ✅ Gallery CMS (File upload, grid display, lightbox)
+  ✅ Teachers CMS (Photo upload, hierarchical sorting)
+  ✅ Storage Buckets (gallery, teachers) with size limits
+  ✅ RLS Policies enforced on all tables and buckets
+  ✅ Type-safe Server Actions with input validation
+  ✅ Automatic orphan file cleanup
+
+Phase 8: Staff CMS
+  ⬜ Create `staff` table, types, and storage bucket
+  ⬜ Admin interfaces and actions
+  ⬜ Update public `/staff` directory
 
 BLOCKED
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  🚫 Supabase credentials — need user to provide SUPABASE_URL and SUPABASE_ANON_KEY
-  🚫 Actual school images — source website content is JS-rendered, images not extractable by static crawl
-  🚫 Headmaster name/photo — not publicly available online
-  🚫 Individual teacher data — not publicly available (CMS-rendered)
-  🚫 Actual notice data — not publicly available (CMS-rendered)
+  🚫 None
 ```
 
 ---

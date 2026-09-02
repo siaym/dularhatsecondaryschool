@@ -21,7 +21,7 @@ export type GalleryItem = {
   category: string;
   image_url: string;
   is_published: boolean;
-  display_order: number;
+  sort_order: number;
   created_at: string;
 };
 
@@ -33,6 +33,18 @@ export type Teacher = {
   designation_en: string | null;
   subject_bn: string | null;
   subject_en: string | null;
+  photo_url: string | null;
+  sort_order: number;
+  is_active: boolean;
+  created_at: string;
+};
+
+export type Staff = {
+  id: string;
+  name_bn: string;
+  name_en: string | null;
+  designation_bn: string;
+  designation_en: string | null;
   photo_url: string | null;
   sort_order: number;
   is_active: boolean;
