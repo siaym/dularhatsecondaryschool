@@ -48,7 +48,7 @@ export function Header() {
       >
         <div className="w-full max-w-[1536px] mx-auto px-0 lg:px-10 pointer-events-auto">
           <div
-            className={`relative flex items-center justify-between bg-white transition-all duration-300 ease-in-out mx-auto h-[60px] lg:h-auto ${
+            className={`relative flex items-center justify-between bg-white/85 backdrop-blur-md transition-all duration-300 ease-in-out mx-auto h-[60px] lg:h-auto ${
               isScrolled
                 ? "rounded-none lg:rounded-[16px] shadow-md px-4 sm:px-6 py-2 lg:py-1.5"
                 : "rounded-none lg:rounded-[20px] shadow-lg px-4 sm:px-6 lg:px-8 py-2.5 lg:py-2.5"
@@ -117,7 +117,7 @@ export function Header() {
                     {/* Dropdown Menu */}
                     {hasChildren && (
                       <div
-                        className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 bg-white rounded-xl shadow-xl border border-gray-100 py-2 transition-all duration-200 ${
+                        className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 bg-white/90 backdrop-blur-md rounded-xl shadow-xl border border-white/20 py-2 transition-all duration-200 ${
                           activeDropdown === link.href
                             ? "opacity-100 translate-y-0 visible"
                             : "opacity-0 translate-y-2 invisible"
