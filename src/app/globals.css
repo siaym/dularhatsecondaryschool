@@ -23,15 +23,13 @@
     --color-gold-dark: #D4A900;
 
     /* Site canvas */
-    --site-bg:   #F8F8F6;   /* warm near-white — primary page surface */
-    --site-dark: #17352F;   /* institutional deep green — header/footer only */
+    --site-bg: #F5FAF6;
 
     /* Text */
-    --text-body:      #1C2522;
-    --text-secondary: #66706C;
+    --text-body: #1A2E1A;
 
-    /* Border */
-    --card-border: #E6E9E7;
+    /* Neutral */
+    --card-border: #DDE8DD;
   }
 
   html { scroll-behavior: smooth; }

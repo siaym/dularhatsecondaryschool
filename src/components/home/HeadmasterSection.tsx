@@ -10,7 +10,7 @@ export function HeadmasterSection({ headmaster }: { headmaster?: Teacher }) {
   const { language } = useLanguage();
 
   return (
-    <section className="py-16 bg-white" aria-labelledby="headmaster-heading">
+    <section className="py-16 bg-gradient-to-br from-green-50 to-white" aria-labelledby="headmaster-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
@@ -24,7 +24,7 @@ export function HeadmasterSection({ headmaster }: { headmaster?: Teacher }) {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-sm border border-[#E6E9E7] overflow-hidden">
+          <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
             <div className="grid md:grid-cols-3 gap-0">
               {/* Photo/Avatar Column */}
               <div className="bg-gradient-to-b from-[#016B00] to-[#024D00] p-8 flex flex-col items-center justify-center text-white text-center">
