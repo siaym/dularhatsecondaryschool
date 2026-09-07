@@ -14,10 +14,16 @@ export const metadata: Metadata = {
     template: "%s | দুলারহাট মাধ্যমিক বিদ্যালয়",
   },
   description:
-    `চরফ্যাশন উপজেলার পশ্চিমাঞ্চলের প্রথম শিক্ষা প্রতিষ্ঠান। ${schoolData.tagline.bengali} EIIN: ${schoolData.eiin}`,
+    `চরফ্যাশন উপজেলায় প্রতিষ্ঠিত ঐতিহ্যবাহী দুলারহাট মাধ্যমিক বিদ্যালয়। ${schoolData.tagline.bengali} EIIN: ${schoolData.eiin}`,
   keywords: [
     "দুলারহাট মাধ্যমিক বিদ্যালয়",
     "Dularhat Secondary School",
+    "Dularhat School",
+    "Dularhat",
+    "Dularhat High School",
+    "দুলারহাট",
+    "দুলারহাট স্কুল",
+    "দুলারহাট হাই স্কুল",
     "Charfashion",
     "Bhola",
     "Bangladesh",
@@ -32,12 +38,12 @@ export const metadata: Metadata = {
     siteName: "দুলারহাট মাধ্যমিক বিদ্যালয়",
     title: "দুলারহাট মাধ্যমিক বিদ্যালয় | Dularhat Secondary School",
     description:
-      `চরফ্যাশন উপজেলার পশ্চিমাঞ্চলের প্রথম শিক্ষা প্রতিষ্ঠান। EIIN: ${schoolData.eiin}`,
+      `চরফ্যাশন উপজেলায় প্রতিষ্ঠিত ঐতিহ্যবাহী দুলারহাট মাধ্যমিক বিদ্যালয়। EIIN: ${schoolData.eiin}`,
   },
   twitter: {
     card: "summary_large_image",
     title: "দুলারহাট মাধ্যমিক বিদ্যালয়",
-    description: "চরফ্যাশন, ভোলার অন্যতম শ্রেষ্ঠ মাধ্যমিক বিদ্যালয়",
+    description: "চরফ্যাশন, ভোলা এর স্বনামধন্য শিক্ষা প্রতিষ্ঠান দুলারহাট মাধ্যমিক বিদ্যালয়",
   },
   robots: {
     index: true,
