@@ -204,7 +204,7 @@ export function HeroSection() {
         </div>
 
         {/* ─── Organic Green Mask ─── */}
-        <div className="absolute inset-0 pointer-events-none z-10 w-[70%] xl:w-[68%]">
+        <div className="absolute inset-0 pointer-events-none z-10 w-[60%] xl:w-[58%]">
           <svg
             className="absolute top-0 bottom-0 left-0 h-full w-full"
             viewBox="0 0 100 100"
@@ -217,7 +217,7 @@ export function HeroSection() {
               </filter>
             </defs>
             <path
-              d="M 0 0 L 100 0 C 110 33, 90 66, 100 100 L 0 100 Z"
+              d="M 0 0 L 85 0 C 110 29.3, 50 58.6, 93.75 100 L 0 100 Z"
               fill="#063F20"
               filter="url(#heroShadowDesktop)"
             />
@@ -237,7 +237,7 @@ export function HeroSection() {
         {/* ─── Hero Content Area ─── */}
         <div className="relative z-20 w-full max-w-[1536px] mx-auto flex items-stretch pl-[60px] xl:pl-[90px] pr-10 h-full">
           
-          <div className="w-full max-w-[500px] xl:max-w-[660px] pr-4 xl:pr-8 text-white flex flex-col justify-center h-full pb-12 pt-4">
+          <div className="w-full max-w-[480px] xl:max-w-[620px] pr-[30px] lg:pr-[50px] xl:pr-[90px] text-white flex flex-col justify-center h-full pb-12 pt-4">
             
             {/* Metadata Row */}
             <div className="flex flex-wrap items-center gap-4 mb-4 text-xs xl:text-sm font-medium text-[#F2F5F2]">
