@@ -34,7 +34,11 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* ── 2. Single green SVG overlay — bottom edge IS the organic curve ── */}
+        {/* ── 2. Single green SVG overlay — bottom edge IS the organic curve ──
+              viewBox 0 0 100 100 so all values are percentages of section size.
+              Path covers the top ~56% on the left, dipping to ~46% at the peak
+              (~40% x), then returning to ~60% on the right.
+              This is the ONE and ONLY green/image boundary. ── */}
         <svg
           className="absolute inset-0 w-full h-full z-10 pointer-events-none"
           viewBox="0 0 100 100"
@@ -46,16 +50,23 @@ export function HeroSection() {
               <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" floodColor="#000" floodOpacity="0.2" />
             </filter>
           </defs>
-          {/* Mobile curve (< 400px) */}
+          {/*
+            Asymmetric organic Bézier:
+            • Top-left  → top-right  → descend right edge to y=60
+            • Cubic curve from (100,60) back to (0,52):
+                CP1 (70, 46): pulls curve HIGH around 70% x
+                CP2 (30, 56): gentle valley near 30% x
+            Resulting boundary (left→right): 52 → dips toward 46 near 70% → 60
+          {/* Mobile curve (< 400px) - Pushed down slightly to give text more solid green space */}
           <path
-            d="M 0 0 L 100 0 L 100 80 C 60 70, 30 70, 0 76 Z"
+            d="M 0 0 L 100 0 L 100 72 C 60 62, 30 62, 0 68 Z"
             fill="#063F20"
             className="block min-[400px]:hidden"
             filter="url(#mobileHeroCurveShadow)"
           />
-          {/* Pro Max curve (>= 400px) - Make it even deeper so content fits on tall phones */}
+          {/* Pro Max curve (>= 400px) - Original exact math */}
           <path
-            d="M 0 0 L 100 0 L 100 80 C 60 68, 30 68, 0 74 Z"
+            d="M 0 0 L 100 0 L 100 68 C 60 55, 30 55, 0 65 Z"
             fill="#063F20"
             className="hidden min-[400px]:block"
             filter="url(#mobileHeroCurveShadow)"
@@ -72,8 +83,8 @@ export function HeroSection() {
             <rect x="0" y="0" width="44" height="88" fill="url(#dot-pattern-right)" />
           </svg>
         </div>
-        {/* Left side dots (yellow) */}
-        <div className="absolute top-[72%] min-[400px]:top-[70%] left-0 z-20 opacity-40 pointer-events-none">
+        {/* Left side dots (yellow) - overlaps curve into image */}
+        <div className="absolute top-[67%] min-[400px]:top-[60%] left-0 z-20 opacity-40 pointer-events-none">
           <svg width="33" height="88" viewBox="0 0 33 88" fill="currentColor" className="text-[#F4C430]">
             <pattern id="dot-pattern-left" x="0" y="0" width="11" height="11" patternUnits="userSpaceOnUse">
               <circle cx="1.5" cy="1.5" r="1.5" />
@@ -83,7 +94,7 @@ export function HeroSection() {
         </div>
 
       {/* ── 4. Hero text content (layered above the green SVG) ── */}
-      <div className="relative z-20 w-full px-[14px] sm:px-5 pt-[60px] min-[400px]:pt-[75px] sm:pt-[90px]">
+      <div className="relative z-20 w-full px-[14px] sm:px-5 pt-[70px] min-[400px]:pt-[120px] sm:pt-[130px]">
 
           {/* Metadata Row */}
           <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 mb-4 min-[400px]:mb-5 text-[10px] sm:text-[11px] font-medium text-[#F2F5F2]">
@@ -237,7 +248,7 @@ export function HeroSection() {
         {/* ─── Hero Content Area ─── */}
         <div className="relative z-20 w-full max-w-[1536px] mx-auto flex items-stretch pl-[60px] xl:pl-[90px] pr-10 h-full">
           
-          <div className="w-full max-w-[480px] xl:max-w-[620px] pr-[30px] lg:pr-[50px] xl:pr-[90px] text-white flex flex-col justify-center h-full pb-12 pt-4">
+          <div className="w-full max-w-[480px] xl:max-w-[620px] text-white flex flex-col justify-center h-full pb-12 pt-4">
             
             {/* Metadata Row */}
             <div className="flex flex-wrap items-center gap-4 mb-4 text-xs xl:text-sm font-medium text-[#F2F5F2]">
