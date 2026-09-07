@@ -46,16 +46,16 @@ export function Header() {
           isScrolled ? "pt-0 lg:pt-2 pb-2" : "pt-0 lg:pt-4 pb-0"
         } pointer-events-none`}
       >
-        <div className="w-full max-w-[1536px] mx-auto px-0 lg:px-10 pointer-events-auto">
+        <div className="w-full max-w-[1536px] mx-auto px-2 xl:px-4 2xl:px-10 pointer-events-auto">
           <div
             className={`relative flex items-center justify-between bg-white/85 backdrop-blur-md transition-all duration-300 ease-in-out mx-auto h-[60px] lg:h-auto ${
               isScrolled
-                ? "rounded-none lg:rounded-[16px] shadow-md px-4 sm:px-6 py-2 lg:py-1.5"
-                : "rounded-none lg:rounded-[20px] shadow-lg px-4 sm:px-6 lg:px-8 py-2.5 lg:py-2.5"
+                ? "rounded-none lg:rounded-[16px] shadow-md px-3 sm:px-4 py-2 lg:py-1.5"
+                : "rounded-none lg:rounded-[20px] shadow-lg px-3 sm:px-4 lg:px-6 py-2.5 lg:py-2.5"
             }`}
           >
             {/* ─── Logo and Identity (Left) ─── */}
-            <Link href="/" className="flex items-center gap-2 lg:gap-3 shrink-0 group z-10 w-fit max-w-[80%] h-full">
+            <Link href="/" className="flex items-center gap-2 lg:gap-3 shrink-0 group z-10 w-fit max-w-[80%] xl:max-w-[30%] h-full">
               <div className={`relative flex items-center transition-all duration-300 ease-in-out shrink-0 ${isScrolled ? "w-9 h-9 lg:w-10 lg:h-10" : "w-[38px] h-[38px] lg:w-[48px] lg:h-[48px]"}`}>
                 <Image
                   src={schoolData.logo_url}
@@ -86,15 +86,15 @@ export function Header() {
             </Link>
 
             {/* ─── Desktop Navigation (Centered) ─── */}
-            <nav className="hidden xl:flex flex-1 justify-center items-center gap-1 2xl:gap-3 px-4">
+            <nav className="hidden xl:flex flex-1 justify-center items-center gap-0.5 2xl:gap-2 px-2">
               {navLinks.map((link) => {
                 const hasChildren = link.children && link.children.length > 0;
                 const isActive = link.href === "/"; // Simple active check for "Home"
 
                 // Adjust font size smaller for English to prevent overflow
                 const textClass = language === "en" 
-                  ? "text-[13px] 2xl:text-[14px]" 
-                  : "text-[15px] 2xl:text-[16px]";
+                  ? "text-[12px] 2xl:text-[14px]" 
+                  : "text-[13px] 2xl:text-[15px]";
 
                 return (
                   <div
@@ -105,13 +105,13 @@ export function Header() {
                   >
                     <Link
                       href={link.href}
-                      className={`flex items-center gap-1.5 px-2.5 py-2 ${textClass} font-medium transition-colors ${
+                      className={`flex items-center gap-1 px-1.5 2xl:px-2.5 py-2 ${textClass} font-medium transition-colors ${
                         isActive ? "text-[#063F20]" : "text-[#151A17] hover:text-[#063F20]"
                       }`}
                     >
-                      {isActive && <span className="w-1.5 h-1.5 bg-[#063F20] rounded-full" />}
-                      <span>{language === "bn" ? link.label.bengali : link.label.english}</span>
-                      {hasChildren && <ChevronDown className="w-3.5 h-3.5 opacity-50" />}
+                      {isActive && <span className="w-1.5 h-1.5 bg-[#063F20] rounded-full shrink-0" />}
+                      <span className="whitespace-nowrap">{language === "bn" ? link.label.bengali : link.label.english}</span>
+                      {hasChildren && <ChevronDown className="w-3 h-3 2xl:w-3.5 2xl:h-3.5 opacity-50 shrink-0" />}
                     </Link>
 
                     {/* Dropdown Menu */}
